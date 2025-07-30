@@ -11,6 +11,8 @@ import { Wishlist } from "../pages/Wishlist";
 import { AddToCart } from "../pages/AddToCart";
 import ProductViewPage from "../pages/ProductViewPage";
 import { CheckoutPage } from "../pages/CheckoutPage";
+import { ConfirmOrder } from "../pages/ConfirmOrder";
+import { OrderTracking } from "../pages/OrderTracking";
 
 export const router = createBrowserRouter([
   {
@@ -60,6 +62,14 @@ export const router = createBrowserRouter([
       {
         path: "/add-to-cart/checkout",
         element: <CheckoutPage />,
+      },
+      {
+        path: "/add-to-cart/checkout/confirm-order",
+        element: <ConfirmOrder />,
+      },
+      {
+        path: "/add-to-cart/checkout/confirm-order/order-tracking",
+        element: <OrderTracking />,
       },
     ],
   },

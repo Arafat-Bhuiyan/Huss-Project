@@ -12,8 +12,8 @@ export const CheckoutOrderItems = () => {
       <div className="w-2/3 flex gap-3">
         <img className="w-14 h-9" src={smallCpu} alt="" />
         <div>
-          <h1 className="font-bold text-xs">{product.title}</h1>
-          <p className="font-normal text-[9px]">{product.shop}</p>
+          <h1 className="font-bold text-sm">{product.title}</h1>
+          <p className="font-normal text-sm">{product.shop}</p>
           <h3 className="w-full font-bold text-xs">QTY: 1</h3>
         </div>
       </div>
