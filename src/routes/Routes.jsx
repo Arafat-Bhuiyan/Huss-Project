@@ -10,6 +10,7 @@ import GamingPCPage from "../pages/GamingPc";
 import { Wishlist } from "../pages/Wishlist";
 import { AddToCart } from "../pages/AddToCart";
 import ProductViewPage from "../pages/ProductViewPage";
+import { CheckoutPage } from "../pages/CheckoutPage";
 
 export const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ export const router = createBrowserRouter([
       {
         path: "/product-view",
         element: <ProductViewPage />,
+      },
+      {
+        path: "/add-to-cart/checkout",
+        element: <CheckoutPage />,
       },
     ],
   },
