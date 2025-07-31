@@ -14,6 +14,7 @@ import { CheckoutPage } from "../pages/CheckoutPage";
 import { ConfirmOrder } from "../pages/ConfirmOrder";
 import { OrderTracking } from "../pages/OrderTracking";
 import { CustomerSupport } from "../pages/CustomerSupport";
+import { ProfileSettings } from "../pages/ProfileSettings";
 
 export const router = createBrowserRouter([
   {
@@ -75,6 +76,10 @@ export const router = createBrowserRouter([
       {
         path: "/customer-support",
         element: <CustomerSupport />,
+      },
+      {
+        path: "/profile-settings",
+        element: <ProfileSettings />,
       },
     ],
   },

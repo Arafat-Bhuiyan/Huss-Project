@@ -1,6 +1,5 @@
 import { CheckoutOrder } from "./CheckoutOrder";
 import { CheckoutUser } from "./CheckoutUser";
-import ShippingForm from "./ShippingForm";
 
 export const CheckoutMain = () => {
   return (
