@@ -23,8 +23,8 @@ export const TrackOrderSummary = () => {
         <p>$50.00</p>
       </div>
       <div className="flex justify-between font-normal text-xl">
-        <p>Total Discount</p>
-        <p>15%</p>
+        <p>Total Discount (15%)</p>
+        <p>$150.00</p>
       </div>
       <div className="border-b border-gray-300"></div>
       <div className="flex justify-between">
