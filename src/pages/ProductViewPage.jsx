@@ -6,6 +6,31 @@ import ReviewImg from "../assets/img/review.png";
 
 export default function ProductViewPage() {
   const [showReviewBox, setShowReviewBox] = useState(false);
+  const [formData, setFormData] = useState({
+    review: "",
+    photo: null, // file object
+  });
+
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+
+    if (name === "photo") {
+      setFormData({
+        ...formData,
+        [name]: files[0],
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
+  };
+
+  const handleSubmit = () => {
+    console.log("Review:", formData.review);
+    console.log("Product Image:", formData.photo);
+  };
 
   return (
     <div className="bg-[#fdfaf6] text-[#1c1c1c] px-28 py-6 gap-6">
@@ -120,13 +145,43 @@ export default function ProductViewPage() {
             <h3 className="text-lg font-semibold mb-3">Write a Review</h3>
 
             <p className="font-medium text-base pb-1">Your Review</p>
-            <textarea className="w-full border p-2 rounded-md h-24 mb-3" />
-
-            <p className="font-medium text-base pb-1">Product Image</p>
-            <input
-              type="file"
-              className="block w-full mb-3 text-base bg-[#FFFFFF] text-gray-600 rounded"
+            <textarea
+              id="review"
+              name="review"
+              value={formData.review}
+              onChange={handleChange}
+              className="w-full border p-2 rounded-md h-24 mb-3"
             />
+
+            {/* <p className="font-medium text-base pb-1">Product Image</p> */}
+            <div className="mt-4">
+              <label className="block text-xl font-bold text-gray-700 mb-2">
+                Product Image
+              </label>
+
+              <input
+                type="file"
+                id="photo"
+                name="photo"
+                onChange={handleChange}
+                className="hidden"
+              />
+
+              <div className="flex w-full">
+                {/* Custom styled label */}
+                <label
+                  htmlFor="photo"
+                  className="flex items-center px-4 py-2 text-white bg-gray-500 rounded-l-xl cursor-pointer text-sm font-medium whitespace-nowrap"
+                >
+                  Choose File
+                </label>
+
+                {/* File name display */}
+                <div className="flex items-center px-4 py-2 text-gray-600 text-base font-normal w-full shadow bg-white rounded-r-xl border border-gray-300">
+                  {formData.photo ? `${formData.photo.name}` : "No File Chosen"}
+                </div>
+              </div>
+            </div>
             <div className="flex gap-2 mb-3">
               {[1, 2, 3, 4, 5].map((star) => (
                 <label
@@ -142,7 +197,10 @@ export default function ProductViewPage() {
               ))}
             </div>
 
-            <button className="bg-yellow-400 text-white w-full py-2 rounded-md font-semibold">
+            <button
+              onClick={() => handleSubmit()}
+              className="bg-yellow-400 text-white w-full py-2 rounded-md font-semibold"
+            >
               Submit Review
             </button>
           </div>
