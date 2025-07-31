@@ -15,14 +15,6 @@ const DeliveryDetailsForm = () => {
           Location Type
         </label>
         <div className="relative">
-          {/* <select className="w-full text-base font-normal px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-500 appearance-none">
-            <option>Home</option>
-            <option>Work</option>
-            <option>Other</option>
-          </select>
-          <div className="absolute top-4 right-3 pointer-events-none text-gray-400">
-            <img src={downArrow} alt="" />
-          </div> */}
           <LocationSelection />
         </div>
       </div>
