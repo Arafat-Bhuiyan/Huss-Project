@@ -13,6 +13,7 @@ import ProductViewPage from "../pages/ProductViewPage";
 import { CheckoutPage } from "../pages/CheckoutPage";
 import { ConfirmOrder } from "../pages/ConfirmOrder";
 import { OrderTracking } from "../pages/OrderTracking";
+import { CustomerSupport } from "../pages/CustomerSupport";
 
 export const router = createBrowserRouter([
   {
@@ -44,7 +45,7 @@ export const router = createBrowserRouter([
         element: <PrivacyPolicy />,
       },
       {
-        path: "/gaming-pc",
+        path: "/gaming-equipent/gaming-pc",
         element: <GamingPCPage />,
       },
       {
@@ -56,7 +57,7 @@ export const router = createBrowserRouter([
         element: <AddToCart />,
       },
       {
-        path: "/product-view",
+        path: "/gaming-equipent/gaming-pc/intel-pc",
         element: <ProductViewPage />,
       },
       {
@@ -70,6 +71,10 @@ export const router = createBrowserRouter([
       {
         path: "/add-to-cart/checkout/confirm-order/order-tracking",
         element: <OrderTracking />,
+      },
+      {
+        path: "/customer-support",
+        element: <CustomerSupport />,
       },
     ],
   },
