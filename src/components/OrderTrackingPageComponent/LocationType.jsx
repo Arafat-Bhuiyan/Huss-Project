@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import downArrow from "../../assets/img/downArrow.png";
+import upArrow from "../../assets/img/upArrow.png";
 
 const locations = [
   { code: "home", name: "Home" },
@@ -29,7 +30,7 @@ export const LocationSelection = () => {
         className="flex justify-between gap-2 items-center px-4 py-2 bg-white shadow rounded-xl cursor-pointer"
       >
         <p>{selected.name}</p>
-        <img src={downArrow} alt="" />
+        {!open ? <img src={downArrow} alt="" /> : <img src={upArrow} alt="" />}
       </div>
 
       {open && (

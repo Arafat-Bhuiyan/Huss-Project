@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 export const CustomerSupportMain = () => {
   const [formData, setFormData] = useState({
@@ -18,6 +19,12 @@ export const CustomerSupportMain = () => {
     e.preventDefault();
     console.log("Email:", formData.emailAddress);
     console.log("Problem:", formData.problem);
+    // Show success toast
+    toast.success("Message sent successfully!");
+    setFormData({
+      emailAddress: "",
+      problem: "",
+    });
   };
 
   return (
@@ -52,6 +59,7 @@ export const CustomerSupportMain = () => {
               onChange={handleChange}
               placeholder="Enter email address"
               className="mt-2 block text-base font-normal w-full px-4 py-2 shadow bg-white rounded-md border border-gray-300 focus:ring-yellow-500 focus:border-yellow-500"
+              required
             />
           </div>
 
@@ -70,6 +78,7 @@ export const CustomerSupportMain = () => {
               placeholder="Enter your message"
               rows={5}
               className="mt-2 block text-base font-normal w-full px-4 py-2 shadow bg-white rounded-md border border-gray-300 focus:ring-yellow-500 focus:border-yellow-500 resize-none"
+              required
             />
           </div>
 

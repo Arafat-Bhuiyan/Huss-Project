@@ -3,9 +3,10 @@ import Headphone from "../assets/img/headphone.png";
 import controller from "../assets/img/controller.png";
 import microscope from "../assets/img/microscope.png";
 import laser from "../assets/img/laser.png";
-import white_save from "../assets/img/white_save.png";
+import red_save from "../assets/img/red-save.png";
 import left from "../assets/img/left-angle.png";
 import right from "../assets/img/right-angle.png";
+import { useNavigate } from "react-router-dom";
 
 const products = [
   {
@@ -35,6 +36,7 @@ const products = [
 ];
 
 const MyWishlist = () => {
+  const navigate = useNavigate();
   return (
     <div className="py-16 bg-[#f9f6ee]">
       {/* Header */}
@@ -57,7 +59,7 @@ const MyWishlist = () => {
             >
               {/* Close Button */}
               <button className="absolute top-2 right-2 w-6 h-6 rounded-full shadow text-sm flex items-center justify-center">
-                <img src={white_save} alt="" />
+                <img src={red_save} alt="" />
               </button>
 
               {/* Image */}
@@ -79,7 +81,10 @@ const MyWishlist = () => {
                   <span className="text-sm font-semibold text-gray-900">
                     {product.price}
                   </span>
-                  <button className="bg-[#ffc107] text-white px-4 py-1 rounded hover:bg-[#e6ac00] transition text-sm font-medium">
+                  <button
+                    onClick={() => navigate("/add-to-cart")}
+                    className="bg-[#ffc107] text-white px-4 py-1 rounded hover:bg-[#e6ac00] transition text-sm font-medium"
+                  >
                     Add to Cart
                   </button>
                 </div>

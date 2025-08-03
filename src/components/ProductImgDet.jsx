@@ -1,8 +1,10 @@
 import React from "react";
 import bigCPU from "../assets/img/big-cpu.png";
 import smallCPU from "../assets/img/small-cpu.png";
+import { useNavigate } from "react-router-dom";
 
 export const ProductImgDet = () => {
+  const navigate = useNavigate();
   return (
     <div className="flex justify-between gap-14">
       {/* Product Images */}
@@ -48,10 +50,16 @@ export const ProductImgDet = () => {
         </ul>
 
         <div className="flex w-full gap-4 mt-6">
-          <button className="bg-yellow-400 px-6 py-2 rounded-lg font-bold text-xl w-1/2">
+          <button
+            onClick={() => navigate("/add-to-cart")}
+            className="bg-yellow-400 px-6 py-2 rounded-lg font-bold text-xl w-1/2"
+          >
             Add to Cart
           </button>
-          <button className="bg-black text-white px-6 py-2 rounded-lg font-bold text-xl w-1/2">
+          <button
+            onClick={() => navigate("/add-to-cart")}
+            className="bg-black text-white px-6 py-2 rounded-lg font-bold text-xl w-1/2"
+          >
             Buy Now
           </button>
         </div>

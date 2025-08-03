@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import googleImg from "../assets/img/google.png";
-import fbImg from "../assets/img/fb.png";
-import appleImg from "../assets/img/apple.png";
 import reg_side_img from "../assets/img/reg-side-img.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -24,6 +24,16 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+    });
+
+    toast.success("Register done");
+
+    navigate("/login");
   };
 
   return (
@@ -36,7 +46,10 @@ const Register = () => {
         </div>
 
         <p className="text-base font-normal">
-          Already have an account? <span className="text-yellow-500"><Link to="/login">Login</Link></span>
+          Already have an account?{" "}
+          <span className="text-yellow-500">
+            <Link to="/login">Login</Link>
+          </span>
         </p>
       </div>
       <div className="flex justify-center items-center">
@@ -132,18 +145,10 @@ const Register = () => {
             </div>
 
             {/* Social media buttons */}
-            <div className="mt-6 grid grid-cols-3 gap-4">
-              <button className="px-3 py-3.5 flex gap-2 justify-center items-center bg-white border border-gray-300 rounded-full hover:bg-gray-100">
+            <div className="mt-4 flex justify-center">
+              <button className="px-4 py-2 flex gap-2 justify-center items-center bg-white border border-gray-300 rounded-full hover:bg-gray-100">
                 <img src={googleImg} alt="Google" className="w-6 h-6" />
                 <p className="text-gray-500 text-sm">Google</p>
-              </button>
-              <button className="px-3 py-3.5 flex gap-2 justify-center items-center bg-white border border-gray-300 rounded-full hover:bg-gray-100">
-                <img src={fbImg} alt="Facebook" className="w-6 h-6 pt-1" />
-                <p className="text-gray-500 text-sm">Facebook</p>
-              </button>
-              <button className="px-3 py-3.5 flex gap-2 justify-center items-center bg-white border border-gray-300 rounded-full hover:bg-gray-100">
-                <img src={appleImg} alt="Apple" className="w-6 h-6" />
-                <p className="text-gray-500 text-sm">Apple</p>
               </button>
             </div>
           </div>

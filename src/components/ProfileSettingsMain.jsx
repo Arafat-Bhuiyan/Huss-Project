@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import personalInfoLogo from "../assets/img/personal-information.png";
+import { toast } from "react-toastify";
 
 export const ProfileSettingsMain = () => {
   const [formData, setFormData] = useState({
@@ -33,6 +34,15 @@ export const ProfileSettingsMain = () => {
     console.log("Phone Number:", formData.phone);
     console.log("Address:", formData.address);
     console.log("Profile Photo:", formData.photo); // file object
+
+    toast.success("Profile info saved successfully!");
+    setFormData({
+      fullName: "",
+      emailAddress: "",
+      phone: "",
+      address: "",
+      photo: null, // file object
+    });
   };
 
   return (
@@ -64,6 +74,7 @@ export const ProfileSettingsMain = () => {
                 onChange={handleChange}
                 placeholder="Enter your name"
                 className="mt-2 block text-xl font-normal w-full px-4 py-2 shadow bg-white rounded-xl border border-gray-300 focus:ring-yellow-500 focus:border-yellow-500"
+                required
               />
             </div>
             <div>
@@ -81,6 +92,7 @@ export const ProfileSettingsMain = () => {
                 onChange={handleChange}
                 placeholder="Enter your email"
                 className="mt-2 block text-xl font-normal w-full px-4 py-2 shadow bg-white rounded-xl border border-gray-300 focus:ring-yellow-500 focus:border-yellow-500"
+                required
               />
             </div>
             <div>
@@ -98,6 +110,7 @@ export const ProfileSettingsMain = () => {
                 onChange={handleChange}
                 placeholder="Enter your phone number"
                 className="mt-2 block text-xl font-normal w-full px-4 py-2 shadow bg-white rounded-xl border border-gray-300 focus:ring-yellow-500 focus:border-yellow-500"
+                required
               />
             </div>
             <div>
@@ -115,6 +128,7 @@ export const ProfileSettingsMain = () => {
                 onChange={handleChange}
                 placeholder="Enter your address"
                 className="mt-2 block text-xl font-normal w-full px-4 py-2 shadow bg-white rounded-xl border border-gray-300 focus:ring-yellow-500 focus:border-yellow-500"
+                required
               />
             </div>
             {/* Profile Photo */}
@@ -129,6 +143,7 @@ export const ProfileSettingsMain = () => {
                 name="photo"
                 onChange={handleChange}
                 className="hidden"
+                required
               />
 
               <div className="flex w-full">

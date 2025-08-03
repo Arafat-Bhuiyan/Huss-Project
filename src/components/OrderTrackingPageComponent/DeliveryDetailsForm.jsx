@@ -1,10 +1,32 @@
+import { toast } from "react-toastify";
 import mapButton from "../../assets/img/map.png";
-import downArrow from "../../assets/img/downArrow.png";
 import { LocationSelection } from "./LocationType";
+import { useState } from "react";
 
 const DeliveryDetailsForm = () => {
+  const [landmark, setLandmark] = useState("");
+  const [gps1, setGps1] = useState("");
+  const [gps2, setGps2] = useState("");
+  const [note, setNote] = useState("");
+
+  const handleDeliveryInfo = (e) => {
+    e.preventDefault();
+
+    // Show success toast
+    toast.success("Saved delivery info successfully!");
+
+    // Reset form fields
+    setLandmark("");
+    setGps1("");
+    setGps2("");
+    setNote("");
+  };
+
   return (
-    <div className="w-full bg-white p-6 mt-4 rounded-xl shadow-md">
+    <form
+      onSubmit={handleDeliveryInfo}
+      className="w-full bg-white p-6 mt-4 rounded-xl shadow-md"
+    >
       <h2 className="text-xl font-semibold text-gray-800 mb-4">
         Delivery Details
       </h2>
@@ -27,7 +49,10 @@ const DeliveryDetailsForm = () => {
         <input
           type="text"
           placeholder="Near Central Mosque, opposite University"
+          value={landmark}
+          onChange={(e) => setLandmark(e.target.value)}
           className="w-full text-base font-normal px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-500 placeholder-gray-400"
+          required
         />
       </div>
 
@@ -39,11 +64,17 @@ const DeliveryDetailsForm = () => {
         <div className="flex gap-2">
           <input
             type="text"
+            value={gps1}
+            onChange={(e) => setGps1(e.target.value)}
             className="w-full text-base font-normal px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            required
           />
           <input
             type="text"
+            value={gps2}
+            onChange={(e) => setGps2(e.target.value)}
             className="w-full text-base font-normal px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            required
           />
           <button type="button">
             <img src={mapButton} alt="" className="w-20 h-12" />
@@ -58,8 +89,11 @@ const DeliveryDetailsForm = () => {
         </label>
         <textarea
           rows="3"
+          value={note}
+          onChange={(e) => setNote(e.target.value)}
           placeholder="Call when you arrive. House has a blue gate."
           className="w-full text-base font-normal px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-500 placeholder-gray-400"
+          required
         ></textarea>
       </div>
 
@@ -70,7 +104,7 @@ const DeliveryDetailsForm = () => {
       >
         Save
       </button>
-    </div>
+    </form>
   );
 };
 

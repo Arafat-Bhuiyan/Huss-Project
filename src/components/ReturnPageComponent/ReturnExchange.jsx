@@ -24,6 +24,12 @@ export const ReturnExchangeForm = () => {
     console.log("Reason:", formData.reason);
     console.log("Photo:", formData.photo);
     toast.success("Return Request Submitted!");
+
+    setFormData({
+      order: "",
+      reason: "",
+      photo: null,
+    });
   };
 
   return (
@@ -105,6 +111,7 @@ export const ReturnExchangeForm = () => {
                 onChange={handleChange}
                 className="hidden"
                 accept="image/png, image/jpeg"
+                required
               />
             </label>
           </div>

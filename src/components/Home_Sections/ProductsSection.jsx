@@ -1,9 +1,9 @@
-import React from "react";
-import Headphone from '../../assets/img/headphone.png'
-import controller from '../../assets/img/controller.png'
-import microscope from '../../assets/img/microscope.png'
-import laser from '../../assets/img/laser.png'
-import white_save from '../../assets/img/white_save.png'
+import Headphone from "../../assets/img/headphone.png";
+import controller from "../../assets/img/controller.png";
+import microscope from "../../assets/img/microscope.png";
+import laser from "../../assets/img/laser.png";
+import white_save from "../../assets/img/white_save.png";
+import { useNavigate } from "react-router-dom";
 
 const products = [
   {
@@ -33,8 +33,10 @@ const products = [
 ];
 
 const ProductsSection = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="py-16 bg-[#f9f6ee] px-4">
+    <div id="products" className="py-16 bg-[#f9f6ee] px-4">
       {/* Header */}
       <div className="max-w-7xl mx-auto text-center mb-10">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
@@ -61,7 +63,7 @@ const ProductsSection = () => {
               key={index}
               className="bg-white border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col relative"
             >
-              {/* Close Button */}
+              {/* Save Button */}
               <button className="absolute top-2 right-2 w-6 h-6 rounded-full shadow text-sm flex items-center justify-center">
                 <img src={white_save} alt="" />
               </button>
@@ -71,6 +73,7 @@ const ProductsSection = () => {
                 src={product.image}
                 alt={product.name}
                 className="w-full h-52 object-cover"
+                onClick={() => navigate("/gaming-equipent/gaming-pc/intel-pc")}
               />
 
               {/* Content */}
@@ -85,7 +88,10 @@ const ProductsSection = () => {
                   <span className="text-sm font-semibold text-gray-900">
                     {product.price}
                   </span>
-                  <button className="bg-[#ffc107] text-white px-4 py-1 rounded hover:bg-[#e6ac00] transition text-sm font-medium">
+                  <button
+                    onClick={() => navigate("/add-to-cart")}
+                    className="bg-[#ffc107] text-white px-4 py-1 rounded hover:bg-[#e6ac00] transition text-sm font-medium"
+                  >
                     Add to Cart
                   </button>
                 </div>

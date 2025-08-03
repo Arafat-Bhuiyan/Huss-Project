@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import searchIcon from "../assets/img/icons/search_icon.png";
 import heartIcon from "../assets/img/icons/heart.png";
 import categoryIcon from "../assets/img/icons/category.png";
@@ -19,15 +19,13 @@ const subCategories = [
 export const Navbar = () => {
   const { user } = useContext(UserContext);
   const [showCategories, setShowCategories] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <nav className="flex items-center justify-between px-28 py-3 bg-black text-white shadow relative">
       {/* Left: Brand */}
       <div className="flex-1">
-        <Link
-          to="/"
-          className="text-2xl font-bold text-white transition"
-        >
+        <Link to="/" className="text-2xl font-bold text-white transition">
           Shop<span className="text-yellow-500">Nest</span>
         </Link>
       </div>
@@ -56,7 +54,7 @@ export const Navbar = () => {
             <img src={heartIcon} alt="" className="pt-1" />
           </div>
           <NavLink
-            to="/saved"
+            to="/wishlist"
             className="text-white font-medium text-xl hover:text-yellow-500 transition"
           >
             Save
@@ -84,6 +82,16 @@ export const Navbar = () => {
                     <div
                       className="flex items-center justify-between"
                       key={cat}
+                      onClick={() => {
+                        const routeMap = {
+                          "Gaming Equipment": "/gaming-equipent/gaming-pc",
+                          "Survey Equipment": "/survey-tools",
+                          "Testing & Lab Equipment": "/testing-lab",
+                        };
+                        if (routeMap[cat]) {
+                          navigate(routeMap[cat]);
+                        }
+                      }}
                     >
                       <li
                         key={cat}
@@ -107,7 +115,7 @@ export const Navbar = () => {
             <img src={cartIcon} alt="" className="pt-1" />
           </div>
           <NavLink
-            to="/cart"
+            to="/add-to-cart"
             className="text-white font-medium text-xl hover:text-yellow-500 transition"
           >
             Cart
@@ -116,7 +124,10 @@ export const Navbar = () => {
 
         {/* Account */}
         {user ? (
-          <div className="flex items-center gap-2">
+          <div
+            className="flex items-center gap-2"
+            onClick={() => navigate("/profile-settings")}
+          >
             <img
               src={user.photo}
               alt="Profile"

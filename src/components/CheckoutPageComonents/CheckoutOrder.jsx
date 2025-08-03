@@ -9,8 +9,14 @@ export const CheckoutOrder = () => {
     setPlaceOrder(true);
   };
 
-  const handleOrderPlace = () => {
-    navigate("/add-to-cart/checkout/confirm-order");
+  const handlePlaceOrder = () => {
+    setTimeout(() => {
+      navigate("/add-to-cart/checkout/confirm-order");
+    }, 1500);
+  };
+
+  const handleContinueShopping = () => {
+    navigate("/#products");
   };
   return (
     <div>
@@ -45,7 +51,10 @@ export const CheckoutOrder = () => {
           >
             Proceed to Checkout
           </button>
-          <button className="flex items-center justify-center border rounded-lg py-1.5 border-yellow-400 bg-white text-yellow-400 text-xl font-bold shadow">
+          <button
+            onClick={handleContinueShopping}
+            className="flex items-center justify-center border rounded-lg py-1.5 border-yellow-400 bg-white hover:bg-gray-50 text-black text-xl font-bold shadow"
+          >
             Continue Shopping
           </button>
           <div className="py-2 flex flex-col justify-center items-center text-xs font-medium">
@@ -84,8 +93,9 @@ export const CheckoutOrder = () => {
             <p className="font-semibold text-2xl">Total</p>
             <p className="font-semibold text-3xl text-yellow-400">$7130.00</p>
           </div>
+
           <button
-            onClick={() => handleOrderPlace()}
+            onClick={() => handlePlaceOrder()}
             className="flex items-center justify-center rounded-lg py-1.5 bg-yellow-400 hover:bg-yellow-500 text-white text-xl font-bold shadow"
           >
             Place Order

@@ -3,6 +3,7 @@ import controller from "../assets/img/controller.png";
 import microscope from "../assets/img/microscope.png";
 import laser from "../assets/img/laser.png";
 import white_save from "../assets/img/white_save.png";
+import { toast } from "react-toastify";
 
 const products = [
   {
@@ -32,6 +33,19 @@ const products = [
 ];
 
 export const CartSuggetion = () => {
+  
+const handleAddToCart = () => {
+  // Toast show
+  toast.success("Product added to cart!");
+
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  // Simulate add by reloading the page (temporary)
+  setTimeout(() => {
+    window.location.reload(); // full reload
+  }, 1500); // Give time for toast to show
+};
   return (
     <div>
       {/* Header */}
@@ -83,7 +97,7 @@ export const CartSuggetion = () => {
                   <span className="text-sm font-semibold text-gray-900">
                     {product.price}
                   </span>
-                  <button className="bg-[#ffc107] text-white px-4 py-1 rounded hover:bg-[#e6ac00] transition text-sm font-medium">
+                  <button onClick={() => handleAddToCart()} className="bg-[#ffc107] text-white px-4 py-1 rounded hover:bg-[#e6ac00] transition text-sm font-medium">
                     Add to Cart
                   </button>
                 </div>

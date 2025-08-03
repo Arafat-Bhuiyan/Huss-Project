@@ -6,7 +6,7 @@ import clock from "../../assets/img/icons/clock.png";
 
 export const ContactSec = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white px-4 py-12">
+    <div id="contact" className=" flex items-center justify-center bg-white px-4 py-12">
       <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Left: Contact Form */}
         <div>

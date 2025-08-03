@@ -2,6 +2,7 @@ import GamingPc from "../assets/img/gamingpc.png";
 import FilterSec from "../components/Filter_Section/filterSec";
 import left from "../assets/img/left-angle.png";
 import right from "../assets/img/right-angle.png";
+import { useNavigate } from "react-router-dom";
 
 const pcList = new Array(12).fill(null).map((_, index) => ({
   title: "AMD Ryzen 5 5600G Custom Desktop PC",
@@ -16,6 +17,7 @@ const pcList = new Array(12).fill(null).map((_, index) => ({
 }));
 
 const GamingPCPage = () => {
+  const navigate = useNavigate();
   return (
     <div className="py-6 px-28 bg-[#FAF8F2] min-h-screen flex">
       {/* Filter Section (1/4 width) */}
@@ -36,6 +38,7 @@ const GamingPCPage = () => {
                 src={pc.image}
                 alt="Gaming PC"
                 className="h-48 w-full object-cover rounded-t-lg mb-4"
+                onClick={() => navigate("/gaming-equipent/gaming-pc/intel-pc")}
               />
               <h2 className="text-lg font-semibold mb-2 p-4">{pc.title}</h2>
               <ul className="text-sm text-gray-600 mb-4 list-disc pl-8 p-4">
@@ -45,7 +48,7 @@ const GamingPCPage = () => {
               </ul>
               <div className="flex justify-between items-center p-4">
                 <span className="text-xl font-bold">{pc.price}</span>
-                <button className="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded font-medium">
+                <button onClick={() => navigate("/add-to-cart")} className="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded font-medium">
                   Buy Now
                 </button>
               </div>

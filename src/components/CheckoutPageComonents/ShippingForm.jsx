@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { CountrySelection } from "./CountrySelection";
+import { toast } from "react-toastify";
 
 const ShippingForm = () => {
   const [formData, setFormData] = useState({
@@ -16,6 +17,7 @@ const ShippingForm = () => {
   });
 
   const handleChange = (e) => {
+    e.preventDefault();
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -25,8 +27,22 @@ const ShippingForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // handle form submission logic
     console.log(formData);
+
+    setFormData({
+      fullName: "",
+      phoneNumber: "",
+      emailAddress: "",
+      streetAddress: "",
+      apartmentName: "",
+      floorNumber: "",
+      flatNumber: "",
+      city: "",
+      zipCode: "",
+      billingInfoSame: true,
+    });
+
+    toast.success("Shipping form submitted successfully!");
   };
 
   return (
@@ -54,6 +70,7 @@ const ShippingForm = () => {
               onChange={handleChange}
               placeholder="Enter full name"
               className="mt-1 text-sm font-medium w-full px-4 py-2 bg-[#f9f6ee] shadow rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
+              required
             />
           </div>
           {/* Country */}
@@ -76,6 +93,7 @@ const ShippingForm = () => {
                 onChange={handleChange}
                 placeholder="Enter phone number"
                 className="mt-1 block text-sm font-medium w-full px-4 py-2 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
+                required
               />
             </div>
           </div>
@@ -114,6 +132,7 @@ const ShippingForm = () => {
             onChange={handleChange}
             placeholder="House number and street name"
             className="mt-1 block text-sm font-medium w-full px-4 py-2 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
+            required
           />
         </div>
 
@@ -133,6 +152,7 @@ const ShippingForm = () => {
               onChange={handleChange}
               placeholder="Enter apartment name"
               className="mt-1 block text-sm font-medium w-full px-4 py-2 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
+              required
             />
           </div>
           <div className="w-32">
@@ -150,6 +170,7 @@ const ShippingForm = () => {
               onChange={handleChange}
               placeholder="00"
               className="mt-1 block text-sm font-medium w-full px-4 py-2 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
+              required
             />
           </div>
         </div>
@@ -170,6 +191,7 @@ const ShippingForm = () => {
               onChange={handleChange}
               placeholder="00"
               className="mt-1 block text-sm font-medium w-full px-4 py-2 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
+              required
             />
           </div>
 
@@ -188,6 +210,7 @@ const ShippingForm = () => {
               onChange={handleChange}
               placeholder="Enter city"
               className="mt-1 block text-sm font-medium w-full px-4 py-2 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
+              required
             />
           </div>
         </div>
@@ -208,6 +231,7 @@ const ShippingForm = () => {
               onChange={handleChange}
               placeholder="Enter zip code"
               className="mt-1 block text-sm font-medium w-full px-4 py-2 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
+              required
             />
           </div>
         </div>
@@ -227,6 +251,7 @@ const ShippingForm = () => {
                 })
               }
               className="text-yellow-500"
+              required
             />
             <label
               htmlFor="billingInfoSame"
@@ -240,7 +265,6 @@ const ShippingForm = () => {
 
       <button
         type="submit"
-        onClick={() => window.location.reload()}
         className="w-full py-3 mt-5 mb-8 bg-yellow-500 text-white rounded-xl shadow hover:bg-yellow-600"
       >
         Save Address

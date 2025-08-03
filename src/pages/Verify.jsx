@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import ResetPassword from "./ResetPassword";
 
@@ -55,6 +54,10 @@ const Verify = () => {
     }
   };
 
+  const handleResendOtp = (e) => {
+    toast.success("We've sent a new OTP to your email. Please check your inbox.");
+  };
+
   return (
     <div>
       {!isVerified ? (
@@ -108,8 +111,8 @@ const Verify = () => {
                 <div className="flex items-center justify-center my-4 text-sm font-medium text-gray-500">
                   <p>
                     Didn't get the code?{" "}
-                    <span className="text-yellow-500">
-                      <Link to="/login">Resend OTP</Link>
+                    <span onClick={handleResendOtp} className="text-yellow-500">
+                      Resend OTP
                     </span>
                   </p>
                 </div>

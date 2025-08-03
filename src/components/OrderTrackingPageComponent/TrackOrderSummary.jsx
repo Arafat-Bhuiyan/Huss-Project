@@ -1,9 +1,19 @@
 import { CheckoutOrderItems } from "../CheckoutPageComonents/CheckoutOrderItems";
 import van from "../../assets/img/van.png";
+import { useNavigate } from "react-router-dom";
 
 export const TrackOrderSummary = () => {
+  const navigate = useNavigate();
+
+  const handleContactSupport = (e) => {
+    e.preventDefault();
+    navigate("/customer-support");
+  };
   return (
-    <div className="flex flex-col gap-4 bg-white p-4 rounded-xl">
+    <form
+      onSubmit={handleContactSupport}
+      className="flex flex-col gap-4 bg-white p-4 rounded-xl"
+    >
       <h1 className="font-semibold text-2xl">Order Summary</h1>
       <CheckoutOrderItems />
       <CheckoutOrderItems />
@@ -45,11 +55,11 @@ export const TrackOrderSummary = () => {
       </div>
 
       <button
-        onClick={() => handleOrderPlace()}
+        type="submit"
         className="flex items-center justify-center rounded-lg py-1.5 bg-yellow-400 hover:bg-yellow-500 text-white text-xl font-bold shadow"
       >
         Contact Support
       </button>
-    </div>
+    </form>
   );
 };

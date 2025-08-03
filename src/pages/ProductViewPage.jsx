@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import { ProductImgDet } from "../components/ProductImgDet";
 import ReviewImg from "../assets/img/review.png";
+import { toast } from "react-toastify";
 
 export default function ProductViewPage() {
   const [showReviewBox, setShowReviewBox] = useState(false);
@@ -27,10 +28,22 @@ export default function ProductViewPage() {
     }
   };
 
-  const handleSubmit = () => {
-    console.log("Review:", formData.review);
-    console.log("Product Image:", formData.photo);
-  };
+const handleSubmit = () => {
+  if (!formData.review.trim() && !formData.photo) {
+    toast.warn("Please provide your review before submitting.");
+    return;
+  }
+
+  console.log("Review:", formData.review);
+  console.log("Product Image:", formData.photo);
+
+  setFormData({
+    review: "",
+    photo: null,
+  });
+
+  toast.success("Your review has been submitted successfully. Thank you!");
+};
 
   return (
     <div className="bg-[#fdfaf6] text-[#1c1c1c] px-28 py-6 gap-6">
@@ -151,6 +164,7 @@ export default function ProductViewPage() {
               value={formData.review}
               onChange={handleChange}
               className="w-full border p-2 rounded-md h-24 mb-3"
+              required
             />
 
             {/* <p className="font-medium text-base pb-1">Product Image</p> */}
@@ -165,6 +179,7 @@ export default function ProductViewPage() {
                 name="photo"
                 onChange={handleChange}
                 className="hidden"
+                required
               />
 
               <div className="flex w-full">

@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import rightImg from "../../assets/img/HomeSec1_img.png";
 
 export const Hero = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen w-full bg-[#f9f6ee] flex items-center justify-center px-6">
       <div className="max-w-7xl w-full flex flex-col md:flex-row items-center justify-between gap-10">
@@ -18,10 +20,10 @@ export const Hero = () => {
 
           {/* Buttons */}
           <div className="flex flex-wrap gap-4">
-            <button className="bg-yellow-500 text-white font-semibold text-2xl px-6 py-3 rounded-2xl shadow hover:bg-yellow-600 transition">
+            <button onClick={() => navigate("/#products")} className="bg-yellow-500 text-white font-semibold text-2xl px-6 py-3 rounded-2xl shadow hover:bg-yellow-600 transition">
               Start Shopping
             </button>
-            <button className="border border-yellow-500 text-black font-semibold text-2xl px-6 py-3 rounded-2xl hover:bg-w-full bg-[#f9f6ee] hover:bg-yellow-500 transition">
+            <button onClick={() => navigate("/wishlist")} className="border border-yellow-500 text-black font-semibold text-2xl px-6 py-3 rounded-2xl hover:bg-w-full bg-[#f9f6ee] hover:bg-yellow-500 transition">
               View Wishlist
             </button>
           </div>
