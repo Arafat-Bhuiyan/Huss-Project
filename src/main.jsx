@@ -4,15 +4,14 @@ import { RouterProvider } from "react-router-dom";
 import "./index.css";
 import { ToastContainer } from "react-toastify";
 import { router } from "./routes/Routes";
-// import UserProvider from "./userContext";
-import { Provider } from "react-redux";
-import { store } from "./app/store";
+import UserProvider from "./userContext";
+
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <Provider store={store}>
+    <UserProvider>
       <ToastContainer />
       <RouterProvider router={router} />
-    </Provider>
+    </UserProvider>
   </StrictMode>
 );

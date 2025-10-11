@@ -40,11 +40,6 @@ const handleAddToCart = () => {
 
   // Scroll to top
   window.scrollTo({ top: 0, behavior: "smooth" });
-
-  // Simulate add by reloading the page (temporary)
-  setTimeout(() => {
-    window.location.reload(); // full reload
-  }, 1500); // Give time for toast to show
 };
   return (
     <div>

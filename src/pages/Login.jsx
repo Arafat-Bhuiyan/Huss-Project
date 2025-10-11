@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { UserContext } from "../userContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import profileImg from "../assets/img/profile.png"
+import profileImg from "../assets/img/profile.png";
 
 const Login = () => {
   const [form, setForm] = useState({ username: "", password: "" });
@@ -24,6 +24,7 @@ const Login = () => {
       };
       setUser(loggedInUser);
       console.log(form);
+      toast.success("You have logged in successfully.");
       navigate("/");
     } else {
       toast.error("Invalid credentials");

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import searchIcon from "../assets/img/icons/search_icon.png";
 import heartIcon from "../assets/img/icons/heart.png";

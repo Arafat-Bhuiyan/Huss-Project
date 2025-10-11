@@ -17,7 +17,7 @@ export const CustomerSupportMain = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Email:", formData.emailAddress);
+    console.log("login:", formData.emailAddress);
     console.log("Problem:", formData.problem);
     // Show success toast
     toast.success("Message sent successfully!");
