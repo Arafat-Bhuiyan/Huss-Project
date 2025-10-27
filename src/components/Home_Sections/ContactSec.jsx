@@ -90,7 +90,7 @@ export const ContactSec = () => {
               </li>
               <li className="flex items-center gap-4">
                 <img src={mail} alt="" className="mt-1.5"/>
-                <span>support@shopnest.com</span>
+                <span>support@mtech.com</span>
               </li>
             </ul>
           </div>

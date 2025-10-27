@@ -59,7 +59,7 @@ export const CheckoutOrder = () => {
           </button>
           <div className="py-2 flex flex-col justify-center items-center text-xs font-medium">
             <p className="text-black">
-              By clicking Place Order, you accept ShopNest
+              By clicking Place Order, you accept Mtech
             </p>
             <p className="text-yellow-400">return & shipping policies</p>
           </div>
@@ -102,7 +102,7 @@ export const CheckoutOrder = () => {
           </button>
           <div className="py-2 flex flex-col justify-center items-center text-xs font-medium">
             <p className="text-black">
-              By clicking Place Order, you accept ShopNest
+              By clicking Place Order, you accept Mtech
             </p>
             <p className="text-yellow-400">return & shipping policies</p>
           </div>

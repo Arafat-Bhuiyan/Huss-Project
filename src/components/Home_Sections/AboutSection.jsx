@@ -20,7 +20,7 @@ const AboutSection = () => {
             </div>
             <h3 className="text-2xl font-bold mb-2">Our Story</h3>
             <p className="text-gray-600 font-normal text-base">
-              Founded in 2015, ShopNest began with a simple mission: to create a
+              Founded in 2015, Mtech began with a simple mission: to create a
               seamless shopping experience that connects people with quality
               products. What started as a small venture has grown into a trusted
               marketplace for thousands of customers worldwide.
@@ -49,7 +49,7 @@ const AboutSection = () => {
             </div>
             <h3 className="text-2xl font-bold mb-2">Our Team</h3>
             <p className="text-gray-600 font-normal text-base">
-              Behind ShopNest is a diverse team of passionate individuals
+              Behind Mtech is a diverse team of passionate individuals
               dedicated to innovation and excellence. Our experts work
               tirelessly to curate the best products, develop intuitive
               features, and ensure your shopping experience is exceptional.

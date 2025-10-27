@@ -6,7 +6,7 @@ import plus from "../assets/img/plusbtn.png";
 
 const product = {
   title: "Intel Core Ultra 5 245K Desktop PC",
-  shop: "by ShopNest.com",
+  shop: "by Mtech.com",
   price: 2369,
 };
 

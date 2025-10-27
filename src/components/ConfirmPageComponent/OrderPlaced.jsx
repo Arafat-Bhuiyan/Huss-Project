@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 export const OrderPlaced = () => {
   const product = {
     title: "Intel Core Ultra 5 245K Desktop PC",
-    shop: "by ShopNest.com",
+    shop: "by Mtech.com",
     price: 2369,
   };
   const navigate = useNavigate();
@@ -98,7 +98,7 @@ export const OrderPlaced = () => {
       </button>
       <div className="py-2 flex flex-col justify-center items-center text-xs font-medium">
         <p className="text-black">
-          By clicking Place Order, you accept ShopNest
+          By clicking Place Order, you accept Mtech
         </p>
         <p className="text-yellow-400">return & shipping policies</p>
       </div>

@@ -6,6 +6,7 @@ import categoryIcon from "../assets/img/icons/category.png";
 import cartIcon from "../assets/img/icons/cart.png";
 import accountIcon from "../assets/img/icons/accout.png";
 import goArrow from "../assets/img/icons/go-arrow.png";
+import logo from "../assets/img/mtech-logo1.png";
 import { UserContext } from "../userContext";
 
 const subCategories = [
@@ -25,8 +26,12 @@ export const Navbar = () => {
     <nav className="flex items-center justify-between px-28 py-3 bg-black text-white shadow relative">
       {/* Left: Brand */}
       <div className="flex-1">
-        <Link to="/" className="text-2xl font-bold text-white transition">
-          Shop<span className="text-yellow-500">Nest</span>
+        <Link to="/" className="transition">
+          <img
+            src={logo}
+            alt="ShopNest Logo"
+            className="h-10 w-auto" // Adjust height and width as needed
+          />
         </Link>
       </div>
 
