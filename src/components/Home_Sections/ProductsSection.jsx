@@ -64,7 +64,10 @@ const ProductsSection = () => {
               className="bg-white border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col relative"
             >
               {/* Save Button */}
-              <button className="absolute top-2 right-2 w-6 h-6 rounded-full shadow text-sm flex items-center justify-center">
+              <button
+                onClick={() => navigate("/wishlist")}
+                className="absolute top-2 right-2 w-6 h-6 rounded-full shadow text-sm flex items-center justify-center"
+              >
                 <img src={white_save} alt="" />
               </button>
 

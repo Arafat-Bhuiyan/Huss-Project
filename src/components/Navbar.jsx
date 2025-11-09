@@ -62,7 +62,7 @@ export const Navbar = () => {
             to="/wishlist"
             className="text-white font-medium text-xl hover:text-yellow-500 transition"
           >
-            Save
+            Wishlist
           </NavLink>
         </div>
         {/* Categories Dropdown */}

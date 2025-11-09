@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Headphone from "../assets/img/headphone.png";
 import controller from "../assets/img/controller.png";
 import microscope from "../assets/img/microscope.png";
 import laser from "../assets/img/laser.png";
-import red_save from "../assets/img/red-save.png";
+import delete_wishlist from "../assets/img/delete.png";
 import left from "../assets/img/left-angle.png";
 import right from "../assets/img/right-angle.png";
 import { useNavigate } from "react-router-dom";
 
-const products = [
+const initialProducts = [
   {
     name: "Wireless Headphones",
     description: "Premium sound quality with noise cancellation",
@@ -37,6 +37,13 @@ const products = [
 
 const MyWishlist = () => {
   const navigate = useNavigate();
+  const [wishlistItems, setWishlistItems] = useState(
+    Array(3).fill(initialProducts).flat()
+  );
+
+  const handleDelete = (indexToDelete) => {
+    setWishlistItems(wishlistItems.filter((_, index) => index !== indexToDelete));
+  };
   return (
     <div className="py-16 bg-[#f9f6ee]">
       {/* Header */}
@@ -49,17 +56,17 @@ const MyWishlist = () => {
 
       {/* Products Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {Array(3)
-          .fill(products)
-          .flat()
-          .map((product, index) => (
+        {wishlistItems.map((product, index) => (
             <div
               key={index}
               className="bg-white border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col relative"
             >
               {/* Close Button */}
-              <button className="absolute top-2 right-2 w-6 h-6 rounded-full shadow text-sm flex items-center justify-center">
-                <img src={red_save} alt="" />
+              <button
+                onClick={() => handleDelete(index)}
+                className="absolute top-2 right-2 w-6 h-6 rounded-full shadow text-sm flex items-center justify-center"
+              >
+                <img src={delete_wishlist} alt="" />
               </button>
 
               {/* Image */}
