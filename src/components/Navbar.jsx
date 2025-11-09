@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useRef, useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import searchIcon from "../assets/img/icons/search_icon.png";
 import heartIcon from "../assets/img/icons/heart.png";
@@ -20,7 +20,19 @@ const subCategories = [
 export const Navbar = () => {
   const { user } = useContext(UserContext);
   const [showCategories, setShowCategories] = useState(false);
+  const categoriesRef = useRef(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (categoriesRef.current && !categoriesRef.current.contains(event.target)) {
+        setShowCategories(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <nav className="flex items-center justify-between px-28 py-3 bg-black text-white shadow relative">
@@ -54,7 +66,7 @@ export const Navbar = () => {
       {/* Right: Nav Links */}
       <div className="flex-1 flex justify-end items-center gap-6 relative">
         {/* Save */}
-        <div className="flex items-center gap-2">
+        <div onClick={() => navigate("/wishlist")} className="flex items-center gap-2">
           <div>
             <img src={heartIcon} alt="" className="pt-1" />
           </div>
@@ -70,7 +82,7 @@ export const Navbar = () => {
           <div>
             <img src={categoryIcon} alt="" className="pt-1" />
           </div>
-          <div className="relative">
+          <div className="relative" ref={categoriesRef}>
             <button
               className="text-white font-medium text-xl hover:text-yellow-500 transition"
               onClick={() => setShowCategories((prev) => !prev)}
@@ -90,8 +102,6 @@ export const Navbar = () => {
                       onClick={() => {
                         const routeMap = {
                           "Gaming Equipment": "/gaming-equipent/gaming-pc",
-                          "Survey Equipment": "/survey-tools",
-                          "Testing & Lab Equipment": "/testing-lab",
                         };
                         if (routeMap[cat]) {
                           navigate(routeMap[cat]);

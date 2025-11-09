@@ -49,7 +49,13 @@ export const ProductImgDet = () => {
           <li>MP600 256GB M.2 PCIe Gen3 NVMe SSD</li>
         </ul>
 
-        <div className="flex w-full gap-4 mt-6">
+        <div className="flex w-full gap-4 mt-6 text-white">
+          <button
+            onClick={() => navigate("/wishlist")}
+            className="bg-[#FD5757] px-6 py-2 rounded-lg font-bold text-xl w-1/2"
+          >
+            Add Wishlist
+          </button>
           <button
             onClick={() => navigate("/add-to-cart")}
             className="bg-yellow-400 px-6 py-2 rounded-lg font-bold text-xl w-1/2"
@@ -58,7 +64,7 @@ export const ProductImgDet = () => {
           </button>
           <button
             onClick={() => navigate("/add-to-cart")}
-            className="bg-black text-white px-6 py-2 rounded-lg font-bold text-xl w-1/2"
+            className="bg-black px-6 py-2 rounded-lg font-bold text-xl w-1/2"
           >
             Buy Now
           </button>

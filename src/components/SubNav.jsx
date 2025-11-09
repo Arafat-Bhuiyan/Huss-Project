@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import HomeIcon from "../assets/img/icons/home-icon.png";
 import goArrow from "../assets/img/icons/go-arrow.png";
 import { Link } from "react-router-dom";
@@ -28,10 +28,24 @@ const subNavItems = [
 
 const SubNavBar = () => {
   const [openIndex, setOpenIndex] = useState(null);
+  const dropdownRef = useRef(null);
 
   const handleClick = (index) => {
     setOpenIndex((prev) => (prev === index ? null : index)); // toggle same index
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setOpenIndex(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className="bg-white shadow-sm border-b">
@@ -45,7 +59,7 @@ const SubNavBar = () => {
 
         {/* Other Menu Items */}
         {subNavItems.map((item, index) => (
-          <div key={index} className="relative">
+          <div key={index} className="relative" ref={openIndex === index ? dropdownRef : null}>
             <div
               className="text-[16px] font-medium text-gray-800 cursor-pointer hover:text-yellow-500 transition"
               onClick={() => handleClick(index)}
