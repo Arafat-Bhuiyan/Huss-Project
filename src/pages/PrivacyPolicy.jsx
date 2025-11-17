@@ -1,4 +1,5 @@
 import React from "react";
+import { ScrollRestoration } from "react-router-dom";
 
 const privacyTerms = [
   "Lorem ipsum dolor sit amet consectetur. Lacus at venenatis gravida vivamus mauris. Quisque mi est vel dis. Donec rhoncus laoreet odio orci sed risus elit accumsan. Mattis ut est tristique amet vitae at aliquet. Ac vel porttitor egestas scelerisque enim quisque senectus. Euismod ultricies vulputate id cras bibendum sollicitudin proin odio bibendum. Velit velit in scelerisque erat etiam rutrum phasellus nunc. Sed lectus sed a at et eget. Nunc purus sed quis at risus. Consectetur nibh justo proin placerat condimentum id at adipiscing.",
@@ -13,6 +14,7 @@ const privacyTerms = [
 const PrivacyPolicy = () => {
   return (
     <section className="px-4 md:px-12 lg:px-24 py-12 bg-[#FAF8F2] text-gray-800">
+      <ScrollRestoration />
       <div className="max-w-5xl mx-auto">
         <nav className="text-sm text-gray-500 mb-4">
           <span className="hover:underline cursor-pointer">Home</span> /{" "}

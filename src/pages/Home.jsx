@@ -4,7 +4,7 @@ import { Hero } from "../components/Home_Sections/Hero";
 import { CategorySection } from "../components/Home_Sections/CategorySection";
 import ProductsSection from "../components/Home_Sections/ProductsSection";
 import SubscribeSection from "../components/Home_Sections/SubscribeSection";
-import { useLocation } from "react-router-dom";
+import { ScrollRestoration, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
 const Home = () => {
@@ -26,6 +26,7 @@ const Home = () => {
 
   return (
     <div>
+      <ScrollRestoration />
       <Hero />
       <CategorySection />
       <ProductsSection />

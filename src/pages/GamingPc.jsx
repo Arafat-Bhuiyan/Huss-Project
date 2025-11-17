@@ -1,7 +1,7 @@
 import GamingPc from "../assets/img/gamingpc.png";
 import left from "../assets/img/left-angle.png";
 import right from "../assets/img/right-angle.png";
-import { useNavigate } from "react-router-dom";
+import { ScrollRestoration, useNavigate } from "react-router-dom";
 import FilterSec from "../components/Filter_Section/FilterSec";
 
 const pcList = new Array(12).fill(null).map((_, index) => ({
@@ -20,6 +20,7 @@ const GamingPCPage = () => {
   const navigate = useNavigate();
   return (
     <div className="py-6 px-28 bg-[#FAF8F2] min-h-screen flex">
+      <ScrollRestoration />
       {/* Filter Section (1/4 width) */}
       <div className="w-1/4 rounded-lg">
         <FilterSec />
