@@ -1,8 +1,8 @@
 import GamingPc from "../assets/img/gamingpc.png";
-import FilterSec from "../components/Filter_Section/filterSec";
 import left from "../assets/img/left-angle.png";
 import right from "../assets/img/right-angle.png";
 import { useNavigate } from "react-router-dom";
+import FilterSec from "../components/Filter_Section/filterSec";
 
 const pcList = new Array(12).fill(null).map((_, index) => ({
   title: "AMD Ryzen 5 5600G Custom Desktop PC",

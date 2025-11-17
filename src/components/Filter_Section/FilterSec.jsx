@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { PriceRanger } from "./priceRanger";
+import { PriceRanger } from "./PriceRanger";
 import { FilterWithCheckbox } from "./FilterWithCheckbox";
 
 // Sample data (this can be dynamically fetched from an API)
