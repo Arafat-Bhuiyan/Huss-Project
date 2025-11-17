@@ -10,7 +10,9 @@ export const Hero = () => {
         <div className="text-left max-w-xl">
           <h1 className="text-4xl md:text-5xl font-bold text-black leading-tight mb-4">
             Discover Your Perfect <br />
-            Shop<span className="text-yellow-500">Nest</span>
+            <span className="text-yellow-500">
+              M<span className="text-black">tech</span>
+            </span>
           </h1>
           <p className="text-gray-700 text-2xl font-medium mb-8">
             Find everything you need, all in one place. <br />
@@ -20,10 +22,16 @@ export const Hero = () => {
 
           {/* Buttons */}
           <div className="flex flex-wrap gap-4">
-            <button onClick={() => navigate("/#products")} className="bg-yellow-500 text-white font-semibold text-2xl px-6 py-3 rounded-2xl shadow hover:bg-yellow-600 transition">
+            <button
+              onClick={() => navigate("/#products")}
+              className="bg-yellow-500 text-white font-semibold text-2xl px-6 py-3 rounded-2xl shadow hover:bg-yellow-600 transition"
+            >
               Start Shopping
             </button>
-            <button onClick={() => navigate("/wishlist")} className="border border-yellow-500 text-black font-semibold text-2xl px-6 py-3 rounded-2xl hover:bg-w-full bg-[#f9f6ee] hover:bg-yellow-500 transition">
+            <button
+              onClick={() => navigate("/wishlist")}
+              className="border border-yellow-500 text-black font-semibold text-2xl px-6 py-3 rounded-2xl hover:bg-w-full bg-[#f9f6ee] hover:bg-yellow-500 transition"
+            >
               View Wishlist
             </button>
           </div>

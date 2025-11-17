@@ -41,7 +41,7 @@ export const Navbar = () => {
         <Link to="/" className="transition">
           <img
             src={logo}
-            alt="ShopNest Logo"
+            alt="Mtech Logo"
             className="h-10 w-auto" // Adjust height and width as needed
           />
         </Link>

@@ -7,7 +7,7 @@ const Footer = () => {
         {/* Brand Description */}
         <div>
           <h2 className="text-3xl font-bold mb-2">
-            <Link to="/">Shop<span className="text-yellow-500">Nest</span></Link>
+            <Link className="text-yellow-500" to="/">M<span className="text-white">tech</span></Link>
           </h2>
           <p className="text-white font-normal text-base">
             Your one-stop destination for quality products and exceptional
@@ -94,8 +94,8 @@ const Footer = () => {
       <div className="border-t border-gray-700 mt-8 pt-4 flex flex-col md:flex-row justify-between items-center text-base font-semibold text-white">
         <p>
           © 2023{" "}
-          <span className="">
-            Shop<span className="text-yellow-500">Nest</span>
+          <span className="text-yellow-500">
+            M<span className="text-white">tech</span>
           </span>
           . All rights reserved.
         </p>
