@@ -6,7 +6,7 @@ import categoryIcon from "../assets/img/icons/category.png";
 import cartIcon from "../assets/img/icons/cart.png";
 import accountIcon from "../assets/img/icons/accout.png";
 import goArrow from "../assets/img/icons/go-arrow.png";
-import logo from "../assets/img/mtech-logo1.png";
+import logo from "../assets/img/mtech-logo2.png";
 import { UserContext } from "../userContext";
 
 const subCategories = [
