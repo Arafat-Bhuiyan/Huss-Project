@@ -6,11 +6,11 @@ import clock from "../../assets/img/icons/clock.png";
 
 export const ContactSec = () => {
   return (
-    <div id="contact" className=" flex items-center justify-center bg-white px-4 py-12">
+    <div id="contact" className=" flex items-center justify-center bg-white px-4 sm:px-6 md:px-8 lg:px-16 py-12">
       <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Left: Contact Form */}
         <div>
-          <h2 className="text-2xl font-bold mb-2">Get in Touch</h2>
+          <h2 className="text-2xl md:text-3xl font-bold mb-2">Get in Touch</h2>
           <p className="text-gray-600 mb-6">
             Have questions about our products or services? Fill out the form and
             our team will get back to you as soon as possible.

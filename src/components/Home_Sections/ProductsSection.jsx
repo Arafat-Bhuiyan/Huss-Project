@@ -36,17 +36,21 @@ const ProductsSection = () => {
   const navigate = useNavigate();
 
   return (
-    <div id="products" className="py-16 bg-[#f9f6ee] px-4">
+    <div id="products" className="py-16 bg-[#f9f6ee] px-4 sm:px-6 lg:px-8 xl:px-28">
       {/* Header */}
-      <div className="max-w-7xl mx-auto text-center mb-10">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-          Featured Products
-        </h2>
-        <p className="text-gray-600">Check & Get Your Desired Product!</p>
-        <div className="text-right mt-2">
+      <div className="max-w-7xl mx-auto mb-10 flex flex-col md:flex-row md:justify-between md:items-center">
+        <div className="text-center md:text-left">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+            Featured Products
+          </h2>
+          <p className="text-gray-600 text-base md:text-lg">
+            Check & Get Your Desired Product!
+          </p>
+        </div>
+        <div className="text-center md:text-right mt-4 md:mt-0">
           <a
             href="#"
-            className="text-sm text-blue-500 font-semibold hover:underline"
+            className="text-base text-blue-500 font-semibold hover:underline"
           >
             See All
           </a>
@@ -54,7 +58,7 @@ const ProductsSection = () => {
       </div>
 
       {/* Products Grid */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
         {Array(3)
           .fill(products)
           .flat()

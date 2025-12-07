@@ -6,15 +6,15 @@ import story from '../../assets/img/icons/story.png'
 
 const AboutSection = () => {
   return (
-    <section className="bg-white py-16 px-4 md:px-8">
+    <section className="bg-white py-16 px-4 sm:px-6 md:px-8 lg:px-16">
       <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-3xl font-bold mb-16">
+        <h2 className="text-3xl md:text-4xl font-bold mb-8 md:mb-16">
           About <span className="text-yellow-500">
             M<span className="text-black">tech</span>
           </span>
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-left">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-10">
           {/* Our Story */}
           <div className="flex flex-col items-center text-center">
             <div className="bg-yellow-100 p-4 rounded-full mb-4">

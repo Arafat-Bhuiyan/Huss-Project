@@ -23,21 +23,21 @@ export const CategorySection = () => {
   ];
 
   return (
-    <div className="py-16 bg-white text-center">
+    <div className="py-16 bg-white text-center px-4 sm:px-6 lg:px-8">
       {/* Heading */}
       <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
         Featured Category
       </h2>
-      <p className="text-gray-600 mb-10">
+      <p className="text-gray-600 text-base md:text-lg mb-10">
         Get Your Desired Product from Featured Category!
       </p>
 
       {/* Category Cards */}
-      <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {categories.map((category, index) => (
           <div
             key={index}
-            className="bg-white border rounded-xl shadow hover:shadow-md transition overflow-hidden flex flex-col"
+            className="bg-white border rounded-xl shadow hover:shadow-md transition overflow-hidden flex flex-col text-center sm:text-left"
           >
             <img
               src={category.image}
@@ -45,13 +45,13 @@ export const CategorySection = () => {
               className="w-full h-56 object-cover"
             />
             <div className="p-5 flex flex-col justify-between flex-grow">
-              <h3 className="text-2xl text-start font-semibold text-gray-800 mb-2">
+              <h3 className="text-xl md:text-2xl font-semibold text-gray-800 mb-2">
                 {category.title}
               </h3>
-              <p className="text-xl text-start font-medium text-gray-600 mb-4">
+              <p className="text-base md:text-lg font-medium text-gray-600 mb-4">
                 {category.description}
               </p>
-              <button className="bg-[#ffc107] text-white text-base font-semibold px-5 py-2 rounded-md w-fit mx-auto hover:bg-[#e6ac00] transition">
+              <button className="bg-[#ffc107] text-white text-base font-semibold px-5 py-2 rounded-md w-fit mx-auto sm:mx-0 hover:bg-[#e6ac00] transition">
                 Explore
               </button>
             </div>
