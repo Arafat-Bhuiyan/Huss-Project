@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#111] text-white px-8 md:px-16 py-10">
-      <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 text-sm">
+    <footer className="bg-[#111] text-white px-4 sm:px-8 md:px-16 py-10">
+      <div className="max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center sm:text-left">
         {/* Brand Description */}
-        <div>
+        <div className="sm:col-span-2 md:col-span-1">
           <h2 className="text-3xl font-bold mb-2">
             <Link className="text-yellow-500" to="/">M<span className="text-white">tech</span></Link>
           </h2>
@@ -91,12 +91,12 @@ const Footer = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-gray-700 mt-8 pt-4 flex flex-col md:flex-row justify-between items-center text-base font-semibold text-white">
+      <div className="border-t border-gray-700 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center text-sm sm:text-base font-semibold text-white">
         <p>
           © 2023{" "}
           <span className="text-yellow-500">
             M<span className="text-white">tech</span>
-          </span>
+          </span>{" "}
           . All rights reserved.
         </p>
         <div className="flex gap-4 mt-2 md:mt-0">

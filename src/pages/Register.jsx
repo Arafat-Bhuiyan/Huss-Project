@@ -37,38 +37,40 @@ const Register = () => {
   };
 
   return (
-    <div className=" bg-[#f9f6ee] px-28">
-      <div className="flex justify-between py-8">
+    <div className="bg-[#f9f6ee] px-4 sm:px-8 md:px-16 lg:px-28">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 py-4 sm:py-8">
         {/* Breadcrumb */}
         <div className="bg-[#f9f6ee] py-3 text-left text-sm text-black font-medium">
-          <span className="text-gray-600 font-medium text-xl">Account / </span>
-          <span className="text-black font-bold text-xl">Register</span>
+          <span className="text-gray-600 font-medium text-lg sm:text-xl">
+            Account /{" "}
+          </span>
+          <span className="text-black font-bold text-lg sm:text-xl">Register</span>
         </div>
 
         <p className="text-base font-normal">
           Already have an account?{" "}
-          <span className="text-yellow-500">
+          <span className="text-yellow-500 hover:underline">
             <Link to="/login">Login</Link>
           </span>
         </p>
       </div>
       <div className="flex justify-center items-center">
-        <div className="flex max-w-6xl w-full p-20 h-full gap-6">
+        <div className="flex flex-col lg:flex-row max-w-6xl w-full p-4 md:p-12 lg:p-16 h-full gap-8">
           {/* Left side: Background image */}
           <img
             src={reg_side_img}
             alt="Register side image"
-            className="w-1/2 h-auto object-cover rounded-lg"
+            className="hidden lg:block lg:w-1/2 h-auto object-cover rounded-lg self-center"
           />
 
           {/* Right side: Registration form */}
-          <div className="w-1/2 h-auto border border-yellow-400 rounded-md p-8 bg-white shadow-md flex flex-col justify-between">
+          <div className="w-full lg:w-1/2 h-auto border border-yellow-400 rounded-md p-6 sm:p-8 bg-white shadow-md flex flex-col justify-between">
             <h2 className="text-2xl font-semibold text-gray-500 mb-6">
               Register Account
             </h2>
             <form onSubmit={handleSubmit} className="flex flex-col">
-              <div className="flex gap-2">
-                <div className="mb-4 w-1/2">
+              <div className="flex flex-col sm:flex-row gap-4">
+                <div className="mb-4 w-full sm:w-1/2">
                   <label className="block text-base font-medium mb-1 text-gray-700">
                     First Name
                   </label>
@@ -83,7 +85,7 @@ const Register = () => {
                   />
                 </div>
 
-                <div className="mb-4 w-1/2">
+                <div className="mb-4 w-full sm:w-1/2">
                   <label className="block text-base font-medium mb-1 text-gray-700">
                     Last Name
                   </label>
