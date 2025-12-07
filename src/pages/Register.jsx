@@ -1,6 +1,6 @@
 import { useState } from "react";
 import googleImg from "../assets/img/google.png";
-import reg_side_img from "../assets/img/reg-side-img.png";
+import reg_side_img from "../assets/img/reg-side-img-2.png";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -62,7 +62,7 @@ const Register = () => {
           />
 
           {/* Right side: Registration form */}
-          <div className="w-1/2 h-full border border-yellow-400 rounded-md p-8 bg-white shadow-md flex flex-col justify-between">
+          <div className="w-1/2 h-auto border border-yellow-400 rounded-md p-8 bg-white shadow-md flex flex-col justify-between">
             <h2 className="text-2xl font-semibold text-gray-500 mb-6">
               Register Account
             </h2>
@@ -131,7 +131,7 @@ const Register = () => {
 
               <button
                 type="submit"
-                className="w-full py-3 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition duration-300"
+                className="w-full py-3 bg-[#2196F3] hover:bg-[#0088ff] text-white rounded-md transition duration-300"
               >
                 Continue
               </button>
