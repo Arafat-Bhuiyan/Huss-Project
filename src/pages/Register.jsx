@@ -37,7 +37,7 @@ const Register = () => {
   };
 
   return (
-    <div className="bg-[#f9f6ee] px-4 sm:px-8 md:px-16 lg:px-28">
+    <div className="bg-[#f9f6ee] px-4 sm:px-6 md:px-12 lg:px-28 py-4">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 py-4 sm:py-8">
         {/* Breadcrumb */}
         <div className="bg-[#f9f6ee] py-3 text-left text-sm text-black font-medium">
@@ -55,16 +55,16 @@ const Register = () => {
         </p>
       </div>
       <div className="flex justify-center items-center">
-        <div className="flex flex-col lg:flex-row max-w-6xl w-full p-4 md:p-12 lg:p-16 h-full gap-8">
+        <div className="flex flex-col lg:flex-row max-w-6xl w-full lg:p-8 h-full gap-8">
           {/* Left side: Background image */}
           <img
             src={reg_side_img}
             alt="Register side image"
-            className="hidden lg:block lg:w-1/2 h-auto object-cover rounded-lg self-center"
+            className="hidden lg:block lg:w-1/2 h-auto object-contain rounded-lg self-center"
           />
 
           {/* Right side: Registration form */}
-          <div className="w-full lg:w-1/2 h-auto border border-yellow-400 rounded-md p-6 sm:p-8 bg-white shadow-md flex flex-col justify-between">
+          <div className="w-full lg:w-1/2 h-auto border border-yellow-400 rounded-md p-6 sm:p-8 bg-white shadow-md flex flex-col">
             <h2 className="text-2xl font-semibold text-gray-500 mb-6">
               Register Account
             </h2>
@@ -80,7 +80,7 @@ const Register = () => {
                     value={formData.firstName}
                     onChange={handleChange}
                     placeholder="First Name"
-                    className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
                     required
                   />
                 </div>
@@ -95,7 +95,7 @@ const Register = () => {
                     value={formData.lastName}
                     onChange={handleChange}
                     placeholder="Last Name"
-                    className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
                     required
                   />
                 </div>
@@ -111,7 +111,7 @@ const Register = () => {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="Enter email"
-                  className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
                   required
                 />
               </div>
@@ -126,14 +126,14 @@ const Register = () => {
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="Password"
-                  className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
                   required
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-3 bg-[#2196F3] hover:bg-[#0088ff] text-white rounded-md transition duration-300"
+                className="w-full py-3 bg-[#2196F3] hover:bg-[#0088ff] text-white font-semibold text-lg rounded-md transition duration-300"
               >
                 Continue
               </button>

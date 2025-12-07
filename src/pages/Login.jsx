@@ -32,21 +32,23 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="bg-[#f9f6ee]">
       {/* Breadcrumb */}
-      <div className="w-full bg-[#f9f6ee] px-28 py-3 text-left text-sm text-black font-medium">
-        <span className="text-gray-600 font-medium text-xl">Account / </span>
-        <span className="text-black font-bold text-xl">Log In</span>
+      <div className="w-full bg-[#f9f6ee] px-4 sm:px-8 md:px-16 lg:px-28 py-3 text-left text-sm text-black font-medium">
+        <span className="text-gray-600 font-medium text-lg sm:text-xl">
+          Account /{" "}
+        </span>
+        <span className="text-black font-bold text-lg sm:text-xl">Log In</span>
       </div>
-      <div className="bg-[#f9f6ee] pt-8 pb-14 flex flex-col items-center justify-center px-4">
+      <div className="pt-8 pb-14 flex flex-col items-center justify-center px-4">
         {/* Login Box */}
-        <div className="w-full max-w-md border border-yellow-400 rounded-md p-8 bg-white shadow-md">
-          <h2 className="text-center text-3xl font-bold text-yellow-500 mb-4">
+        <div className="w-full max-w-md border border-yellow-400 rounded-md p-6 sm:p-8 bg-white shadow-md">
+          <h2 className="text-center text-2xl sm:text-3xl font-bold text-yellow-500 mb-4">
             Welcome
           </h2>
 
           <form onSubmit={handleSubmit}>
-            <h3 className="text-gray-500 font-semibold text-2xl mb-4">
+            <h3 className="text-gray-500 font-semibold text-xl sm:text-2xl mb-4">
               Account Login
             </h3>
 
@@ -61,7 +63,7 @@ const Login = () => {
                 value={form.username}
                 onChange={handleChange}
                 placeholder="Enter username"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
                 required
               />
             </div>
@@ -76,7 +78,7 @@ const Login = () => {
                 name="password"
                 value={form.password}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
                 required
               />
               <div className="text-right mt-1 text-sm font-normal">
@@ -92,7 +94,7 @@ const Login = () => {
             {/* Log In Button */}
             <button
               type="submit"
-              className="w-full bg-[#2196F3] hover:bg-[#0088ff] text-white font-medium text-xl py-2 rounded-md transition"
+              className="w-full bg-[#2196F3] hover:bg-[#0088ff] text-white font-medium text-lg sm:text-xl py-3 rounded-md transition"
             >
               Log In
             </button>
@@ -108,7 +110,7 @@ const Login = () => {
             <Link to="/register">
               <button
                 type="button"
-                className="w-full border border-gray-400 text-[#2196F3] font-bold text-xl py-2 rounded-md hover:bg-gray-100 transition"
+                className="w-full border border-gray-400 text-[#2196F3] font-bold text-lg sm:text-xl py-3 rounded-md hover:bg-gray-100 transition"
               >
                 Create Your Account
               </button>
