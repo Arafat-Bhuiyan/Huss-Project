@@ -46,14 +46,14 @@ const handleSubmit = () => {
 };
 
   return (
-    <div className="bg-[#fdfaf6] text-[#1c1c1c] px-28 py-6 gap-6">
+    <div className="bg-[#fdfaf6] text-[#1c1c1c] px-4 sm:px-6 lg:px-8 xl:px-28 py-6">
       {/* Breadcrumb */}
-      <div className=" text-left text-sm text-black font-medium pb-6">
-        <span className="text-gray-600 font-medium text-xl">
+      <div className="text-left font-medium pb-6 text-lg sm:text-xl">
+        <span className="text-gray-600">
           Gaming Equipment /{" "}
         </span>
-        <span className="text-black font-bold text-xl">Gaming PC /</span>
-        <span className="text-black font-bold text-xl"> Intel PC</span>
+        <span className="text-black font-bold">Gaming PC /</span>
+        <span className="text-black font-bold"> Intel PC</span>
       </div>
       {/* Left Main Section */}
       <div className="flex-1 justify-center w-full">

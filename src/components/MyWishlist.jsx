@@ -101,26 +101,26 @@ const MyWishlist = () => {
       </div>
 
       {/* Pagination */}
-      <div className="bg-white w-56 py-1.5 pr-2.5 mt-4 rounded-lg flex gap-2 justify-end ml-auto">
-        <div className="border border-gray-400 p-2 rounded w-6 h-6 flex justify-center items-center">
+      <div className="w-full mt-8 flex flex-wrap gap-2 justify-center sm:justify-end">
+        <button className="border border-gray-400 p-2 rounded w-8 h-8 flex justify-center items-center hover:bg-gray-100">
           <img src={left} alt="left arrow" />
-        </div>
-        <div className="bg-[#CBA135] text-white shadow p-2 rounded w-6 h-6 flex justify-center items-center">
+        </button>
+        <button className="bg-[#CBA135] text-white shadow p-2 rounded w-8 h-8 flex justify-center items-center">
           1
-        </div>
-        <div className="border border-gray-400 p-2 rounded w-6 h-6 flex justify-center items-center">
+        </button>
+        <button className="border border-gray-400 p-2 rounded w-8 h-8 flex justify-center items-center hover:bg-gray-100">
           2
-        </div>
-        <div className="border border-gray-400 p-2 rounded w-6 h-6 flex justify-center items-center">
+        </button>
+        <button className="border border-gray-400 p-2 rounded w-8 h-8 flex justify-center items-center hover:bg-gray-100">
           3
-        </div>
-        <div>...</div>
-        <div className="border border-gray-400 p-2 rounded w-6 h-6 flex justify-center items-center">
+        </button>
+        <div className="px-2 flex items-center">...</div>
+        <button className="border border-gray-400 p-2 rounded w-8 h-8 flex justify-center items-center hover:bg-gray-100">
           7
-        </div>
-        <div className="border border-gray-400 p-2 rounded w-6 h-6 flex justify-center items-center">
+        </button>
+        <button className="border border-gray-400 p-2 rounded w-8 h-8 flex justify-center items-center hover:bg-gray-100">
           <img src={right} alt="right arrow" />
-        </div>
+        </button>
       </div>
     </div>
   );
