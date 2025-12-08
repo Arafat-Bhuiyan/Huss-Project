@@ -19,20 +19,20 @@ const pcList = new Array(12).fill(null).map((_, index) => ({
 const GamingPCPage = () => {
   const navigate = useNavigate();
   return (
-    <div className="py-6 px-28 bg-[#FAF8F2] min-h-screen flex">
+    <div className="py-6 px-4 sm:px-6 lg:px-8 xl:px-28 bg-[#FAF8F2] min-h-screen flex flex-col lg:flex-row gap-6">
       <ScrollRestoration />
       {/* Filter Section (1/4 width) */}
-      <div className="w-1/4 rounded-lg">
+      <div className="w-full lg:w-1/4 rounded-lg">
         <FilterSec />
       </div>
 
       {/* Card Section (3/4 width) */}
-      <div className="w-3/4 pl-6">
+      <div className="w-full lg:w-3/4">
         <div className="bg-black w-full text-white flex justify-between py-2.5 px-4 mb-4 items-center rounded-t-xl">
           <h1 className="text-base font-semibold">Gaming PC</h1>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {pcList.slice(0).map((pc, index) => (
             <div key={index} className="bg-white rounded-xl shadow">
               <img
@@ -58,7 +58,7 @@ const GamingPCPage = () => {
         </div>
 
         {/* Pagination */}
-        <div className="bg-white w-56 py-1.5 pr-2.5 mt-4 rounded-lg flex gap-2 justify-end ml-auto">
+        <div className="w-full py-1.5 mt-6 rounded-lg flex flex-wrap gap-2 justify-center lg:justify-end">
           <div className="border border-gray-400 p-2 rounded w-6 h-6 flex justify-center items-center">
             <img src={left} alt="left arrow" />
           </div>

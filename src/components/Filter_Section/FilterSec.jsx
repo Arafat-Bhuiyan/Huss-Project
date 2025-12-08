@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { PriceRanger } from "./PriceRanger";
-import { FilterWithCheckbox } from "./FilterWithCheckbox";
+import { FilterDisclosure } from "./FilterDisclosure";
 
 // Sample data (this can be dynamically fetched from an API)
 const sampleData = {
@@ -21,34 +22,44 @@ const sampleData = {
 };
 
 const FilterSec = () => {
+  const [isFilterVisible, setIsFilterVisible] = useState(false);
+
   return (
-    <div className="w-full">
-      <div className="bg-black w-full text-white flex justify-between px-4 py-2.5 items-center rounded-t-xl">
-        <h2 className="text-base font-semibold">Filter By</h2>
-        <p>
-          <Link className="font-semibold text-xs">Reset</Link>
-        </p>
+    <div className="w-full lg:w-72 xl:w-80">
+      {/* Header and Mobile Toggle */}
+      <div className="bg-black w-full text-white flex justify-between px-4 py-2.5 items-center rounded-t-lg">
+        <h2 className="text-lg font-semibold">Filter By</h2>
+        <div className="flex items-center gap-4">
+          <button className="font-semibold text-xs hover:text-yellow-400">
+            Reset
+          </button>
+          <button
+            className="lg:hidden"
+            onClick={() => setIsFilterVisible(!isFilterVisible)}
+            aria-expanded={isFilterVisible}
+            aria-controls="filter-options"
+          >
+            {isFilterVisible ? "Hide" : "Show"}
+          </button>
+        </div>
       </div>
-      <div className="shadow-md bg-white h-52 mb-2 rounded-b-xl">
-        <PriceRanger />
-      </div>
-      <div className="my-4 shadow-md bg-white mb-2 rounded-xl">
-        <FilterWithCheckbox
-          title="Availability"
-          options={sampleData.Availability}
-        />
-      </div>
-      <div className="my-4 shadow-md bg-white mb-2 rounded-xl">
-        <FilterWithCheckbox title="Processor" options={sampleData.Processor} />
-      </div>
-      <div className="my-4 shadow-md bg-white mb-2 rounded-xl">
-        <FilterWithCheckbox title="RAM" options={sampleData.RAM} />
-      </div>
-      <div className="my-4 shadow-md bg-white mb-2 rounded-xl">
-        <FilterWithCheckbox title="SSD" options={sampleData.SSD} />
-      </div>
-      <div className="my-4 shadow-md bg-white mb-2 rounded-xl">
-        <FilterWithCheckbox title="Graphics" options={sampleData.Graphics} />
+
+      {/* Filter sections */}
+      <div
+        id="filter-options"
+        className={`bg-white shadow-md rounded-b-lg divide-y divide-gray-200 ${
+          isFilterVisible ? "block" : "hidden"
+        } lg:block`}
+      >
+        <FilterDisclosure title="Price Range" defaultOpen={true}>
+          <PriceRanger />
+        </FilterDisclosure>
+        <FilterDisclosure title="Brand" options={sampleData.Brand} />
+        <FilterDisclosure title="Availability" options={sampleData.Availability} />
+        <FilterDisclosure title="Processor" options={sampleData.Processor} />
+        <FilterDisclosure title="RAM" options={sampleData.RAM} />
+        <FilterDisclosure title="SSD" options={sampleData.SSD} />
+        <FilterDisclosure title="Graphics" options={sampleData.Graphics} />
       </div>
     </div>
   );

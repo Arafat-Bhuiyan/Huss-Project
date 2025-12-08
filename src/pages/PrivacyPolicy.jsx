@@ -13,15 +13,17 @@ const privacyTerms = [
 
 const PrivacyPolicy = () => {
   return (
-    <section className="px-4 md:px-12 lg:px-24 py-12 bg-[#FAF8F2] text-gray-800">
+    <section className="px-4 sm:px-6 md:px-12 lg:px-24 py-12 bg-[#FAF8F2] text-gray-800">
       <ScrollRestoration />
       <div className="max-w-5xl mx-auto">
-        <nav className="text-sm text-gray-500 mb-4">
+        <nav className="text-xs sm:text-sm text-gray-500 mb-4">
           <span className="hover:underline cursor-pointer">Home</span> /{" "}
           <span className="text-gray-700 font-medium">Privacy Policy</span>
         </nav>
-        <h1 className="text-4xl font-bold mb-6">Privacy Policy</h1>
-        <ul className="space-y-5 list-disc text-xl text-left">
+        <h1 className="text-3xl sm:text-4xl font-bold mb-6">
+          Privacy Policy
+        </h1>
+        <ul className="space-y-5 list-disc pl-5 sm:pl-6 text-base sm:text-lg lg:text-xl text-left">
           {privacyTerms.map((term, index) => (
             <li key={index}>{term}</li>
           ))}

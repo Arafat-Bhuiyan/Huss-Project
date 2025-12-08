@@ -1,73 +1,102 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 
 export const PriceRanger = () => {
-  const [minPrice, setMinPrice] = useState(0); // Minimum price state (starts at 0)
-  const [maxPrice, setMaxPrice] = useState(299000); // Maximum price state (starts at 299000)
+  const MIN = 0;
+  const MAX = 299000;
+  const STEP = 1000;
 
-  // Handle changes in range slider
-  const handleRangeChange = (e) => {
-    const { name, value } = e.target;
-    if (name === "min") {
-      setMinPrice(Math.min(value, maxPrice)); // Prevent minPrice exceeding maxPrice
-    } else if (name === "max") {
-      setMaxPrice(Math.max(value, minPrice)); // Prevent maxPrice being less than minPrice
-    }
+  const [minPrice, setMinPrice] = useState(MIN);
+  const [maxPrice, setMaxPrice] = useState(MAX);
+
+  const handleMinChange = (e) => {
+    const value = Math.min(Number(e.target.value), maxPrice - STEP);
+    setMinPrice(value);
   };
+
+  const handleMaxChange = (e) => {
+    const value = Math.max(Number(e.target.value), minPrice + STEP);
+    setMaxPrice(value);
+  };
+
+  // Calculate the percentage for the background gradient
+  const getBackgroundSize = useCallback(() => {
+    const minPercent = ((minPrice - MIN) / (MAX - MIN)) * 100;
+    const maxPercent = ((maxPrice - MIN) / (MAX - MIN)) * 100;
+    return {
+      background: `linear-gradient(to right, #d1d5db ${minPercent}%, #fbbd23 ${minPercent}%, #fbbd23 ${maxPercent}%, #d1d5db ${maxPercent}%)`,
+    };
+  }, [minPrice, maxPrice]);
+
+  // Format numbers with commas for better readability
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat("en-IN").format(price);
+  };
+
   return (
-    <div>
-      <h3 className="font-semibold text-base p-2.5 border-b border-gray-300">
-        Price Range
-      </h3>
-
-      {/* Yellow price range slider */}
-      <div className="my-4 px-9">
-        {/* Custom Yellow Range Slider with Two Circular Knobs */}
-        <div className="relative w-full h-3 ml-2">
-          {/* Range Track */}
-          <input
-            type="range"
-            min="0"
-            max="299000"
-            step="1000"
-            name="min"
-            value={minPrice}
-            onChange={handleRangeChange}
-            className="absolute top-0 left-[-15px] w-full h-3 bg-yellow-400 rounded-lg appearance-none"
+    <div className="p-4">
+      {/* Price Range Slider */}
+      <div className="relative h-10 flex items-center">
+        <div className="relative w-full">
+          {/* Combined track for both sliders */}
+          <div
+            className="absolute w-full h-1.5 rounded-lg"
+            style={getBackgroundSize()}
           />
-
+          {/* Min price slider */}
           <input
             type="range"
-            min="0"
-            max="299000"
-            step="1000"
-            name="max"
+            min={MIN}
+            max={MAX}
+            step={STEP}
+            value={minPrice}
+            onChange={handleMinChange}
+            className="absolute w-full h-1.5 appearance-none bg-transparent pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-moz-range-thumb]:pointer-events-auto"
+            aria-label="Minimum Price"
+          />
+          {/* Max price slider */}
+          <input
+            type="range"
+            min={MIN}
+            max={MAX}
+            step={STEP}
             value={maxPrice}
-            onChange={handleRangeChange}
-            className="absolute top-0 left-0 w-full h-3 bg-yellow-400 rounded-lg appearance-none"
+            onChange={handleMaxChange}
+            className="absolute w-full h-1.5 appearance-none bg-transparent pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-moz-range-thumb]:pointer-events-auto"
+            aria-label="Maximum Price"
           />
         </div>
       </div>
 
-      {/* Filter Boxes */}
-      <div className="flex justify-between items-center space-x-4 p-4">
-        {/* First Box */}
-        <input
-          type="number"
-          value={minPrice}
-          onChange={(e) => setMinPrice(e.target.value)}
-          placeholder="0"
-          className="w-1/2 text-base font-medium px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
-        />
+      {/* Price Input Boxes */}
+      <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-4">
+        {/* Min Price Input */}
+        <div className="relative w-full sm:w-1/2">
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
+          <input
+            type="text"
+            value={formatPrice(minPrice)}
+            readOnly
+            className="w-full text-sm font-medium pl-7 pr-2 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 bg-gray-50"
+            aria-label="Minimum price display"
+          />
+        </div>
 
-        {/* Second Box */}
-        <input
-          type="number"
-          value={maxPrice}
-          onChange={(e) => setMaxPrice(e.target.value)}
-          placeholder="2,99,000"
-          className="w-1/2 text-base font-medium px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
-        />
+        {/* Max Price Input */}
+        <div className="relative w-full sm:w-1/2">
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
+          <input
+            type="text"
+            value={formatPrice(maxPrice)}
+            readOnly
+            className="w-full text-sm font-medium pl-7 pr-2 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 bg-gray-50"
+            aria-label="Maximum price display"
+          />
+        </div>
       </div>
+      <style>{`
+        input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; background-color: #fbbd23; border: 2px solid white; border-radius: 50%; cursor: pointer; margin-top: -6px; box-shadow: 0 0 2px rgba(0,0,0,0.5); }
+        input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; background-color: #fbbd23; border: 2px solid white; border-radius: 50%; cursor: pointer; box-shadow: 0 0 2px rgba(0,0,0,0.5); }
+      `}</style>
     </div>
   );
 };
