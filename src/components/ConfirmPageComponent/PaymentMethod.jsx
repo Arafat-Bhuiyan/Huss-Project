@@ -36,27 +36,27 @@ const PaymentMethod = () => {
   ];
 
   return (
-    <div className="py-16 bg-[#f9f6ee]">
+    <div className="py-8 md:py-16 bg-[#f9f6ee]">
       {!confirmOrder ? (
         <div>
           {/* Header */}
-          <div className="text-start mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+          <div className="text-start mb-6 md:mb-10">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2">
               Confirm Order
             </h2>
-            <p className="text-gray-600">
+            <p className="text-gray-600 text-sm sm:text-base">
               Almost there! Confirm your details to complete your order
             </p>
           </div>
 
           {/* Payment Method */}
-          <div className="max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-sm border border-gray-200">
-            <div className="flex items-center gap-4 mb-4">
+          <div className="max-w-2xl mx-auto p-4 sm:p-6 bg-white rounded-xl shadow-sm border border-gray-200">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-4">
               <div className="flex items-center gap-2">
                 <img src={Lock} alt="" />
-                <h2 className="text-2xl font-medium">Payment Method</h2>
+                <h2 className="text-xl sm:text-2xl font-medium">Payment Method</h2>
               </div>
-              <span className="text-base text-yellow-500 font-normal">
+              <span className="text-sm sm:text-base text-yellow-500 font-normal">
                 Secure & Encrypted
               </span>
             </div>
@@ -80,8 +80,8 @@ const PaymentMethod = () => {
                     onChange={() => setSelectedMethod(method.id)}
                   />
                   <div>
-                    <p className="text-xl font-medium">{method.title}</p>
-                    <p className="text-base font-normal text-gray-600">
+                    <p className="text-base sm:text-lg font-medium">{method.title}</p>
+                    <p className="text-sm sm:text-base font-normal text-gray-600">
                       {method.subtitle}
                     </p>
                   </div>
@@ -89,13 +89,13 @@ const PaymentMethod = () => {
               ))}
             </div>
 
-            <div className="mt-4 text-base font-normal text-yellow-500 bg-[#f9f6ee] p-2 rounded-xl flex items-center gap-2 shadow">
+            <div className="mt-4 text-sm sm:text-base font-normal text-yellow-500 bg-[#f9f6ee] p-2 rounded-xl flex items-center gap-2 shadow">
               <img src={secure} alt="" />
               <span>Your payment information is encrypted and secure</span>
             </div>
 
             <button
-              className="w-full mt-5 font-bold text-xl bg-yellow-400 hover:bg-yellow-500 text-white py-3 rounded-xl transition"
+              className="w-full mt-5 font-bold text-lg sm:text-xl bg-yellow-400 hover:bg-yellow-500 text-white py-3 rounded-xl transition"
               onClick={() => confirmButton()}
             >
               Confirm Order

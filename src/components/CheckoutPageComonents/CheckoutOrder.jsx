@@ -22,89 +22,89 @@ export const CheckoutOrder = () => {
     <div>
       {!placeOrder ? (
         <div className="flex flex-col gap-4">
-          <h1 className="font-semibold text-2xl">Order Summary</h1>
+          <h1 className="font-semibold text-xl sm:text-2xl">Order Summary</h1>
           <CheckoutOrderItems />
           <CheckoutOrderItems />
           <CheckoutOrderItems />
           <div className="border-b border-gray-300"></div>
 
-          <div className="flex justify-between font-normal text-xl">
+          <div className="flex justify-between font-normal text-base sm:text-lg">
             <p>Subtotal (3 items)</p>
             <p>$7000.00</p>
           </div>
-          <div className="flex justify-between font-normal text-xl">
+          <div className="flex justify-between font-normal text-base sm:text-lg">
             <p>Delivery fee</p>
             <p>$80.00</p>
           </div>
-          <div className="flex justify-between font-normal text-xl">
+          <div className="flex justify-between font-normal text-base sm:text-lg">
             <p>Tax</p>
             <p>$50.00</p>
           </div>
           <div className="border-b border-gray-300"></div>
-          <div className="flex justify-between">
-            <p className="font-semibold text-2xl">Total</p>
-            <p className="font-semibold text-3xl text-yellow-400">$7130.00</p>
+          <div className="flex justify-between items-center">
+            <p className="font-semibold text-xl sm:text-2xl">Total</p>
+            <p className="font-semibold text-2xl sm:text-3xl text-yellow-400">$7130.00</p>
           </div>
           <button
             onClick={() => handleCheckout()}
-            className="flex items-center justify-center rounded-lg py-1.5 bg-yellow-400 hover:bg-yellow-500 text-white text-xl font-bold shadow"
+            className="flex items-center justify-center rounded-lg py-2.5 bg-yellow-400 hover:bg-yellow-500 text-white text-lg sm:text-xl font-bold shadow"
           >
             Proceed to Checkout
           </button>
           <button
             onClick={handleContinueShopping}
-            className="flex items-center justify-center border rounded-lg py-1.5 border-yellow-400 bg-white hover:bg-gray-50 text-black text-xl font-bold shadow"
+            className="flex items-center justify-center border rounded-lg py-2.5 border-yellow-400 bg-white hover:bg-gray-50 text-black text-lg sm:text-xl font-bold shadow"
           >
             Continue Shopping
           </button>
-          <div className="py-2 flex flex-col justify-center items-center text-xs font-medium">
+          <div className="py-2 flex flex-col justify-center items-center text-center text-xs sm:text-sm font-medium">
             <p className="text-black">
               By clicking Place Order, you accept Mtech
             </p>
-            <p className="text-yellow-400">return & shipping policies</p>
+            <p className="text-yellow-400 hover:underline cursor-pointer">return & shipping policies</p>
           </div>
         </div>
       ) : (
         <div className="flex flex-col gap-4">
-          <h1 className="font-semibold text-2xl">Order Summary</h1>
+          <h1 className="font-semibold text-xl sm:text-2xl">Order Summary</h1>
           <CheckoutOrderItems />
           <CheckoutOrderItems />
           <CheckoutOrderItems />
           <div className="border-b border-gray-300"></div>
 
-          <div className="flex justify-between font-normal text-xl">
+          <div className="flex justify-between font-normal text-base sm:text-lg">
             <p>Subtotal (3 items)</p>
             <p>$7000.00</p>
           </div>
-          <div className="flex justify-between font-normal text-xl">
+          <div className="flex justify-between font-normal text-base sm:text-lg">
             <p>Delivery fee</p>
             <p>$80.00</p>
           </div>
-          <div className="flex justify-between font-normal text-xl">
+          <div className="flex justify-between font-normal text-base sm:text-lg">
             <p>Tax</p>
             <p>$50.00</p>
           </div>
-          <div className="flex justify-between font-normal text-xl">
+          <div className="flex justify-between font-normal text-base sm:text-lg">
             <p>Total Discount</p>
             <p>15%</p>
           </div>
           <div className="border-b border-gray-300"></div>
-          <div className="flex justify-between">
-            <p className="font-semibold text-2xl">Total</p>
-            <p className="font-semibold text-3xl text-yellow-400">$7130.00</p>
+          <div className="flex justify-between items-center">
+            <p className="font-semibold text-xl sm:text-2xl">Total</p>
+            <p className="font-semibold text-2xl sm:text-3xl text-yellow-400">$7130.00</p>
           </div>
 
           <button
             onClick={() => handlePlaceOrder()}
-            className="flex items-center justify-center rounded-lg py-1.5 bg-yellow-400 hover:bg-yellow-500 text-white text-xl font-bold shadow"
+            className="flex items-center justify-center rounded-lg py-2.5 bg-yellow-400 hover:bg-yellow-500 text-white text-lg sm:text-xl font-bold shadow"
           >
             Place Order
           </button>
-          <div className="py-2 flex flex-col justify-center items-center text-xs font-medium">
+          <div className="py-2 flex flex-col justify-center items-center text-center text-xs sm:text-sm font-medium">
             <p className="text-black">
               By clicking Place Order, you accept Mtech
             </p>
-            <p className="text-yellow-400">return & shipping policies</p>
+            <p className="text-yellow-400 hover:underline cursor-pointer">return & shipping policies</p>
           </div>
         </div>
       )}

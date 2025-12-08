@@ -48,14 +48,14 @@ const ShippingForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="p-12 w-full bg-white rounded-lg shadow-lg"
+      className="p-4 sm:p-6 md:p-8 lg:p-12 w-full bg-white rounded-lg shadow-lg"
     >
-      <h2 className="text-2xl font-semibold mb-6">Shipping Information</h2>
+      <h2 className="text-xl sm:text-2xl font-semibold mb-6">Shipping Information</h2>
 
-      <div className="grid grid-cols-1 gap-4 mb-6">
+      <div className="grid grid-cols-1 gap-y-4 mb-6">
         {/* name, country, phone */}
-        <div className="flex gap-3 items-center w-full">
-          <div className="w-2/3">
+        <div className="flex flex-col md:flex-row gap-4 items-start md:items-end w-full">
+          <div className="w-full md:w-2/3">
             <label
               htmlFor="fullName"
               className="block text-sm font-medium text-gray-700"
@@ -69,33 +69,33 @@ const ShippingForm = () => {
               value={formData.fullName}
               onChange={handleChange}
               placeholder="Enter full name"
-              className="mt-1 text-sm font-medium w-full px-4 py-2 bg-[#f9f6ee] shadow rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
+              className="mt-1 text-sm font-medium w-full px-4 py-2.5 bg-[#f9f6ee] shadow rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
               required
             />
           </div>
           {/* Country */}
-          <CountrySelection />
+          <div className="w-auto">
+            <CountrySelection />
+          </div>
 
           {/* Phone Number */}
-          <div className=" flex justify-between gap-4">
-            <div className="">
-              <label
-                htmlFor="phoneNumber"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Phone Number
-              </label>
-              <input
-                type="tel"
-                id="phoneNumber"
-                name="phoneNumber"
-                value={formData.phoneNumber}
-                onChange={handleChange}
-                placeholder="Enter phone number"
-                className="mt-1 block text-sm font-medium w-full px-4 py-2 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
-                required
-              />
-            </div>
+          <div className="w-full md:w-auto flex-grow">
+            <label
+              htmlFor="phoneNumber"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Phone Number
+            </label>
+            <input
+              type="tel"
+              id="phoneNumber"
+              name="phoneNumber"
+              value={formData.phoneNumber}
+              onChange={handleChange}
+              placeholder="Enter phone number"
+              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
+              required
+            />
           </div>
         </div>
 
@@ -113,7 +113,7 @@ const ShippingForm = () => {
             value={formData.emailAddress}
             onChange={handleChange}
             placeholder="Enter email address"
-            className="mt-1 block text-sm font-medium w-full px-4 py-2 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
+            className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
           />
         </div>
 
@@ -131,12 +131,12 @@ const ShippingForm = () => {
             value={formData.streetAddress}
             onChange={handleChange}
             placeholder="House number and street name"
-            className="mt-1 block text-sm font-medium w-full px-4 py-2 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
+            className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
             required
           />
         </div>
 
-        <div className="flex justify-between gap-4">
+        <div className="flex flex-col sm:flex-row justify-between gap-4">
           <div className="w-full">
             <label
               htmlFor="apartmentName"
@@ -151,11 +151,11 @@ const ShippingForm = () => {
               value={formData.apartmentName}
               onChange={handleChange}
               placeholder="Enter apartment name"
-              className="mt-1 block text-sm font-medium w-full px-4 py-2 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
+              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
               required
             />
           </div>
-          <div className="w-32">
+          <div className="w-full sm:w-32">
             <label
               htmlFor="floorNumber"
               className="block text-sm font-medium text-gray-700"
@@ -169,13 +169,13 @@ const ShippingForm = () => {
               value={formData.floorNumber}
               onChange={handleChange}
               placeholder="00"
-              className="mt-1 block text-sm font-medium w-full px-4 py-2 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
+              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
               required
             />
           </div>
         </div>
 
-        <div className="flex justify-between gap-4">
+        <div className="flex flex-col sm:flex-row justify-between gap-4">
           <div className="w-full">
             <label
               htmlFor="flatNumber"
@@ -190,7 +190,7 @@ const ShippingForm = () => {
               value={formData.flatNumber}
               onChange={handleChange}
               placeholder="00"
-              className="mt-1 block text-sm font-medium w-full px-4 py-2 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
+              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
               required
             />
           </div>
@@ -209,13 +209,13 @@ const ShippingForm = () => {
               value={formData.city}
               onChange={handleChange}
               placeholder="Enter city"
-              className="mt-1 block text-sm font-medium w-full px-4 py-2 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
+              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
               required
             />
           </div>
         </div>
 
-        <div className="flex justify-between gap-4">
+        <div className="flex flex-col sm:flex-row justify-between gap-4">
           <div className="w-full">
             <label
               htmlFor="zipCode"
@@ -230,14 +230,14 @@ const ShippingForm = () => {
               value={formData.zipCode}
               onChange={handleChange}
               placeholder="Enter zip code"
-              className="mt-1 block text-sm font-medium w-full px-4 py-2 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
+              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
               required
             />
           </div>
         </div>
 
-        <div className="w-full px-4 py-2 shadow bg-[#f9f6ee] rounded-xl">
-          <h1 className="font-medium text-xl">Billing Information:</h1>
+        <div className="w-full p-4 shadow bg-[#f9f6ee] rounded-xl">
+          <h1 className="font-medium text-lg sm:text-xl">Billing Information:</h1>
           <div className="flex items-center gap-2">
             <input
               type="checkbox"
