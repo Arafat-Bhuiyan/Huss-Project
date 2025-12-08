@@ -44,13 +44,13 @@ const handleAddToCart = () => {
   return (
     <div>
       {/* Header */}
-      <div className="flex justify-between mb-10">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-10">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-0">
           You may also need{" "}
         </h2>
-        <div className=" mt-2">
+        <div className="self-end sm:self-center">
           <a
-            href="#"
+            href="/#products"
             className="text-sm text-yellow-500 font-semibold hover:underline"
           >
             See All
@@ -59,13 +59,13 @@ const handleAddToCart = () => {
       </div>
 
       {/* Products Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 min-[480px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {Array(1)
           .fill(products)
           .flat()
-          .map((product, index) => (
+          .map((product) => (
             <div
-              key={index}
+              key={product.name}
               className="bg-white border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col relative"
             >
               {/* Close Button */}

@@ -16,13 +16,13 @@ export const MyCart = () => {
       </div>
 
       {/* Cart Product Section */}
-      <div className="w-full flex justify-between items-center gap-3">
-        <div className="w-2/3 flex flex-col gap-5">
+      <div className="w-full flex flex-col lg:flex-row justify-between items-start gap-8">
+        <div className="w-full lg:w-2/3 flex flex-col gap-5">
           <CartItem />
           <CartItem />
           <CartItem />
         </div>
-        <div className="w-1/3 bg-white rounded-lg p-4 shadow">
+        <div className="w-full lg:w-1/3 bg-white rounded-lg p-4 shadow">
           <OrderSection />
         </div>
       </div>

@@ -115,10 +115,7 @@ export const Navbar = () => {
                         }
                       }}
                     >
-                      <li
-                        key={cat}
-                        className="px-4 py-2 hover:bg-gray-100 text-gray-800 cursor-pointer"
-                      >
+                      <li className="px-4 py-2 hover:bg-gray-100 text-gray-800 cursor-pointer">
                         {cat}
                       </li>
                       <div>
@@ -261,7 +258,15 @@ export const Navbar = () => {
                     <li
                       key={cat}
                       className="hover:text-yellow-500 cursor-pointer"
-                      onClick={() => setIsMobileMenuOpen(false)}
+                      onClick={() => {
+                        const routeMap = {
+                          "Gaming Equipment": "/gaming-equipent/gaming-pc",
+                        };
+                        if (routeMap[cat]) {
+                          navigate(routeMap[cat]);
+                        }
+                        setIsMobileMenuOpen(false);
+                      }}
                     >
                       {cat}
                     </li>
