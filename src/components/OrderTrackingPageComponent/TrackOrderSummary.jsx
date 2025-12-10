@@ -1,6 +1,26 @@
 import { CheckoutOrderItems } from "../CheckoutPageComonents/CheckoutOrderItems";
 import van from "../../assets/img/van.png";
 import { useNavigate } from "react-router-dom";
+import smallCpu from "../../assets/img/small-cpu.png";
+
+const orderProducts = [
+  {
+    id: 1,
+    title: "Intel Core Ultra 5 245K Desktop PC",
+    shop: "by Mtech.com",
+    price: 2369,
+    quantity: 1,
+    image: smallCpu,
+  },
+  {
+    id: 2,
+    title: "Another Awesome Product",
+    shop: "by TechStore",
+    price: 1250,
+    quantity: 2,
+    image: smallCpu,
+  },
+];
 
 export const TrackOrderSummary = () => {
   const navigate = useNavigate();
@@ -12,38 +32,38 @@ export const TrackOrderSummary = () => {
   return (
     <form
       onSubmit={handleContactSupport}
-      className="flex flex-col gap-4 bg-white p-4 rounded-xl"
+      className="flex flex-col gap-4 bg-white p-4 md:p-6 rounded-xl"
     >
-      <h1 className="font-semibold text-2xl">Order Summary</h1>
-      <CheckoutOrderItems />
-      <CheckoutOrderItems />
-      <CheckoutOrderItems />
+      <h1 className="font-semibold text-xl sm:text-2xl">Order Summary</h1>
+      {orderProducts.map((product) => (
+        <CheckoutOrderItems key={product.id} product={product} />
+      ))}
       <div className="border-b border-gray-300"></div>
 
-      <div className="flex justify-between font-normal text-xl">
+      <div className="flex justify-between font-normal text-base sm:text-lg md:text-xl">
         <p>Subtotal (3 items)</p>
         <p>$7000.00</p>
       </div>
-      <div className="flex justify-between font-normal text-xl">
+      <div className="flex justify-between font-normal text-base sm:text-lg md:text-xl">
         <p>Delivery fee</p>
         <p>$80.00</p>
       </div>
-      <div className="flex justify-between font-normal text-xl">
+      <div className="flex justify-between font-normal text-base sm:text-lg md:text-xl">
         <p>Tax</p>
         <p>$50.00</p>
       </div>
-      <div className="flex justify-between font-normal text-xl">
+      <div className="flex justify-between font-normal text-base sm:text-lg md:text-xl">
         <p>Total Discount (15%)</p>
         <p>$150.00</p>
       </div>
       <div className="border-b border-gray-300"></div>
       <div className="flex justify-between">
-        <p className="font-semibold text-2xl">Total</p>
-        <p className="font-semibold text-3xl text-yellow-400">$7130.00</p>
+        <p className="font-semibold text-xl sm:text-2xl">Total</p>
+        <p className="font-semibold text-2xl sm:text-3xl text-yellow-400">$7130.00</p>
       </div>
 
       <div className="w-full bg-[#FAF8F2] p-4 rounded-xl">
-        <div className="mb-2 flex gap-2">
+        <div className="mb-2 flex items-center gap-2">
           <img src={van} alt="" />
           <h1 className="font-medium text-sm">Delivery Info</h1>
         </div>
@@ -56,7 +76,7 @@ export const TrackOrderSummary = () => {
 
       <button
         type="submit"
-        className="flex items-center justify-center rounded-lg py-1.5 bg-yellow-400 hover:bg-yellow-500 text-white text-xl font-bold shadow"
+        className="flex items-center justify-center rounded-lg py-1.5 bg-yellow-400 hover:bg-yellow-500 text-white text-lg md:text-xl font-bold shadow"
       >
         Contact Support
       </button>

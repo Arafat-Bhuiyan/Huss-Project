@@ -24,10 +24,10 @@ const DeliveryDetailsForm = () => {
 
   return (
     <form
-      onSubmit={handleDeliveryInfo}
-      className="w-full bg-white p-6 mt-4 rounded-xl shadow-md"
+      onSubmit={handleDeliveryInfo} 
+      className="w-full bg-white p-4 md:p-6 rounded-xl shadow-md"
     >
-      <h2 className="text-xl font-semibold text-gray-800 mb-4">
+      <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-4">
         Delivery Details
       </h2>
 
@@ -61,7 +61,7 @@ const DeliveryDetailsForm = () => {
         <label className="block text-sm font-medium text-gray-700 mb-1">
           GPS Pinning
         </label>
-        <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row gap-2">
           <input
             type="text"
             value={gps1}
@@ -76,8 +76,8 @@ const DeliveryDetailsForm = () => {
             className="w-full text-base font-normal px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-500"
             required
           />
-          <button type="button">
-            <img src={mapButton} alt="" className="w-20 h-12" />
+          <button type="button" className="w-full sm:w-auto py-2 sm:py-0">
+            <img src={mapButton} alt="Map" className="hidden sm:block w-20 h-12 object-contain" />
           </button>
         </div>
       </div>
@@ -100,7 +100,7 @@ const DeliveryDetailsForm = () => {
       {/* Save Button */}
       <button
         type="submit"
-        className="w-full bg-yellow-400 hover:bg-yellow-500 text-white font-bold text-xl py-2 rounded-xl transition"
+        className="w-full bg-yellow-400 hover:bg-yellow-500 text-white font-bold text-lg md:text-xl py-2 rounded-xl transition"
       >
         Save
       </button>

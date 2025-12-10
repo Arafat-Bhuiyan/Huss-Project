@@ -2,13 +2,19 @@ import PaymentMethod from "../components/ConfirmPageComponent/PaymentMethod";
 
 export const ConfirmOrder = () => {
   return (
-    <div className="w-full bg-[#f9f6ee] px-4 sm:px-6 lg:px-8 xl:px-28 py-3">
+    <div className="w-full bg-[#f9f6ee] px-4 py-4 sm:px-6 sm:py-6 md:px-8 lg:px-12 lg:py-8 xl:px-28 2xl:px-32">
       {/* Breadcrumb */}
-      <div className="text-left font-medium text-lg sm:text-xl">
-        <span className="text-gray-600">Home / </span>
-        <span className="text-black font-bold">Add to Cart / </span>
-        <span className="text-black font-bold">Checkout / </span>
-        <span className="text-black font-bold">Confirm Order</span>
+      <div className="flex flex-wrap items-center gap-x-2 text-left font-medium text-base sm:text-lg lg:text-xl">
+        <span className="text-gray-600 whitespace-nowrap">Home /</span>
+        <span className="text-black font-bold whitespace-nowrap">
+          Add to Cart /
+        </span>
+        <span className="text-black font-bold whitespace-nowrap">
+          Checkout /
+        </span>
+        <span className="text-black font-bold whitespace-nowrap">
+          Confirm Order
+        </span>
       </div>
 
       {/* Payment Method Section */}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import googleImg from "../assets/img/google.png";
-import reg_side_img from "../assets/img/reg-side-img-2.png";
+import reg_side_img from "../assets/img/reg-side-img-3.png";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
