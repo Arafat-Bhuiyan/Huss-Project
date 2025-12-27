@@ -1,6 +1,6 @@
 import { useState } from "react";
 import googleImg from "../assets/img/google.png";
-import reg_side_img from "../assets/img/reg-side-img-3.png";
+import reg_side_img from "../assets/img/img-of-2.png";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -55,17 +55,17 @@ const Register = () => {
         </p>
       </div>
       <div className="flex justify-center items-center">
-        <div className="flex flex-col lg:flex-row max-w-6xl w-full lg:p-8 h-full gap-8">
+        <div className="flex flex-col md:flex-row md:items-stretch max-w-6xl w-full md:p-4 lg:p-8 h-full gap-8">
           {/* Left side: Background image */}
           <img
             src={reg_side_img}
             alt="Register side image"
-            className="hidden lg:block lg:w-1/2 h-auto object-contain rounded-lg self-center"
+            className="hidden xl:block xl:w-1/2 h-auto xl:h-full object-cover rounded-lg"
           />
 
           {/* Right side: Registration form */}
-          <div className="w-full lg:w-1/2 h-auto border border-yellow-400 rounded-md p-6 sm:p-8 bg-white shadow-md flex flex-col">
-            <h2 className="text-2xl font-semibold text-gray-500 mb-6">
+          <div className="w-full xl:w-1/2 border border-yellow-400 rounded-md p-6 sm:p-8 bg-white shadow-md flex flex-col justify-center">
+            <h2 className="text-2xl font-semibold text-gray-500 mb-6 text-center lg:text-left">
               Register Account
             </h2>
             <form onSubmit={handleSubmit} className="flex flex-col">
