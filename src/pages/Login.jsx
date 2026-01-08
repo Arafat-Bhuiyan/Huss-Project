@@ -1,33 +1,42 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { UserContext } from "../userContext";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { Eye, EyeOff } from "lucide-react";
 import profileImg from "../assets/img/profile.png";
+import { useLoginMutation } from "../redux/api/authApi";
+import { setUser } from "../redux/features/authSlice";
 
 const Login = () => {
-  const [form, setForm] = useState({ username: "", password: "" });
-  const { setUser } = useContext(UserContext);
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [login, { isLoading }] = useLoginMutation();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (form.username === "Alex Martin" && form.password === "123456") {
-      const loggedInUser = {
-        name: "Alex",
-        photo: profileImg,
+    try {
+      const res = await login(form).unwrap();
+
+      // Map API response to Navbar expectations
+      const userData = {
+        ...res.data,
+        name: `${res.data.first_name} ${res.data.last_name}`,
+        photo: res.data.picture || profileImg, // Use API picture or fallback
       };
-      setUser(loggedInUser);
-      console.log(form);
-      toast.success("You have logged in successfully.");
+
+      dispatch(setUser({ user: userData, token: res.access_token }));
+      toast.success(res.message || "Login successful!");
       navigate("/");
-    } else {
-      toast.error("Invalid credentials");
+    } catch (err) {
+      console.error(err);
+      toast.error(err?.data?.detail || "Invalid email or password");
     }
   };
 
@@ -52,17 +61,17 @@ const Login = () => {
               Account Login
             </h3>
 
-            {/* Username */}
+            {/* Email */}
             <div className="mb-4">
               <label className="block text-base mb-1 text-gray-700">
-                Username
+                Email Address
               </label>
               <input
-                type="text"
-                name="username"
-                value={form.username}
+                type="email"
+                name="email"
+                value={form.email}
                 onChange={handleChange}
-                placeholder="Enter username"
+                placeholder="Enter email"
                 className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
                 required
               />
@@ -73,14 +82,27 @@ const Login = () => {
               <label className="block text-base mb-1 text-gray-700">
                 Password
               </label>
-              <input
-                type="password"
-                name="password"
-                value={form.password}
-                onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                required
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  value={form.password}
+                  onChange={handleChange}
+                  className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 pr-10"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                >
+                  {showPassword ? (
+                    <EyeOff strokeWidth={1} />
+                  ) : (
+                    <Eye strokeWidth={1} />
+                  )}
+                </button>
+              </div>
               <div className="text-right mt-1 text-sm font-normal">
                 <Link
                   to="/forget-password"
@@ -94,9 +116,14 @@ const Login = () => {
             {/* Log In Button */}
             <button
               type="submit"
-              className="w-full bg-[#2196F3] hover:bg-[#0088ff] text-white font-medium text-lg sm:text-xl py-3 rounded-md transition"
+              disabled={isLoading}
+              className={`w-full ${
+                isLoading
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-[#2196F3] hover:bg-[#0088ff]"
+              } text-white font-medium text-lg sm:text-xl py-3 rounded-md transition`}
             >
-              Log In
+              {isLoading ? "Logging in..." : "Log In"}
             </button>
 
             {/* Divider */}

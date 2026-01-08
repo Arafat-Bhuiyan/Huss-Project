@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import ResetPassword from "./ResetPassword";
+import { useVerifyOtpMutation } from "../redux/api/authApi";
 
-const Verify = () => {
+const Verify = ({ email }) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [isVerified, setIsVerified] = useState(false);
+  const [verifyOtpApi, { isLoading }] = useVerifyOtpMutation();
 
   // OTP ইনপুট হ্যান্ডলার
   const handleOtpChange = (e, index) => {
@@ -41,16 +43,16 @@ const Verify = () => {
   };
 
   // OTP ভ্যালিডেশন
-  const verifyOtp = (e) => {
+  const verifyOtp = async (e) => {
     e.preventDefault(); // Prevent the default form submission
     const otpString = otp.join("");
-    const numOtpStr = Number(otpString);
-    console.log("OTP Submitted: ", numOtpStr); // Check OTP before verifying
-    if (numOtpStr === 1234) {
-      toast.success("OTP Verified Successfully!");
+
+    try {
+      const res = await verifyOtpApi({ email, otp: otpString }).unwrap();
+      toast.success(res.message || "OTP Verified Successfully!");
       setIsVerified(true);
-    } else {
-      toast.error("Invalid OTP. Please try again.");
+    } catch (err) {
+      toast.error(err?.data?.message || "Invalid OTP. Please try again.");
     }
   };
 
@@ -102,9 +104,10 @@ const Verify = () => {
                 {/* Verify Button */}
                 <button
                   type="submit" // Important: ensure it's of type 'submit'
-                  className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-medium text-lg sm:text-xl py-3 rounded-md transition mt-4"
+                  disabled={isLoading}
+                  className={`w-full ${isLoading ? "bg-gray-400 cursor-not-allowed" : "bg-yellow-500 hover:bg-yellow-600"} text-white font-medium text-lg sm:text-xl py-3 rounded-md transition mt-4`}
                 >
-                  Verify OTP
+                  {isLoading ? "Verifying..." : "Verify OTP"}
                 </button>
 
                 {/* Divider */}
@@ -121,7 +124,7 @@ const Verify = () => {
           </div>
         </div>
       ) : (
-        <ResetPassword />
+        <ResetPassword email={email} />
       )}
     </div>
   );

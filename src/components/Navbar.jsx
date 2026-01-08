@@ -1,4 +1,5 @@
-import { useContext, useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import searchIcon from "../assets/img/icons/search_icon.png";
 import heartIcon from "../assets/img/icons/heart.png";
@@ -7,7 +8,8 @@ import cartIcon from "../assets/img/icons/cart.png";
 import accountIcon from "../assets/img/icons/accout.png";
 import goArrow from "../assets/img/icons/go-arrow.png";
 import logo from "../assets/img/mtech-logo2.png";
-import { UserContext } from "../userContext";
+import { LogOut } from "lucide-react";
+import { logout } from "../redux/features/authSlice";
 
 const subCategories = [
   "Survey Equipment",
@@ -18,11 +20,17 @@ const subCategories = [
 ];
 
 export const Navbar = () => {
-  const { user } = useContext(UserContext);
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const [showCategories, setShowCategories] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const categoriesRef = useRef(null);
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/login");
+  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -45,129 +53,132 @@ export const Navbar = () => {
       <nav className="flex items-center justify-between px-4 sm:px-6 lg:px-28 py-3">
         {/* Left: Brand */}
         <div className="flex-1 lg:flex">
-        <Link to="/" className="transition">
-          <img
-            src={logo}
-            alt="Mtech Logo"
-            className="h-8 sm:h-10 w-auto"
-          />
-        </Link>
-      </div>
+          <Link to="/" className="transition">
+            <img src={logo} alt="Mtech Logo" className="h-8 sm:h-10 w-auto" />
+          </Link>
+        </div>
 
-      {/* Center: Search Bar */}
-      <div className="hidden lg:flex flex-1 justify-center px-4">
-        <div className="relative w-72 md:w-96 flex items-center">
-          <span className="absolute right-0 h-full flex items-center">
-            <span className="bg-yellow-500 rounded-r-full px-6 py-[10px] border border-gray-100 flex items-center">
-              <img src={searchIcon} alt="Search" className="w-5 h-5" />
+        {/* Center: Search Bar */}
+        <div className="hidden lg:flex flex-1 justify-center px-4">
+          <div className="relative w-72 md:w-96 flex items-center">
+            <span className="absolute right-0 h-full flex items-center">
+              <span className="bg-yellow-500 rounded-r-full px-6 py-[10px] border border-gray-100 flex items-center">
+                <img src={searchIcon} alt="Search" className="w-5 h-5" />
+              </span>
             </span>
-          </span>
-          <input
-            type="text"
-            placeholder="Search for Products..."
-            className="w-full px-4 py-2 rounded-full placeholder:text-base placeholder:font-normal placeholder:text-gray-100 border border-gray-100 bg-black focus:outline-none focus:ring-2 focus:ring-gray-300 transition"
-          />
-        </div>
-      </div>
-
-      {/* Right: Nav Links */}
-      <div className="hidden lg:flex flex-1 justify-end items-center gap-6">
-        {/* Save */}
-        <div onClick={() => navigate("/wishlist")} className="flex items-center gap-2">
-          <div>
-            <img src={heartIcon} alt="" className="pt-1" />
-          </div>
-          <NavLink
-            to="/wishlist"
-            className="text-white font-medium text-xl hover:text-yellow-500 transition"
-          >
-            Wishlist
-          </NavLink>
-        </div>
-        {/* Categories Dropdown */}
-        <div className="flex items-center gap-2 relative">
-          <div>
-            <img src={categoryIcon} alt="" className="pt-1" />
-          </div>
-          <div>
-            <button
-              className="text-white font-medium text-xl hover:text-yellow-500 transition"
-              onClick={() => setShowCategories((prev) => !prev)}
-            >
-              Categories
-            </button>
-            {showCategories && (
-              <div className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-64 shadow-lg z-50">
-                <div className="bg-black text-white px-4 py-2 rounded-t">
-                  All Categories
-                </div>
-                <ul className="bg-white rounded-b">
-                  {subCategories.map((cat) => (
-                    <div
-                      className="flex items-center justify-between"
-                      key={cat}
-                      onClick={() => {
-                        const routeMap = {
-                          "Gaming Equipment": "/gaming-equipent/gaming-pc",
-                        };
-                        if (routeMap[cat]) {
-                          navigate(routeMap[cat]);
-                        }
-                      }}
-                    >
-                      <li className="px-4 py-2 hover:bg-gray-100 text-gray-800 cursor-pointer">
-                        {cat}
-                      </li>
-                      <div>
-                        <img src={goArrow} alt="Go Arrow" className="mr-2" />
-                      </div>
-                    </div>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-        </div>
-        {/* Cart */}
-        <div className="flex items-center gap-2">
-          <div>
-            <img src={cartIcon} alt="" className="pt-1" />
-          </div>
-          <NavLink
-            to="/add-to-cart"
-            className="text-white font-medium text-xl hover:text-yellow-500 transition"
-          >
-            Cart
-          </NavLink>
-        </div>
-
-        {/* Account */}
-        {user ? (
-          <div
-            className="flex items-center gap-2"
-            onClick={() => navigate("/profile-settings")}
-          >
-            <img
-              src={user.photo}
-              alt="Profile"
-              className="w-8 h-8 rounded-full"
+            <input
+              type="text"
+              placeholder="Search for Products..."
+              className="w-full px-4 py-2 rounded-full placeholder:text-base placeholder:font-normal placeholder:text-gray-100 border border-gray-100 bg-black focus:outline-none focus:ring-2 focus:ring-gray-300 transition"
             />
-            <span>{user.name}</span>
           </div>
-        ) : (
-          <div className="flex items-center gap-2">
+        </div>
+
+        {/* Right: Nav Links */}
+        <div className="hidden lg:flex flex-1 justify-end items-center gap-6">
+          {/* Save */}
+          <div
+            onClick={() => navigate("/wishlist")}
+            className="flex items-center gap-2"
+          >
             <div>
-              <img src={accountIcon} alt="" />
+              <img src={heartIcon} alt="" className="pt-1" />
             </div>
             <NavLink
-              to="/login"
+              to="/wishlist"
               className="text-white font-medium text-xl hover:text-yellow-500 transition"
             >
-              Account
+              Wishlist
             </NavLink>
           </div>
-        )}
-      </div>
+          {/* Categories Dropdown */}
+          <div className="flex items-center gap-2 relative">
+            <div>
+              <img src={categoryIcon} alt="" className="pt-1" />
+            </div>
+            <div>
+              <button
+                className="text-white font-medium text-xl hover:text-yellow-500 transition"
+                onClick={() => setShowCategories((prev) => !prev)}
+              >
+                Categories
+              </button>
+              {showCategories && (
+                <div className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-64 shadow-lg z-50">
+                  <div className="bg-black text-white px-4 py-2 rounded-t">
+                    All Categories
+                  </div>
+                  <ul className="bg-white rounded-b">
+                    {subCategories.map((cat) => (
+                      <div
+                        className="flex items-center justify-between"
+                        key={cat}
+                        onClick={() => {
+                          const routeMap = {
+                            "Gaming Equipment": "/gaming-equipent/gaming-pc",
+                          };
+                          if (routeMap[cat]) {
+                            navigate(routeMap[cat]);
+                          }
+                        }}
+                      >
+                        <li className="px-4 py-2 hover:bg-gray-100 text-gray-800 cursor-pointer">
+                          {cat}
+                        </li>
+                        <div>
+                          <img src={goArrow} alt="Go Arrow" className="mr-2" />
+                        </div>
+                      </div>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </div>
+          {/* Cart */}
+          <div className="flex items-center gap-2">
+            <div>
+              <img src={cartIcon} alt="" className="pt-1" />
+            </div>
+            <NavLink
+              to="/add-to-cart"
+              className="text-white font-medium text-xl hover:text-yellow-500 transition"
+            >
+              Cart
+            </NavLink>
+          </div>
+
+          {/* Account */}
+          {user ? (
+            <div className="flex items-center gap-2">
+              <img
+                onClick={() => navigate("/profile-settings")}
+                src={user.photo}
+                alt="Profile"
+                className="w-8 h-8 rounded-full"
+              />
+              <span onClick={() => navigate("/profile-settings")}>{user.name}</span>
+              <LogOut
+                size={20}
+                color="#FFBA07"
+                onClick={handleLogout}
+                className="cursor-pointer"
+              />
+            </div>
+          ) : (
+            <div className="flex items-center gap-2">
+              <div>
+                <img src={accountIcon} alt="" />
+              </div>
+              <NavLink
+                to="/login"
+                className="text-white font-medium text-xl hover:text-yellow-500 transition"
+              >
+                Account
+              </NavLink>
+            </div>
+          )}
+        </div>
 
         {/* Mobile Menu Button */}
         <div className="lg:hidden">
@@ -235,7 +246,11 @@ export const Navbar = () => {
                 onClick={() => setShowCategories(!showCategories)}
               >
                 <div className="flex items-center gap-3">
-                  <img src={categoryIcon} alt="Categories" className="w-5 h-5" />
+                  <img
+                    src={categoryIcon}
+                    alt="Categories"
+                    className="w-5 h-5"
+                  />
                   <span>Categories</span>
                 </div>
                 <svg
@@ -287,7 +302,11 @@ export const Navbar = () => {
 
             {/* Account */}
             {/* You can add the same user logic here if needed */}
-            <NavLink to="/login" className="flex items-center gap-3 hover:text-yellow-500" onClick={() => setIsMobileMenuOpen(false)}>
+            <NavLink
+              to="/login"
+              className="flex items-center gap-3 hover:text-yellow-500"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
               <img src={accountIcon} alt="Account" className="w-5 h-5" />
               <span>Account</span>
             </NavLink>

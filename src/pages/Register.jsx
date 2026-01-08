@@ -3,9 +3,13 @@ import googleImg from "../assets/img/google.png";
 import reg_side_img from "../assets/img/img-of-2.png";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useSignupMutation } from "../redux/api/authApi";
+import { Eye, EyeOff } from "lucide-react";
 
 const Register = () => {
   const navigate = useNavigate();
+  const [signup, { isLoading }] = useSignupMutation();
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -21,19 +25,30 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-    });
+    
+    // Map local state (camelCase) to API expectation (snake_case)
+    const submitData = {
+      first_name: formData.firstName,
+      last_name: formData.lastName,
+      email: formData.email,
+      password: formData.password,
+    };
 
-    toast.success("Register done");
-
-    navigate("/login");
+    try {
+      await signup(submitData).unwrap();
+      toast.success("Registration successful! Please login.");
+      navigate("/login");
+    } catch (err) {
+      console.error("Registration failed:", err);
+      // Handle validation errors (e.g., "user with this email already exists")
+      if (err?.data) {
+        Object.values(err.data).flat().forEach((msg) => toast.error(msg));
+      } else {
+        toast.error("Something went wrong. Please try again.");
+      }
+    }
   };
 
   return (
@@ -120,22 +135,32 @@ const Register = () => {
                 <label className="block text-base font-medium mb-1 text-gray-700">
                   Password
                 </label>
-                <input
-                  type="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  placeholder="Password"
-                  className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                  required
-                />
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    placeholder="Password"
+                    className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 pr-10"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                  >
+                    {showPassword ? <EyeOff strokeWidth={1} /> : <Eye strokeWidth={1} />}
+                  </button>
+                </div>
               </div>
 
               <button
                 type="submit"
-                className="w-full py-3 bg-[#2196F3] hover:bg-[#0088ff] text-white font-semibold text-lg rounded-md transition duration-300"
+                disabled={isLoading}
+                className={`w-full py-3 ${isLoading ? "bg-gray-400 cursor-not-allowed" : "bg-[#2196F3] hover:bg-[#0088ff]"} text-white font-semibold text-lg rounded-md transition duration-300`}
               >
-                Continue
+                {isLoading ? "Loading..." : "Continue"}
               </button>
             </form>
 

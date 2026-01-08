@@ -3,23 +3,17 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import Verify from "./Verify";
+import { useSendOtpMutation } from "../redux/api/authApi";
 
 const ForgetPassword = () => {
   const [form, setForm] = useState({ email: "" });
   const [otpSent, setOtpSent] = useState(false);
-  const [otp, setOtp] = useState("");
   const [timeLeft, setTimeLeft] = useState(30); // 30 seconds timer
+  const [sendOtp, { isLoading }] = useSendOtpMutation();
 
   // Handle form input changes
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  // Function to generate a 4-digit OTP
-  const generateOtp = () => {
-    const otpCode = Math.floor(1000 + Math.random() * 9000); // 4-digit OTP
-    setOtp(otpCode);
-    console.log("Generated OTP: ", otpCode); // Simulating OTP sending by logging to console
   };
 
   // Function to handle OTP expiry
@@ -36,16 +30,21 @@ const ForgetPassword = () => {
   }, [otpSent, timeLeft]);
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (form.email === "") {
       toast.error("Please enter a valid email address.");
       return;
     }
 
-    generateOtp(); // Generate OTP
-    setOtpSent(true); // OTP sent status
-    toast.success("OTP has been sent to your email.");
+    try {
+      const res = await sendOtp(form).unwrap();
+      setOtpSent(true); // OTP sent status
+      toast.success(res.message || "OTP has been sent to your email.");
+    } catch (err) {
+      console.error(err);
+      toast.error(err?.data?.message || "Failed to send OTP. Please try again.");
+    }
   };
 
   return (
@@ -93,9 +92,10 @@ const ForgetPassword = () => {
                 {/* Send OTP Button */}
                 <button
                   type="submit"
-                  className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-medium text-lg sm:text-xl py-3 rounded-md transition"
+                  disabled={isLoading}
+                  className={`w-full ${isLoading ? "bg-gray-400 cursor-not-allowed" : "bg-yellow-500 hover:bg-yellow-600"} text-white font-medium text-lg sm:text-xl py-3 rounded-md transition`}
                 >
-                  {otpSent ? "OTP Sent" : "Send OTP"}
+                  {isLoading ? "Sending..." : "Send OTP"}
                 </button>
 
                 {/* Divider */}
@@ -113,7 +113,7 @@ const ForgetPassword = () => {
         </div>
       ) : (
         // Conditional Rendering of Verify Component - if otpSent is true then show verify component
-        <Verify />
+        <Verify email={form.email} />
       )}
     </div>
   );

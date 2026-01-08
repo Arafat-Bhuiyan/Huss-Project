@@ -3,9 +3,14 @@ import { Link } from "react-router-dom";
 import Congratulation from "./Congratulation";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import { useResetPasswordMutation } from "../redux/api/authApi";
+import { Eye, EyeOff } from "lucide-react";
 
-const ResetPassword = () => {
+const ResetPassword = ({ email }) => {
   const [passChanged, setPassChanged] = useState(false);
+  const [resetPassword, { isLoading }] = useResetPasswordMutation();
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [form, setForm] = useState({
     newPassword: "",
     confirmPassword: "",
@@ -15,7 +20,7 @@ const ResetPassword = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const { newPassword, confirmPassword } = form;
@@ -30,12 +35,22 @@ const ResetPassword = () => {
       return;
     }
 
-    // ✅ Here you can send password to the server using API call
-    console.log("Password Reset Successfully:", newPassword);
-
-    toast.success("Your password has been reset successfully!");
-    setPassChanged(true);
-    // Redirect to login if needed
+    try {
+      const res = await resetPassword({
+        email,
+        password: newPassword,
+        confirm_password: confirmPassword,
+      }).unwrap();
+      toast.success(
+        res.message || "Your password has been reset successfully!"
+      );
+      setPassChanged(true);
+    } catch (err) {
+      console.error(err);
+      toast.error(
+        err?.data?.message || "Failed to reset password. Please try again."
+      );
+    }
   };
 
   return (
@@ -68,15 +83,24 @@ const ResetPassword = () => {
                   <label className="block text-base mb-1 text-gray-700">
                     New Password
                   </label>
-                  <input
-                    type="password"
-                    name="newPassword"
-                    value={form.newPassword}
-                    onChange={handleChange}
-                    placeholder="Enter new password"
-                    className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                    required
-                  />
+                  <div className="relative">
+                    <input
+                      type={showNewPassword ? "text" : "password"}
+                      name="newPassword"
+                      value={form.newPassword}
+                      onChange={handleChange}
+                      placeholder="Enter new password"
+                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 pr-10"
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowNewPassword(!showNewPassword)}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                    >
+                      {showNewPassword ? <EyeOff strokeWidth={1} /> : <Eye strokeWidth={1} />}
+                    </button>
+                  </div>
                 </div>
 
                 {/* Confirm Password Input */}
@@ -84,23 +108,37 @@ const ResetPassword = () => {
                   <label className="block text-base mb-1 text-gray-700">
                     Confirm Password
                   </label>
-                  <input
-                    type="password"
-                    name="confirmPassword"
-                    value={form.confirmPassword}
-                    onChange={handleChange}
-                    placeholder="Confirm new password"
-                    className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                    required
-                  />
+                  <div className="relative">
+                    <input
+                      type={showConfirmPassword ? "text" : "password"}
+                      name="confirmPassword"
+                      value={form.confirmPassword}
+                      onChange={handleChange}
+                      placeholder="Confirm new password"
+                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 pr-10"
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                    >
+                      {showConfirmPassword ? <EyeOff strokeWidth={1} /> : <Eye strokeWidth={1} />}
+                    </button>
+                  </div>
                 </div>
 
                 {/* Reset Button */}
                 <button
                   type="submit"
-                  className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-medium text-lg sm:text-xl py-3 rounded-md transition"
+                  disabled={isLoading}
+                  className={`w-full ${
+                    isLoading
+                      ? "bg-gray-400 cursor-not-allowed"
+                      : "bg-yellow-500 hover:bg-yellow-600"
+                  } text-white font-medium text-lg sm:text-xl py-3 rounded-md transition`}
                 >
-                  Reset Password
+                  {isLoading ? "Resetting..." : "Reset Password"}
                 </button>
 
                 {/* Back to Login */}
