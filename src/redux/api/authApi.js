@@ -42,6 +42,21 @@ export const authApi = api.injectEndpoints({
         body: data,
       }),
     }),
+    // Get Profile
+    getProfile: builder.query({
+      query: () => ({
+        url: "/accounts/profile/",
+        method: "GET",
+      }),
+    }),
+    // Update Profile
+    updateProfile: builder.mutation({
+      query: (data) => ({
+        url: "/accounts/update-profile/",
+        method: "PATCH",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -51,4 +66,6 @@ export const {
   useSendOtpMutation,
   useVerifyOtpMutation,
   useResetPasswordMutation,
+  useGetProfileQuery,
+  useUpdateProfileMutation,
 } = authApi;

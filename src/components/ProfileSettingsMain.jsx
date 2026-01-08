@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import personalInfoLogo from "../assets/img/personal-information.png";
 import { toast } from "react-toastify";
+import { useGetProfileQuery, useUpdateProfileMutation } from "../redux/api/authApi";
 
 export const ProfileSettingsMain = () => {
+  const { data: userData, refetch } = useGetProfileQuery();
+  const [updateProfile, { isLoading }] = useUpdateProfileMutation();
   const [formData, setFormData] = useState({
     fullName: "",
     emailAddress: "",
@@ -10,6 +13,19 @@ export const ProfileSettingsMain = () => {
     address: "",
     photo: null, // file object
   });
+
+  // Populate form when data is fetched
+  useEffect(() => {
+    if (userData) {
+      setFormData((prev) => ({
+        ...prev,
+        fullName: userData.full_name || `${userData.first_name} ${userData.last_name}`.trim(),
+        emailAddress: userData.email || "",
+        phone: userData.phone || "",
+        address: userData.address || "",
+      }));
+    }
+  }, [userData]);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -27,22 +43,27 @@ export const ProfileSettingsMain = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Full Name:", formData.fullName);
-    console.log("Email:", formData.emailAddress);
-    console.log("Phone Number:", formData.phone);
-    console.log("Address:", formData.address);
-    console.log("Profile Photo:", formData.photo); // file object
 
-    toast.success("Profile info saved successfully!");
-    setFormData({
-      fullName: "",
-      emailAddress: "",
-      phone: "",
-      address: "",
-      photo: null, // file object
-    });
+    const submitData = new FormData();
+    submitData.append("full_name", formData.fullName);
+    submitData.append("phone", formData.phone);
+    submitData.append("address", formData.address);
+    // Only append photo if a new one is selected
+    if (formData.photo) {
+      submitData.append("picture", formData.photo);
+    }
+
+    try {
+      await updateProfile(submitData).unwrap();
+      toast.success("Profile info saved successfully!");
+      refetch(); // Refresh the data
+      setFormData((prev) => ({ ...prev, photo: null })); // Reset file input
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to update profile.");
+    }
   };
 
   return (
@@ -91,7 +112,8 @@ export const ProfileSettingsMain = () => {
                 value={formData.emailAddress}
                 onChange={handleChange}
                 placeholder="Enter your email"
-                className="mt-2 block text-xl font-normal w-full px-4 py-2 shadow bg-white rounded-xl border border-gray-300 focus:ring-yellow-500 focus:border-yellow-500"
+                className="mt-2 block text-xl font-normal w-full px-4 py-2 shadow bg-gray-100 rounded-xl border border-gray-300 focus:ring-yellow-500 focus:border-yellow-500 cursor-not-allowed"
+                readOnly
                 required
               />
             </div>
@@ -143,7 +165,6 @@ export const ProfileSettingsMain = () => {
                 name="photo"
                 onChange={handleChange}
                 className="hidden"
-                required
               />
 
               <div className="flex w-full">
@@ -164,9 +185,10 @@ export const ProfileSettingsMain = () => {
 
             <button
               type="submit"
-              className="w-full font-bold text-2xl py-2.5 my-7 bg-yellow-500 text-white rounded-xl shadow hover:bg-yellow-600"
+              disabled={isLoading}
+              className={`w-full font-bold text-2xl py-2.5 my-7 ${isLoading ? "bg-gray-400 cursor-not-allowed" : "bg-yellow-500 hover:bg-yellow-600"} text-white rounded-xl shadow`}
             >
-              Save
+              {isLoading ? "Saving..." : "Save"}
             </button>
           </form>
         </div>
