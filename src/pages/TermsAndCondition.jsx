@@ -1,19 +1,32 @@
 import React from "react";
 import { ScrollRestoration } from "react-router-dom";
-
-const terms = [
-  "Lorem ipsum dolor sit amet consectetur. Lacus at venenatis gravida vivamus mauris. Quisque mi est vel dis. Donec rhoncus laoreet odio orci sed risus elit accumsan. Mattis ut est tristique amet vitae at aliquet. Ac vel porttitor egestas scelerisque enim quisque senectus. Euismod ultricies vulputate id cras bibendum sollicitudin proin odio bibendum. Velit velit in scelerisque erat etiam rutrum phasellus nunc. Sed lectus sed a at et eget. Nunc purus sed quis at risus. Consectetur nibh justo proin placerat condimentum id at adipiscing.",
-  "Vel blandit mi nulla sodales consectetur. Egestas tristique ultrices gravida duis nisl odio. Posuere curabitur eu platea pellentesque ut. Facilisi elementum neque mauris facilisis in. Cursus condimentum ipsum pretium consequat turpis at porttitor nisi.",
-  "Scelerisque tellus praesent condimentum euismod a faucibus. Auctor at ultricies at urna aliquam massa pellentesque. Vitae vulputate nullam diam placerat m.",
-  // repeated 3x as seen in image
-  "Lorem ipsum dolor sit amet consectetur. Lacus at venenatis gravida vivamus mauris. Quisque mi est vel dis. Donec rhoncus laoreet odio orci sed risus elit accumsan. Mattis ut est tristique amet vitae at aliquet. Ac vel porttitor egestas scelerisque enim quisque senectus. Euismod ultricies vulputate id cras bibendum sollicitudin proin odio bibendum. Velit velit in scelerisque erat etiam rutrum phasellus nunc. Sed lectus sed a at et eget. Nunc purus sed quis at risus. Consectetur nibh justo proin placerat condimentum id at adipiscing.",
-  "Vel blandit mi nulla sodales consectetur. Egestas tristique ultrices gravida duis nisl odio. Posuere curabitur eu platea pellentesque ut. Facilisi elementum neque mauris facilisis in. Cursus condimentum ipsum pretium consequat turpis at porttitor nisi.",
-  "Scelerisque tellus praesent condimentum euismod a faucibus. Auctor at ultricies at urna aliquam massa pellentesque. Vitae vulputate nullam diam placerat m.",
-];
+import { useTermsAndConditionsQuery } from "../redux/api/authApi";
 
 const TermsAndConditions = () => {
+  const { data, isLoading, isError } = useTermsAndConditionsQuery();
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-[#FAF8F2]">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-[#FAF8F2]">
+        <p className="text-red-500 text-xl font-semibold">
+          Error loading terms and conditions. Please try again later.
+        </p>
+      </div>
+    );
+  }
+
+  const termsContent = data?.content || "No terms and conditions found.";
+
   return (
-    <section className="px-4 sm:px-6 md:px-12 lg:px-24 py-12 bg-[#FAF8F2] text-gray-800">
+    <section className="px-4 sm:px-6 md:px-12 lg:px-24 py-12 bg-[#FAF8F2] text-gray-800 min-h-screen">
       <ScrollRestoration />
       <div className="max-w-5xl mx-auto">
         <nav className="text-xs sm:text-sm text-gray-500 mb-4">
@@ -23,11 +36,10 @@ const TermsAndConditions = () => {
         <h1 className="text-3xl sm:text-4xl font-bold mb-6">
           Terms of Conditions
         </h1>
-        <ul className="space-y-5 list-disc pl-5 sm:pl-6 text-base sm:text-lg lg:text-xl text-left">
-          {terms.map((term, index) => (
-            <li key={index}>{term}</li>
-          ))}
-        </ul>
+        <div
+          className="text-base sm:text-lg lg:text-xl text-left terms-content"
+          dangerouslySetInnerHTML={{ __html: termsContent }}
+        />
       </div>
     </section>
   );

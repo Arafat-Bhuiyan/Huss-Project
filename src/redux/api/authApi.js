@@ -57,6 +57,20 @@ export const authApi = api.injectEndpoints({
         body: data,
       }),
     }),
+    // === Terms & Conditions ===
+    termsAndConditions: builder.query({
+      query: () => ({
+        url: "/cores/terms-conditions/",
+        method: "GET",
+      }),
+    }),
+    // === Privacy Policy ===
+    privacyPolicy: builder.query({
+      query: () => ({
+        url: "/cores/privacy-policy/",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -68,4 +82,6 @@ export const {
   useResetPasswordMutation,
   useGetProfileQuery,
   useUpdateProfileMutation,
+  useTermsAndConditionsQuery,
+  usePrivacyPolicyQuery,
 } = authApi;
