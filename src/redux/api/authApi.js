@@ -71,6 +71,14 @@ export const authApi = api.injectEndpoints({
         method: "GET",
       }),
     }),
+    // === Help & Support ===
+    helpSupport: builder.mutation({
+      query: (data) => ({
+        url: "/cores/help-support/",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -84,4 +92,5 @@ export const {
   useUpdateProfileMutation,
   useTermsAndConditionsQuery,
   usePrivacyPolicyQuery,
+  useHelpSupportMutation,
 } = authApi;

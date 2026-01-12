@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import { useHelpSupportMutation } from "../redux/api/authApi";
 
 export const CustomerSupportMain = () => {
+  const [helpSupport, { isLoading }] = useHelpSupportMutation();
   const [formData, setFormData] = useState({
     emailAddress: "",
-    problem: "",
+    subject: "",
+    message: "",
   });
 
   const handleChange = (e) => {
@@ -15,16 +18,30 @@ export const CustomerSupportMain = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("login:", formData.emailAddress);
-    console.log("Problem:", formData.problem);
-    // Show success toast
-    toast.success("Message sent successfully!");
-    setFormData({
-      emailAddress: "",
-      problem: "",
-    });
+
+    const payload = {
+      email: formData.emailAddress,
+      subject: formData.subject,
+      message: formData.message,
+    };
+
+    try {
+      const response = await helpSupport(payload).unwrap();
+      toast.success(
+        response?.message || "Support request submitted successfully."
+      );
+      setFormData({
+        emailAddress: "",
+        subject: "",
+        message: "",
+      });
+    } catch (error) {
+      toast.error(
+        error?.data?.message || "Something went wrong. Please try again."
+      );
+    }
   };
 
   return (
@@ -65,15 +82,33 @@ export const CustomerSupportMain = () => {
 
           <div>
             <label
-              htmlFor="problem"
+              htmlFor="subject"
               className="mt-3 block text-2xl font-semibold text-gray-700"
             >
-              Problem
+              Subject
             </label>
             <textarea
-              id="problem"
-              name="problem"
-              value={formData.problem}
+              id="subject"
+              name="subject"
+              value={formData.subject}
+              onChange={handleChange}
+              placeholder="Enter your subject"
+              rows={1}
+              className="mt-2 block text-base font-normal w-full px-4 py-2 shadow bg-white rounded-md border border-gray-300 focus:ring-yellow-500 focus:border-yellow-500 resize-none"
+              required
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="message"
+              className="mt-3 block text-2xl font-semibold text-gray-700"
+            >
+              Message
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              value={formData.message}
               onChange={handleChange}
               placeholder="Enter your message"
               rows={5}
@@ -84,9 +119,14 @@ export const CustomerSupportMain = () => {
 
           <button
             type="submit"
-            className="w-60 h-14 font-semibold text-2xl py-3 mt-5 mb-8 bg-yellow-500 text-white rounded-xl shadow hover:bg-yellow-600"
+            disabled={isLoading}
+            className={`w-60 h-14 font-semibold text-2xl py-3 mt-5 mb-8 text-white rounded-xl shadow ${
+              isLoading
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-yellow-500 hover:bg-yellow-600"
+            }`}
           >
-            Send Message
+            {isLoading ? "Sending..." : "Send Message"}
           </button>
         </form>
       </div>
