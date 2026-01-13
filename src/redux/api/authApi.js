@@ -79,6 +79,13 @@ export const authApi = api.injectEndpoints({
         body: data,
       }),
     }),
+    // === Category List ===
+    getCategoryList: builder.query({
+      query: () => ({
+        url: "/categories/list/",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -93,4 +100,5 @@ export const {
   useTermsAndConditionsQuery,
   usePrivacyPolicyQuery,
   useHelpSupportMutation,
+  useGetCategoryListQuery,
 } = authApi;

@@ -2,31 +2,11 @@ import { useState, useEffect, useRef } from "react";
 import HomeIcon from "../assets/img/icons/home-icon.png";
 import goArrow from "../assets/img/icons/go-arrow.png";
 import { Link } from "react-router-dom";
-
-const subNavItems = [
-  {
-    name: "Survey Equipment",
-    subCategories: ["GPS", "Theodolite", "Laser Scanner"],
-  },
-  {
-    name: "Testing & Lab Equipment",
-    subCategories: ["Soil Test", "Concrete Test", "Water Test"],
-  },
-  {
-    name: "Electronics Equipment",
-    subCategories: ["Multimeter", "Oscilloscope", "Soldering Tools"],
-  },
-  {
-    name: "Gaming Equipment",
-    subCategories: ["Gaming Mouse", "Headset", "Graphics Card"],
-  },
-  {
-    name: "Accessories Equipment",
-    subCategories: ["Cables", "Adapters", "Mounts"],
-  },
-];
+import { useGetCategoryListQuery } from "../redux/api/authApi";
 
 const SubNavBar = () => {
+  const { data: categoryList, isLoading } = useGetCategoryListQuery();
+  const subNavItems = categoryList || [];
   const [openIndex, setOpenIndex] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navRef = useRef(null);
@@ -51,7 +31,7 @@ const SubNavBar = () => {
 
   return (
     <nav className="bg-white shadow-sm border-b" ref={navRef}>
-      <div className="mx-auto flex items-center justify-between gap-6 px-4 sm:px-6 md:px-12 lg:px-28 py-3 relative">
+      <div className="mx-auto flex items-center justify-start gap-6 px-4 sm:px-6 md:px-12 lg:px-28 py-3 relative">
         {/* Home */}
         <Link to="/" className="flex-shrink-0">
           <img src={HomeIcon} alt="Home" className="w-5 h-5" />
@@ -65,17 +45,17 @@ const SubNavBar = () => {
                 className="text-[16px] font-medium text-gray-800 cursor-pointer hover:text-yellow-500 transition"
                 onClick={() => handleClick(index)}
               >
-                {item.name}
+                {item.category_name}
               </div>
 
               {/* Desktop Dropdown */}
               {openIndex === index && (
                 <div className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-64 shadow-lg z-50">
                   <div className="bg-black text-white px-4 py-2 rounded-t text-start">
-                    {item.name}
+                    {item.category_name}
                   </div>
                   <ul className="bg-white rounded-b">
-                    {item.subCategories.map((sub, i) => (
+                    {(item.subCategories || []).map((sub, i) => (
                       <li
                         key={i}
                         className="flex items-center justify-between px-4 py-2 hover:bg-gray-100 text-gray-800 cursor-pointer"
@@ -134,7 +114,7 @@ const SubNavBar = () => {
                   className="flex justify-between items-center py-3 text-[16px] font-medium text-gray-800 cursor-pointer"
                   onClick={() => handleClick(index)}
                 >
-                  <span>{item.name}</span>
+                  <span>{item.category_name}</span>
                   <svg
                     className={`w-4 h-4 transform transition-transform ${
                       openIndex === index ? "rotate-180" : ""
@@ -151,7 +131,7 @@ const SubNavBar = () => {
                 </div>
                 {openIndex === index && (
                   <ul className="pl-4 pb-3">
-                    {item.subCategories.map((sub, i) => (
+                    {(item.subCategories || []).map((sub, i) => (
                       <li
                         key={i}
                         className="py-2 text-gray-600 hover:text-black cursor-pointer"

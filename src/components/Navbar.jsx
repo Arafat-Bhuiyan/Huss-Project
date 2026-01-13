@@ -10,16 +10,11 @@ import goArrow from "../assets/img/icons/go-arrow.png";
 import logo from "../assets/img/mtech-logo2.png";
 import { LogOut } from "lucide-react";
 import { logout } from "../redux/features/authSlice";
-
-const subCategories = [
-  "Survey Equipment",
-  "Testing & Lab Equipment",
-  "Electronics Equipment",
-  "Gaming Equipment",
-  "Accessories Equipment",
-];
+import { useGetCategoryListQuery } from "../redux/api/authApi";
 
 export const Navbar = () => {
+  const { data: categoryList } = useGetCategoryListQuery();
+  const subCategories = categoryList || [];
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [showCategories, setShowCategories] = useState(false);
@@ -112,18 +107,18 @@ export const Navbar = () => {
                     {subCategories.map((cat) => (
                       <div
                         className="flex items-center justify-between"
-                        key={cat}
+                        key={cat.id || cat.category_name}
                         onClick={() => {
                           const routeMap = {
-                            "Gaming Equipment": "/gaming-equipent/gaming-pc",
+                            "Survey Equipment": "/gaming-equipent/gaming-pc",
                           };
-                          if (routeMap[cat]) {
-                            navigate(routeMap[cat]);
+                          if (routeMap[cat.category_name]) {
+                            navigate(routeMap[cat.category_name]);
                           }
                         }}
                       >
                         <li className="px-4 py-2 hover:bg-gray-100 text-gray-800 cursor-pointer">
-                          {cat}
+                          {cat.category_name}
                         </li>
                         <div>
                           <img src={goArrow} alt="Go Arrow" className="mr-2" />
@@ -157,7 +152,9 @@ export const Navbar = () => {
                 alt="Profile"
                 className="w-8 h-8 rounded-full"
               />
-              <span onClick={() => navigate("/profile-settings")}>{user.name}</span>
+              <span onClick={() => navigate("/profile-settings")}>
+                {user.name}
+              </span>
               <LogOut
                 size={20}
                 color="#FFBA07"
@@ -271,19 +268,19 @@ export const Navbar = () => {
                 <ul className="pl-8 pt-2 space-y-2 text-base">
                   {subCategories.map((cat) => (
                     <li
-                      key={cat}
+                      key={cat.id || cat.category_name}
                       className="hover:text-yellow-500 cursor-pointer"
                       onClick={() => {
                         const routeMap = {
                           "Gaming Equipment": "/gaming-equipent/gaming-pc",
                         };
-                        if (routeMap[cat]) {
-                          navigate(routeMap[cat]);
+                        if (routeMap[cat.category_name]) {
+                          navigate(routeMap[cat.category_name]);
                         }
                         setIsMobileMenuOpen(false);
                       }}
                     >
-                      {cat}
+                      {cat.category_name}
                     </li>
                   ))}
                 </ul>
