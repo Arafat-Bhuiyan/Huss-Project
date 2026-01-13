@@ -86,6 +86,13 @@ export const authApi = api.injectEndpoints({
         method: "GET",
       }),
     }),
+    // === Product List ===
+    getProductList: builder.query({
+      query: () => ({
+        url: "/products/list/",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -101,4 +108,5 @@ export const {
   usePrivacyPolicyQuery,
   useHelpSupportMutation,
   useGetCategoryListQuery,
+  useGetProductListQuery,
 } = authApi;
