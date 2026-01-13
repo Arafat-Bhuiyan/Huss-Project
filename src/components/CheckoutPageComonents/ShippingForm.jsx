@@ -1,8 +1,9 @@
+import { useDispatch } from "react-redux";
+import { setShippingInfo } from "../../redux/features/checkoutSlice";
 import { useState } from "react";
-import { CountrySelection } from "./CountrySelection";
-import { toast } from "react-toastify";
 
 const ShippingForm = () => {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     fullName: "",
     phoneNumber: "",
@@ -17,7 +18,6 @@ const ShippingForm = () => {
   });
 
   const handleChange = (e) => {
-    e.preventDefault();
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -27,22 +27,8 @@ const ShippingForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-
-    setFormData({
-      fullName: "",
-      phoneNumber: "",
-      emailAddress: "",
-      streetAddress: "",
-      apartmentName: "",
-      floorNumber: "",
-      flatNumber: "",
-      city: "",
-      zipCode: "",
-      billingInfoSame: true,
-    });
-
-    toast.success("Shipping form submitted successfully!");
+    dispatch(setShippingInfo(formData));
+    toast.success("Shipping address saved!");
   };
 
   return (
@@ -50,7 +36,9 @@ const ShippingForm = () => {
       onSubmit={handleSubmit}
       className="p-4 sm:p-6 md:p-8 lg:p-12 w-full bg-white rounded-lg shadow-lg"
     >
-      <h2 className="text-xl sm:text-2xl font-semibold mb-6">Shipping Information</h2>
+      <h2 className="text-xl sm:text-2xl font-semibold mb-6">
+        Shipping Information
+      </h2>
 
       <div className="grid grid-cols-1 gap-y-4 mb-6">
         {/* name, country, phone */}
@@ -72,10 +60,6 @@ const ShippingForm = () => {
               className="mt-1 text-sm font-medium w-full px-4 py-2.5 bg-[#f9f6ee] shadow rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
               required
             />
-          </div>
-          {/* Country */}
-          <div className="w-auto">
-            <CountrySelection />
           </div>
 
           {/* Phone Number */}
@@ -237,7 +221,9 @@ const ShippingForm = () => {
         </div>
 
         <div className="w-full p-4 shadow bg-[#f9f6ee] rounded-xl">
-          <h1 className="font-medium text-lg sm:text-xl">Billing Information:</h1>
+          <h1 className="font-medium text-lg sm:text-xl">
+            Billing Information:
+          </h1>
           <div className="flex items-center gap-2">
             <input
               type="checkbox"

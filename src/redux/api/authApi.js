@@ -108,6 +108,21 @@ export const authApi = api.injectEndpoints({
         method: "GET",
       }),
     }),
+    // === Place order ===
+    placeOrder: builder.mutation({
+      query: (data) => ({
+        url: "/carts/place-order/",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    // === Success order ===
+    successOrder: builder.query({
+      query: (orderId) => ({
+        url: `/carts/order-summary/${orderId}/`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -126,4 +141,6 @@ export const {
   useGetProductListQuery,
   useAddToCartMutation,
   useGetCartQuery,
+  usePlaceOrderMutation,
+  useSuccessOrderQuery,
 } = authApi;

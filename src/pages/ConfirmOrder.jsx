@@ -1,4 +1,4 @@
-import PaymentMethod from "../components/ConfirmPageComponent/PaymentMethod";
+import { OrderPlaced } from "../components/ConfirmPageComponent/OrderPlaced";
 
 export const ConfirmOrder = () => {
   return (
@@ -17,8 +17,7 @@ export const ConfirmOrder = () => {
         </span>
       </div>
 
-      {/* Payment Method Section */}
-      <PaymentMethod />
+       <OrderPlaced />
     </div>
   );
 };
