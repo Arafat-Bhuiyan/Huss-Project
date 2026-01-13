@@ -5,12 +5,14 @@ import {
   useGetCartQuery,
   usePlaceOrderMutation,
 } from "../../redux/api/authApi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { setOrderId } from "../../redux/features/checkoutSlice";
 
 export const CheckoutOrder = () => {
   const [placeOrderToggle, setPlaceOrderToggle] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { data, isLoading } = useGetCartQuery();
   const [placeOrderMutation, { isLoading: isPlacingOrder }] =
     usePlaceOrderMutation();
@@ -50,6 +52,9 @@ export const CheckoutOrder = () => {
     try {
       const response = await placeOrderMutation(payload).unwrap();
       if (response.stripe_url) {
+        if (response.order_id) {
+          dispatch(setOrderId(response.order_id));
+        }
         window.location.href = response.stripe_url;
       } else {
         toast.error("Stripe URL not found in response.");

@@ -16,6 +16,8 @@ import { OrderTracking } from "../pages/OrderTracking";
 import { CustomerSupport } from "../pages/CustomerSupport";
 import { ProfileSettings } from "../pages/ProfileSettings";
 import { Return } from "../pages/Return";
+import { PaymentSuccess } from "../components/PaymentSuccess/PaymentSuccess";
+import { CancelOrder } from "../components/CancelOrder/CancelOrder";
 
 export const router = createBrowserRouter([
   {
@@ -65,6 +67,14 @@ export const router = createBrowserRouter([
       {
         path: "/add-to-cart/checkout",
         element: <CheckoutPage />,
+      },
+      {
+        path: "/payment-success",
+        element: <PaymentSuccess />,
+      },
+      {
+        path: "/cancel-order",
+        element: <CancelOrder />,
       },
       {
         path: "/add-to-cart/checkout/confirm-order",

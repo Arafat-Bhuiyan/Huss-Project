@@ -1,11 +1,16 @@
 import tic from "../../assets/img/tic.png";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useSuccessOrderQuery } from "../../redux/api/authApi";
+import { useSelector } from "react-redux";
 
 export const OrderPlaced = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const orderId = searchParams.get("order_id");
+  const { orderId: persistedOrderId } = useSelector((state) => state.checkout);
+
+  // Use order_id from URL if present, otherwise fall back to Redux state
+  const orderId = searchParams.get("order_id") || persistedOrderId;
+
   const { data, isLoading } = useSuccessOrderQuery(orderId, {
     skip: !orderId,
   });
@@ -33,10 +38,13 @@ export const OrderPlaced = () => {
   if (!orderId) {
     return (
       <div className="flex flex-col justify-center items-center py-20 gap-4">
-        <p className="text-xl font-bold text-red-500">No order ID found.</p>
+        <p className="text-xl font-bold text-red-500 text-center">
+          No order ID found. <br />
+          Please check your email for order confirmation.
+        </p>
         <button
           onClick={handleContinueShopping}
-          className="px-6 py-2 bg-yellow-400 font-bold rounded-lg"
+          className="px-6 py-2 bg-yellow-400 font-bold rounded-lg hover:bg-yellow-500 transition-colors"
         >
           Back to Shop
         </button>
@@ -45,19 +53,7 @@ export const OrderPlaced = () => {
   }
 
   return (
-    <div className="flex flex-col gap-4 bg-white max-w-3xl mx-auto p-4 sm:p-6 md:p-8 rounded-xl shadow-sm">
-      <div className="flex flex-col justify-center items-center gap-1 mb-6 sm:mb-10 text-center">
-        <div className="rounded-full p-2 bg-[#f8f5ee]">
-          <img src={tic} alt="Success" />
-        </div>
-        <h1 className="font-semibold text-2xl sm:text-3xl">
-          Order Placed Successfully!
-        </h1>
-        <p className="text-sm sm:text-base font-normal">
-          Thank You for Your Order
-        </p>
-      </div>
-
+    <div className="flex flex-col gap-4 bg-white max-w-3xl mx-auto p-4 sm:p-6 md:p-8 rounded-xl shadow-sm mt-5">
       <div className="flex flex-col gap-3 justify-start text-sm sm:text-base font-normal">
         <h1 className="font-semibold text-xl sm:text-2xl">Order Details</h1>
         <div className="flex w-full justify-between">
