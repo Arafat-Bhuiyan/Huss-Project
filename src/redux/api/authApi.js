@@ -93,6 +93,21 @@ export const authApi = api.injectEndpoints({
         method: "GET",
       }),
     }),
+    // === Add to cart ===
+    addToCart: builder.mutation({
+      query: (data) => ({
+        url: "/carts/add-to-cart/",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    // === Get cart ===
+    getCart: builder.query({
+      query: () => ({
+        url: "/carts/get-cart-details/",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -109,4 +124,6 @@ export const {
   useHelpSupportMutation,
   useGetCategoryListQuery,
   useGetProductListQuery,
+  useAddToCartMutation,
+  useGetCartQuery,
 } = authApi;

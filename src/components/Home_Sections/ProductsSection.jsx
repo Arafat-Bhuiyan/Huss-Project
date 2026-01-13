@@ -5,16 +5,35 @@ import microscope from "../../assets/img/microscope.png";
 import laser from "../../assets/img/laser.png";
 import white_save from "../../assets/img/white_save.png";
 import { useNavigate } from "react-router-dom";
-import { useGetProductListQuery } from "../../redux/api/authApi";
+import {
+  useGetProductListQuery,
+  useAddToCartMutation,
+} from "../../redux/api/authApi";
+import { toast } from "react-toastify";
 
 const BASE_URL = "http://10.10.13.20:8001";
 
 const ProductsSection = () => {
   const navigate = useNavigate();
   const { data: productList, isLoading } = useGetProductListQuery();
+  const [addToCart] = useAddToCartMutation();
   const [showAll, setShowAll] = useState(false);
   const products = productList || [];
   const displayedProducts = showAll ? products : products.slice(0, 8);
+
+  const handleAddToCart = async (productId) => {
+    try {
+      const response = await addToCart({
+        product_id: productId.toString(),
+        quantity: 1,
+      }).unwrap();
+
+      navigate("/add-to-cart");
+      toast.success(response.message || "Added to cart.");
+    } catch (error) {
+      toast.error(error?.data?.message || "Something went wrong.");
+    }
+  };
 
   return (
     <div
@@ -77,7 +96,7 @@ const ProductsSection = () => {
                   ${product.price}
                 </span>
                 <button
-                  onClick={() => navigate("/add-to-cart")}
+                  onClick={() => handleAddToCart(product.id)}
                   className="bg-[#ffc107] text-white px-4 py-1 rounded hover:bg-[#e6ac00] transition text-sm font-medium"
                 >
                   Add to Cart
