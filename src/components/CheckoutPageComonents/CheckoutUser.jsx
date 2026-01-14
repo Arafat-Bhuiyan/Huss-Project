@@ -59,7 +59,7 @@ export const CheckoutUser = () => {
           >
             Close
           </button>
-          <ShippingForm />
+          <ShippingForm onClose={() => setAddNewButton(false)} />
         </div>
       )}
     </div>

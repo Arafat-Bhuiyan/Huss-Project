@@ -132,6 +132,14 @@ export const authApi = api.injectEndpoints({
         method: "GET",
       }),
     }),
+    // === Update Shipping ===
+    updateShippingAddress: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/update-address/${id}/`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -153,4 +161,5 @@ export const {
   usePlaceOrderMutation,
   useSuccessOrderQuery,
   useOrderTrackingQuery,
+  useUpdateShippingAddressMutation,
 } = authApi;
