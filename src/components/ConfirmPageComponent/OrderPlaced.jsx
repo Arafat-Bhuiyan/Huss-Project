@@ -20,7 +20,9 @@ export const OrderPlaced = () => {
   const summary = orderDetails?.summary;
 
   const handleTrackOrder = () => {
-    navigate("/add-to-cart/checkout/confirm-order/order-tracking");
+    navigate(
+      `/add-to-cart/checkout/confirm-order/order-tracking?order_id=${orderId}`
+    );
   };
 
   const handleContinueShopping = () => {
