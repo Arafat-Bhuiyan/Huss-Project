@@ -100,6 +100,7 @@ export const authApi = api.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["Cart"],
     }),
     // === Get cart ===
     getCart: builder.query({
@@ -107,6 +108,7 @@ export const authApi = api.injectEndpoints({
         url: "/carts/get-cart-details/",
         method: "GET",
       }),
+      providesTags: ["Cart"],
     }),
     // === Place order ===
     placeOrder: builder.mutation({

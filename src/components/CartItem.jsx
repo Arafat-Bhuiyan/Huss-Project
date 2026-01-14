@@ -1,17 +1,30 @@
-import React from "react";
-import smallCpu from "../assets/img/small-cpu.png";
 import x from "../assets/img/xbtn.png";
 import minus from "../assets/img/minusbtn.png";
 import plus from "../assets/img/plusbtn.png";
-
-const product = {
-  title: "Intel Core Ultra 5 245K Desktop PC",
-  shop: "by Mtech.com",
-  price: 2369,
-};
+import { useAddToCartMutation } from "../redux/api/authApi";
+import { toast } from "react-toastify";
 
 export const CartItem = ({ item }) => {
+  const [addToCart, { isLoading: isAdding }] = useAddToCartMutation();
+
   if (!item) return null;
+
+  const handleIncrease = async () => {
+    try {
+      // Use prouct_id as seen in the user's provided response example
+      const productId = item.prouct_id || item.product_id;
+      if (!productId) {
+        toast.error("Product ID not found");
+        return;
+      }
+
+      await addToCart({ product_id: productId }).unwrap();
+      toast.success("Quantity increased!");
+    } catch (error) {
+      toast.error(error?.data?.message || "Failed to increase quantity");
+    }
+  };
+
   return (
     <div className="bg-white rounded-lg p-4 shadow flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
       {/* Product Info */}
@@ -37,7 +50,10 @@ export const CartItem = ({ item }) => {
         <img
           src={plus}
           alt="Increase quantity"
-          className="cursor-pointer w-6 h-6"
+          onClick={handleIncrease}
+          className={`cursor-pointer w-6 h-6 ${
+            isAdding ? "opacity-50 cursor-not-allowed" : ""
+          }`}
         />
         <img
           src={x}
