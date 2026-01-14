@@ -123,6 +123,13 @@ export const authApi = api.injectEndpoints({
         method: "GET",
       }),
     }),
+    // === Order tracking ===
+    orderTracking: builder.query({
+      query: (order_uuid) => ({
+        url: `/track-order-by-uuid/${order_uuid}/`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -143,4 +150,5 @@ export const {
   useGetCartQuery,
   usePlaceOrderMutation,
   useSuccessOrderQuery,
+  useOrderTrackingQuery,
 } = authApi;

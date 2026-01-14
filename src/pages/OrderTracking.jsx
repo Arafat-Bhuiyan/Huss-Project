@@ -1,5 +1,6 @@
 import React from "react";
-import { TrackOrderID } from "../components/OrderTrackingPageComponent/TrackOrderID";
+// import { TrackOrderID } from "../components/OrderTrackingPageComponent/TrackOrderID";
+import { OrderTrackMain } from "../components/OrderTrackingPageComponent/OrderTrackMain";
 
 export const OrderTracking = () => {
   return (
@@ -22,7 +23,8 @@ export const OrderTracking = () => {
       </div>
 
       {/* Tracking Order */}
-      <TrackOrderID />
+      {/* <TrackOrderID /> */}
+      <OrderTrackMain />
     </div>
   );
 };
