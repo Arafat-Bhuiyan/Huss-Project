@@ -6,6 +6,6 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: "10.10.13.12", // your local IP (no leading space)
-    port: 5173, // default Vite dev server port
+    port: 5174, // default Vite dev server port
   },
 });

@@ -118,8 +118,8 @@ export const authApi = api.injectEndpoints({
     }),
     // === Success order ===
     successOrder: builder.query({
-      query: (orderId) => ({
-        url: `/carts/order-summary/${orderId}/`,
+      query: (order_uuid) => ({
+        url: `/carts/order-summary/${order_uuid}/`,
         method: "GET",
       }),
     }),
