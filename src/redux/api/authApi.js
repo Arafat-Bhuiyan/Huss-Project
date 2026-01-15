@@ -156,6 +156,14 @@ export const authApi = api.injectEndpoints({
       }),
       invalidatesTags: ["Cart"],
     }),
+    // === Return ===
+    returnExchange: builder.mutation({
+      query: (data) => ({
+        url: "/submit-return-request/",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -180,4 +188,5 @@ export const {
   useOrderTrackingQuery,
   useUpdateShippingAddressMutation,
   useUpdateCartMutation,
+  useReturnExchangeMutation,
 } = authApi;

@@ -1,13 +1,15 @@
 import { useState } from "react";
 import upload from "../../assets/img/upload.png";
 import { toast } from "react-toastify";
-import { OrderSelection } from "./OrderSelection";
+import { useReturnExchangeMutation } from "../../redux/api/authApi";
 
 export const ReturnExchangeForm = () => {
+  const [returnExchange, { isLoading }] = useReturnExchangeMutation();
   const [formData, setFormData] = useState({
-    order: "",
+    order_id: "",
+    product_id: "",
     reason: "",
-    photo: null,
+    image: null,
   });
 
   const handleChange = (e) => {
@@ -18,18 +20,30 @@ export const ReturnExchangeForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Order:", formData.order);
-    console.log("Reason:", formData.reason);
-    console.log("Photo:", formData.photo);
-    toast.success("Return Request Submitted!");
 
-    setFormData({
-      order: "",
-      reason: "",
-      photo: null,
-    });
+    const data = new FormData();
+    data.append("order_id", formData.order_id);
+    data.append("product_id", formData.product_id);
+    data.append("reason", formData.reason);
+    if (formData.image) {
+      data.append("image", formData.image);
+    }
+
+    try {
+      const response = await returnExchange(data).unwrap();
+      toast.success(response?.message || "Return Request Submitted!");
+
+      setFormData({
+        order_id: "",
+        product_id: "",
+        reason: "",
+        image: null,
+      });
+    } catch (error) {
+      toast.error(error?.data?.message || "Failed to submit return request.");
+    }
   };
 
   return (
@@ -39,25 +53,49 @@ export const ReturnExchangeForm = () => {
       </h2>
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Step 1 */}
+        {/* Step 1: Order and Product IDs */}
         <div className="bg-white p-5 rounded-xl shadow space-y-4">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-full bg-yellow-500 text-white flex items-center justify-center font-bold text-lg">
               1
             </div>
             <h3 className="font-semibold text-gray-800 text-lg">
-              Select Product from Your Orders
+              Order and Product Details
             </h3>
           </div>
-          <OrderSelection
-            selectedOrder={formData.order}
-            onChange={(selectedOrderId) =>
-              setFormData({ ...formData, order: selectedOrderId })
-            }
-          />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Order ID
+              </label>
+              <input
+                type="text"
+                name="order_id"
+                value={formData.order_id}
+                onChange={handleChange}
+                placeholder="Enter Order ID"
+                className="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Product ID
+              </label>
+              <input
+                type="text"
+                name="product_id"
+                value={formData.product_id}
+                onChange={handleChange}
+                placeholder="Enter Product ID"
+                className="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                required
+              />
+            </div>
+          </div>
         </div>
 
-        {/* Step 2 */}
+        {/* Step 2: Reason */}
         <div className="bg-white p-5 rounded-xl shadow space-y-4">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-full bg-yellow-500 text-white flex items-center justify-center font-bold text-lg">
@@ -78,52 +116,51 @@ export const ReturnExchangeForm = () => {
           />
         </div>
 
-        {/* Step 3 */}
-
-        {formData.photo ? (
-          <p className="text-base font-medium text-gray-600 mt-1 text-center border border-gray-300 px-4 py-2 shadow rounded-lg bg-white">
-            {formData.photo.name}
-          </p>
-        ) : (
-          <div className="bg-white p-5 rounded-xl shadow space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-yellow-500 text-white flex items-center justify-center font-bold text-lg">
-                3
-              </div>
-              <h3 className="font-semibold text-gray-800 text-lg">
-                Upload Photos (Optional)
-              </h3>
+        {/* Step 3: Photo Upload */}
+        <div className="bg-white p-5 rounded-xl shadow space-y-4">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-full bg-yellow-500 text-white flex items-center justify-center font-bold text-lg">
+              3
             </div>
-
-            <label
-              htmlFor="photo"
-              className="mt-3 flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-xl px-4 py-6 cursor-pointer text-center hover:border-yellow-500"
-            >
-              <img src={upload} className="mb-2" alt="" />
-              <p className="text-gray-500">
-                Drag and drop images here, or click to browse
-              </p>
-              <p className="text-sm text-gray-400">PNG, JPG up to 10MB</p>
-              <input
-                type="file"
-                name="photo"
-                id="photo"
-                onChange={handleChange}
-                className="hidden"
-                accept="image/png, image/jpeg"
-                required
-              />
-            </label>
+            <h3 className="font-semibold text-gray-800 text-lg">
+              Upload Photos (Optional)
+            </h3>
           </div>
-        )}
+
+          <label
+            htmlFor="image"
+            className="mt-3 flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-xl px-4 py-6 cursor-pointer text-center hover:border-yellow-500"
+          >
+            <img src={upload} className="mb-2" alt="" />
+            <p className="text-gray-500">
+              {formData.image
+                ? formData.image.name
+                : "Drag and drop images here, or click to browse"}
+            </p>
+            <p className="text-sm text-gray-400">PNG, JPG up to 10MB</p>
+            <input
+              type="file"
+              name="image"
+              id="image"
+              onChange={handleChange}
+              className="hidden"
+              accept="image/png, image/jpeg"
+            />
+          </label>
+        </div>
 
         {/* Submit Button */}
         <div className="text-center">
           <button
             type="submit"
-            className="bg-yellow-500 hover:bg-yellow-600 text-white text-lg font-semibold py-3 px-6 rounded-lg shadow"
+            disabled={isLoading}
+            className={`text-white text-lg font-semibold py-3 px-6 rounded-lg shadow transition ${
+              isLoading
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-yellow-500 hover:bg-yellow-600"
+            }`}
           >
-            Submit Return Request
+            {isLoading ? "Submitting..." : "Submit Return Request"}
           </button>
         </div>
       </form>
