@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer className="bg-[#111] text-white px-4 sm:px-8 md:px-16 py-10">
-      <div className="max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center sm:text-left">
+      <div className="max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-center sm:text-left">
         {/* Brand Description */}
         <div className="sm:col-span-2 md:col-span-1">
           <h2 className="text-3xl font-bold mb-2">
@@ -29,33 +29,6 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Categories */}
-        <div>
-          <h3 className="text-white font-bold text-xl mb-2">Categories</h3>
-          <ul className="space-y-1 text-white font-normal text-base">
-            <li className="hover:text-yellow-500 cursor-pointer">
-              Survey Equipment
-            </li>
-            <li className="hover:text-yellow-500 cursor-pointer">
-              Test & Lab Equipment
-            </li>
-            <li className="hover:text-yellow-500 cursor-pointer">
-              Electronics Equipment
-            </li>
-            <li>
-              <Link
-                to="/gaming-equipent/gaming-pc"
-                className="hover:text-yellow-500 cursor-pointer"
-              >
-                Gaming Equipment
-              </Link>
-            </li>
-            <li className="hover:text-yellow-500 cursor-pointer">
-              Accessories Equipment
-            </li>
-          </ul>
-        </div>
-
         {/* Customer Service */}
         <div>
           <h3 className="text-white font-bold text-xl mb-2">
@@ -68,14 +41,6 @@ const Footer = () => {
                 className="hover:text-yellow-500 cursor-pointer"
               >
                 Return & Return Policy
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/add-to-cart/checkout/confirm-order/order-tracking"
-                className="hover:text-yellow-500 cursor-pointer"
-              >
-                Order Tracking
               </Link>
             </li>
             <li>

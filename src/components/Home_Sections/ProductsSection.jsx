@@ -80,7 +80,7 @@ const ProductsSection = () => {
               src={product.image ? `${BASE_URL}${product.image}` : Headphone}
               alt={product.product_name}
               className="w-full h-52 object-cover cursor-pointer"
-              onClick={() => navigate("/gaming-equipent/gaming-pc/intel-pc")}
+              onClick={() => navigate(`/products/${product.id}/detail`)}
             />
 
             {/* Content */}

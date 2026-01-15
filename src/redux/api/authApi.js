@@ -93,6 +93,13 @@ export const authApi = api.injectEndpoints({
         method: "GET",
       }),
     }),
+    // === Product Details ===
+    getProductDetails: builder.query({
+      query: (id) => ({
+        url: `/products/${id}/detail/`,
+        method: "GET",
+      }),
+    }),
     // === Add to cart ===
     addToCart: builder.mutation({
       query: (data) => ({
@@ -140,6 +147,15 @@ export const authApi = api.injectEndpoints({
         body: data,
       }),
     }),
+    // === Update Cart ===
+    updateCart: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/carts/update-cart/${id}/item/`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["Cart"],
+    }),
   }),
 });
 
@@ -156,10 +172,12 @@ export const {
   useHelpSupportMutation,
   useGetCategoryListQuery,
   useGetProductListQuery,
+  useGetProductDetailsQuery,
   useAddToCartMutation,
   useGetCartQuery,
   usePlaceOrderMutation,
   useSuccessOrderQuery,
   useOrderTrackingQuery,
   useUpdateShippingAddressMutation,
+  useUpdateCartMutation,
 } = authApi;

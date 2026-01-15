@@ -1,53 +1,102 @@
 import React from "react";
-import bigCPU from "../assets/img/big-cpu.png";
-import smallCPU from "../assets/img/small-cpu.png";
+import Headphone from "../assets/img/headphone.png";
 import { useNavigate } from "react-router-dom";
+import { useAddToCartMutation } from "../redux/api/authApi";
+import { toast } from "react-toastify";
 
-export const ProductImgDet = () => {
+const BASE_URL = "http://10.10.13.20:8001";
+
+export const ProductImgDet = ({ product, isLoading }) => {
   const navigate = useNavigate();
+  const [addToCart, { isLoading: isAdding }] = useAddToCartMutation();
+
+  const handleAddToCart = async () => {
+    if (!product) return;
+    try {
+      await addToCart({
+        product_id: product.id.toString(),
+        quantity: 1,
+      }).unwrap();
+      toast.success("Added to cart!");
+      navigate("/add-to-cart");
+    } catch (error) {
+      toast.error(error?.data?.message || "Failed to add to cart");
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <div className="py-20 text-center text-xl font-bold">
+        Loading product details...
+      </div>
+    );
+  }
+
+  if (!product) {
+    return (
+      <div className="py-20 text-center text-xl font-bold">
+        Product not found.
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col lg:flex-row justify-between gap-8 lg:gap-14">
       {/* Product Images */}
       <div className="flex flex-col gap-5 w-full lg:w-1/2">
-        <img src={bigCPU} alt="PC Main" className="rounded-xl w-full" />
+        <img
+          src={product.image ? `${BASE_URL}${product.image}` : Headphone}
+          alt={product.product_name}
+          className="rounded-xl w-full h-[300px] sm:h-[400px] object-cover"
+        />
         <div className="flex gap-2 justify-center sm:justify-start">
-          <img src={smallCPU} alt="PC thumbnail 1" className="w-16 h-16 sm:w-24 sm:h-24 object-cover rounded-md cursor-pointer" />
-          <img src={smallCPU} alt="PC thumbnail 2" className="w-16 h-16 sm:w-24 sm:h-24 object-cover rounded-md cursor-pointer" />
-          <img src={smallCPU} alt="PC thumbnail 3" className="w-16 h-16 sm:w-24 sm:h-24 object-cover rounded-md cursor-pointer" />
+          <img
+            src={product.image ? `${BASE_URL}${product.image}` : Headphone}
+            alt="thumbnail"
+            className="w-16 h-16 sm:w-24 sm:h-24 object-cover rounded-md cursor-pointer border-2 border-yellow-500"
+          />
         </div>
       </div>
 
       {/* Product Info */}
       <div className="flex-1 w-full lg:w-1/2">
         <h1 className="text-2xl md:text-3xl font-bold mb-2 leading-tight">
-          Intel Core Ultra 5 245K Desktop PC
+          {product.product_name}
         </h1>
         <div className="flex flex-col sm:flex-row sm:justify-between gap-1 text-sm sm:text-base md:text-lg">
           <p className="text-black font-semibold ">
-            Price: <span className=" text-yellow-500">$2800</span>
+            Price: <span className=" text-yellow-500">${product.price}</span>
           </p>
           <p className="text-black font-semibold ">
-            Status: <span className=" text-yellow-500">In Stock</span>
+            Status:{" "}
+            <span className=" text-yellow-500 capitalize">
+              {product.stock_status?.replace("_", " ") || "In Stock"}
+            </span>
           </p>
         </div>
 
         <div className="flex flex-col sm:flex-row sm:justify-between gap-1 text-sm sm:text-base md:text-lg">
           <p className="text-black font-semibold  text-left">
-            Discount: <span className=" text-yellow-500">15%</span>
+            Discount:{" "}
+            <span className=" text-yellow-500">
+              {product.discount_percent}%
+            </span>
           </p>
           <p className="text-black font-semibold  text-start">
-            Quantity: <span className=" text-yellow-500">30</span>
+            Quantity:{" "}
+            <span className=" text-yellow-500">{product.stock_quantity}</span>
           </p>
         </div>
-        <p className="text-yellow-500 mt-2 text-sm">★★★★☆ (127 reviews)</p>
+        <p className="text-yellow-500 mt-2 text-sm">
+          {"★".repeat(Math.round(product.rating || 0)) +
+            "☆".repeat(5 - Math.round(product.rating || 0))}
+          ({product.review_count || 0} reviews)
+        </p>
 
-        <h2 className="mt-4 font-bold text-base">Key Features:</h2>
-        <ul className="list-disc pl-5 space-y-1 mt-1 text-sm">
-          <li>AMD Ryzen 5 5600G Processor with Radeon Graphics</li>
-          <li>MSI A520M-A Pro AMD Micro-ATX Motherboard</li>
-          <li>Team T-CREATE EXPERT 8GB DDR4 3200MHz Desktop RAM</li>
-          <li>MP600 256GB M.2 PCIe Gen3 NVMe SSD</li>
-        </ul>
+        <h2 className="mt-4 font-bold text-base">Description:</h2>
+        <p className="text-sm text-gray-700 mt-1 line-clamp-4">
+          {product.description || "No description available for this product."}
+        </p>
 
         <div className="flex flex-col min-[420px]:flex-row w-full gap-3 mt-6 text-white">
           <button
@@ -57,13 +106,14 @@ export const ProductImgDet = () => {
             Add Wishlist
           </button>
           <button
-            onClick={() => navigate("/add-to-cart")}
+            onClick={handleAddToCart}
+            disabled={isAdding}
             className="bg-yellow-400 px-4 py-2.5 rounded-lg font-bold text-base w-full min-[420px]:w-1/3"
           >
-            Add to Cart
+            {isAdding ? "Adding..." : "Add to Cart"}
           </button>
           <button
-            onClick={() => navigate("/add-to-cart")}
+            onClick={handleAddToCart}
             className="bg-black px-4 py-2.5 rounded-lg font-bold text-base w-full min-[420px]:w-1/3"
           >
             Buy Now

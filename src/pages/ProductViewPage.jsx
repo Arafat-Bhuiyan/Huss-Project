@@ -1,11 +1,14 @@
-// ProductPage.jsx
 import { useState } from "react";
-
+import { ScrollRestoration, useParams } from "react-router-dom";
+import { useGetProductDetailsQuery } from "../redux/api/authApi";
 import { ProductImgDet } from "../components/ProductImgDet";
 import ReviewImg from "../assets/img/review.png";
 import { toast } from "react-toastify";
 
 export default function ProductViewPage() {
+  const { id } = useParams();
+  const { data: product, isLoading, error } = useGetProductDetailsQuery(id);
+
   const [showReviewBox, setShowReviewBox] = useState(false);
   const [formData, setFormData] = useState({
     review: "",
@@ -28,36 +31,51 @@ export default function ProductViewPage() {
     }
   };
 
-const handleSubmit = () => {
-  if (!formData.review.trim() && !formData.photo) {
-    toast.warn("Please provide your review before submitting.");
-    return;
+  const handleSubmit = () => {
+    if (!formData.review.trim() && !formData.photo) {
+      toast.warn("Please provide your review before submitting.");
+      return;
+    }
+
+    console.log("Review:", formData.review);
+    console.log("Product Image:", formData.photo);
+
+    setFormData({
+      review: "",
+      photo: null,
+    });
+
+    toast.success("Your review has been submitted successfully. Thank you!");
+  };
+
+  if (error) {
+    return (
+      <div className="bg-[#fdfaf6] min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-red-500 mb-4">
+            Oops! Error loading product.
+          </h1>
+          <p className="text-gray-600">
+            {error?.data?.message || "Something went wrong."}
+          </p>
+        </div>
+      </div>
+    );
   }
-
-  console.log("Review:", formData.review);
-  console.log("Product Image:", formData.photo);
-
-  setFormData({
-    review: "",
-    photo: null,
-  });
-
-  toast.success("Your review has been submitted successfully. Thank you!");
-};
 
   return (
     <div className="bg-[#fdfaf6] text-[#1c1c1c] px-4 sm:px-6 lg:px-8 xl:px-28 py-6">
+      <ScrollRestoration />
       {/* Breadcrumb */}
       <div className="text-left font-medium pb-6 text-lg sm:text-xl">
         <span className="text-gray-600">
-          Gaming Equipment /{" "}
+          {product?.category?.category_name || "Category"} /{" "}
         </span>
-        <span className="text-black font-bold">Gaming PC /</span>
-        <span className="text-black font-bold"> Intel PC</span>
+        <span className="text-black font-bold">{product?.product_name}</span>
       </div>
       {/* Left Main Section */}
       <div className="flex-1 justify-center w-full">
-        <ProductImgDet />
+        <ProductImgDet product={product} isLoading={isLoading} />
 
         {/* Tabs */}
         <div className="mt-10 rounded-lg bg-white p-2 sm:p-3">
@@ -76,7 +94,9 @@ const handleSubmit = () => {
 
         {/* Specifications */}
         <div className="mt-4 bg-white p-4 sm:p-6 rounded-lg shadow-sm">
-          <h1 className="font-semibold text-lg sm:text-xl">Product Specifications</h1>
+          <h1 className="font-semibold text-lg sm:text-xl">
+            Product Specifications
+          </h1>
           <div className="flex flex-col md:flex-row gap-4 mt-4 w-full text-sm sm:text-base">
             <div className="flex flex-col w-full md:w-1/2">
               <div className="flex justify-between pb-2 border-b border-gray-300 mb-2">
@@ -109,21 +129,11 @@ const handleSubmit = () => {
         <div className="mt-6 bg-white p-4 sm:p-6 rounded-lg shadow-sm">
           <h1 className="font-bold text-xl sm:text-2xl">Description</h1>
           <h3 className="font-semibold text-lg sm:text-xl my-2">
-            Intel Core Ultra 5 245K Desktop PC
+            {product?.product_name}
           </h3>
           <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
-            The Intel Core Ultra 5 245K Desktop PC is a simply constructed
-            system that creates a new standard for high-performance Intel
-            Desktop PCs, making it ideal for both professional workloads and
-            intensive gaming sessions. This Intel Core Ultra 5 PC is powered by
-            the cutting-edge Intel Core Ultra 5 245K Arrow Lake Processor, which
-            delivers enhanced multi-core performance, while the sturdy DeepCool
-            AG620 DIGITAL BK CPU Air Cooler ensures optimal heat management even
-            under heavy loads. This Intel Core Ultra 5 Desktop PC is based on
-            the versatile MSI MAG B860M MORTAR WIFI LGA 1851 mATX Motherboard,
-            which allows for easy networking and extension, making it an
-            excellent foundation for an Intel Core Ultra 5 Gaming PC. This
-            design exemplifies speed a
+            {product?.description ||
+              "No description available for this product."}
           </p>
         </div>
 

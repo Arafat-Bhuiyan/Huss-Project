@@ -39,7 +39,7 @@ const GamingPCPage = () => {
                 src={pc.image}
                 alt="Gaming PC"
                 className="h-48 w-full object-cover rounded-t-lg mb-4"
-                onClick={() => navigate("/gaming-equipent/gaming-pc/intel-pc")}
+                onClick={() => navigate(`/products/${index}/detail`)}
               />
               <h2 className="text-lg font-semibold mb-2 p-4">{pc.title}</h2>
               <ul className="text-sm text-gray-600 mb-4 list-disc pl-8 p-4">
@@ -49,7 +49,10 @@ const GamingPCPage = () => {
               </ul>
               <div className="flex justify-between items-center p-4">
                 <span className="text-xl font-bold">{pc.price}</span>
-                <button onClick={() => navigate("/add-to-cart")} className="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded font-medium">
+                <button
+                  onClick={() => navigate("/add-to-cart")}
+                  className="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded font-medium"
+                >
                   Buy Now
                 </button>
               </div>

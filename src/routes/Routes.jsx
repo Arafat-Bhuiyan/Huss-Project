@@ -61,7 +61,7 @@ export const router = createBrowserRouter([
         element: <AddToCart />,
       },
       {
-        path: "/gaming-equipent/gaming-pc/intel-pc",
+        path: "/products/:id/detail",
         element: <ProductViewPage />,
       },
       {

@@ -1,27 +1,32 @@
 import x from "../assets/img/xbtn.png";
 import minus from "../assets/img/minusbtn.png";
 import plus from "../assets/img/plusbtn.png";
-import { useAddToCartMutation } from "../redux/api/authApi";
+import { useUpdateCartMutation } from "../redux/api/authApi";
 import { toast } from "react-toastify";
 
 export const CartItem = ({ item }) => {
-  const [addToCart, { isLoading: isAdding }] = useAddToCartMutation();
+  const [updateCart, { isLoading: isUpdating }] = useUpdateCartMutation();
 
   if (!item) return null;
 
-  const handleIncrease = async () => {
+  const handleUpdateQuantity = async (action) => {
     try {
-      // Use prouct_id as seen in the user's provided response example
-      const productId = item.prouct_id || item.product_id;
-      if (!productId) {
-        toast.error("Product ID not found");
+      const cartItemId = item.id;
+      if (!cartItemId) {
+        toast.error("Cart item ID not found");
         return;
       }
 
-      await addToCart({ product_id: productId }).unwrap();
-      toast.success("Quantity increased!");
+      await updateCart({
+        id: cartItemId,
+        data: { action },
+      }).unwrap();
+
+      toast.success(
+        `Quantity ${action === "increase" ? "increased" : "decreased"}!`
+      );
     } catch (error) {
-      toast.error(error?.data?.message || "Failed to increase quantity");
+      toast.error(error?.data?.message || `Failed to ${action} quantity`);
     }
   };
 
@@ -44,15 +49,18 @@ export const CartItem = ({ item }) => {
         <img
           src={minus}
           alt="Decrease quantity"
-          className="cursor-pointer w-6 h-6"
+          onClick={() => handleUpdateQuantity("decrease")}
+          className={`cursor-pointer w-6 h-6 ${
+            isUpdating ? "opacity-50 cursor-not-allowed" : ""
+          }`}
         />
         <p className="text-base font-medium w-4 text-center">{item.quantity}</p>
         <img
           src={plus}
           alt="Increase quantity"
-          onClick={handleIncrease}
+          onClick={() => handleUpdateQuantity("increase")}
           className={`cursor-pointer w-6 h-6 ${
-            isAdding ? "opacity-50 cursor-not-allowed" : ""
+            isUpdating ? "opacity-50 cursor-not-allowed" : ""
           }`}
         />
         <img

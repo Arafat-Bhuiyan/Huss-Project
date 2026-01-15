@@ -155,12 +155,12 @@ const DeliveryDetailsForm = () => {
       </div>
 
       {/* Save Button */}
-      <button
+      {/* <button
         type="submit"
         className="w-full bg-yellow-400 hover:bg-yellow-500 text-white font-bold text-lg md:text-xl py-2 rounded-xl transition"
       >
         Save
-      </button>
+      </button> */}
     </form>
   );
 };
