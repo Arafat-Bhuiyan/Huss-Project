@@ -1,12 +1,53 @@
-import React from "react";
-import location from "../../assets/img/icons/location.png";
-import phone from "../../assets/img/icons/phone.png";
-import mail from "../../assets/img/icons/mail.png";
-import clock from "../../assets/img/icons/clock.png";
+import { useState } from "react";
+import { useHelpSupportMutation } from "../../redux/api/authApi";
+import { toast } from "react-toastify"
+import clock from "../../assets/img/icons/clock.png"
+import location from "../../assets/img/icons/location.png"
+import phone from "../../assets/img/icons/phone.png"
+import mail from "../../assets/img/icons/mail.png"
 
 export const ContactSec = () => {
+  const [helpSupport, { isLoading }] = useHelpSupportMutation();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await helpSupport(formData).unwrap();
+      toast.success(
+        response?.message || "Support request submitted successfully."
+      );
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+    } catch (error) {
+      toast.error(
+        error?.data?.message || "Something went wrong. Please try again."
+      );
+    }
+  };
+
   return (
-    <div id="contact" className=" flex items-center justify-center bg-white px-4 sm:px-6 md:px-8 lg:px-16 py-12">
+    <div
+      id="contact"
+      className=" flex items-center justify-center bg-white px-4 sm:px-6 md:px-8 lg:px-16 py-12"
+    >
       <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Left: Contact Form */}
         <div>
@@ -15,36 +56,65 @@ export const ContactSec = () => {
             Have questions about our products or services? Fill out the form and
             our team will get back to you as soon as possible.
           </p>
-          <form className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-sm font-medium mb-1">Name</label>
               <input
                 type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
                 placeholder="Enter name"
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-yellow-400"
+                required
               />
             </div>
             <div>
               <label className="block text-sm font-medium mb-1">Email</label>
               <input
                 type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
                 placeholder="Enter email"
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-yellow-400"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">Subject</label>
+              <input
+                type="text"
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
+                placeholder="Enter subject"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-yellow-400"
+                required
               />
             </div>
             <div>
               <label className="block text-sm font-medium mb-1">Message</label>
               <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
                 rows="4"
                 placeholder="Enter message..."
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-yellow-400"
+                required
               ></textarea>
             </div>
             <button
               type="submit"
-              className="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold px-6 py-2 rounded-md transition"
+              disabled={isLoading}
+              className={`text-white font-semibold px-6 py-2 rounded-md transition ${
+                isLoading
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-yellow-400 hover:bg-yellow-500"
+              }`}
             >
-              Send Message
+              {isLoading ? "Sending..." : "Send Message"}
             </button>
           </form>
         </div>
@@ -89,7 +159,7 @@ export const ContactSec = () => {
                 <span>+1 (555) 123-4567</span>
               </li>
               <li className="flex items-center gap-4">
-                <img src={mail} alt="" className="mt-1.5"/>
+                <img src={mail} alt="" className="mt-1.5" />
                 <span>support@mtech.com</span>
               </li>
             </ul>

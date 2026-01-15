@@ -5,6 +5,7 @@ import { useHelpSupportMutation } from "../redux/api/authApi";
 export const CustomerSupportMain = () => {
   const [helpSupport, { isLoading }] = useHelpSupportMutation();
   const [formData, setFormData] = useState({
+    name: "",
     emailAddress: "",
     subject: "",
     message: "",
@@ -22,6 +23,7 @@ export const CustomerSupportMain = () => {
     e.preventDefault();
 
     const payload = {
+      name: formData.name,
       email: formData.emailAddress,
       subject: formData.subject,
       message: formData.message,
@@ -33,6 +35,7 @@ export const CustomerSupportMain = () => {
         response?.message || "Support request submitted successfully."
       );
       setFormData({
+        name: "",
         emailAddress: "",
         subject: "",
         message: "",
@@ -62,6 +65,25 @@ export const CustomerSupportMain = () => {
           className="bg-white py-3 px-5 w-full shadow rounded-xl"
         >
           <div>
+            <label
+              htmlFor="name"
+              className="block text-2xl font-semibold text-gray-700"
+            >
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Enter your name"
+              className="mt-2 block text-base font-normal w-full px-4 py-2 shadow bg-white rounded-md border border-gray-300 focus:ring-yellow-500 focus:border-yellow-500"
+              required
+            />
+          </div>
+
+          <div className="mt-3">
             <label
               htmlFor="emailAddress"
               className="block text-2xl font-semibold text-gray-700"
