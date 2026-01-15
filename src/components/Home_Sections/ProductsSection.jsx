@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import {
   useGetProductListQuery,
   useAddToCartMutation,
+  useToggleWishlistMutation,
 } from "../../redux/api/authApi";
 import { toast } from "react-toastify";
 
@@ -17,6 +18,7 @@ const ProductsSection = () => {
   const navigate = useNavigate();
   const { data: productList, isLoading } = useGetProductListQuery();
   const [addToCart] = useAddToCartMutation();
+  const [toggleWishlist] = useToggleWishlistMutation();
   const [showAll, setShowAll] = useState(false);
   const products = productList || [];
   const displayedProducts = showAll ? products : products.slice(0, 8);
@@ -30,6 +32,16 @@ const ProductsSection = () => {
 
       navigate("/add-to-cart");
       toast.success(response.message || "Added to cart.");
+    } catch (error) {
+      toast.error(error?.data?.message || "Something went wrong.");
+    }
+  };
+
+  const handleToggleWishlist = async (productId) => {
+    try {
+      const response = await toggleWishlist(productId).unwrap();
+      toast.success(response.message || "Wishlist updated.");
+      navigate("/wishlist");
     } catch (error) {
       toast.error(error?.data?.message || "Something went wrong.");
     }
@@ -69,7 +81,7 @@ const ProductsSection = () => {
           >
             {/* Save Button */}
             <button
-              onClick={() => navigate("/wishlist")}
+              onClick={() => handleToggleWishlist(product.id)}
               className="absolute top-2 right-2 w-6 h-6 rounded-full shadow text-sm flex items-center justify-center"
             >
               <img src={white_save} alt="" />

@@ -164,6 +164,22 @@ export const authApi = api.injectEndpoints({
         body: data,
       }),
     }),
+    // === Wishlist Add/Remove ===
+    toggleWishlist: builder.mutation({
+      query: (id) => ({
+        url: `/products/${id}/wishlist/toggle/`,
+        method: "POST",
+      }),
+      invalidatesTags: ["Wishlist"],
+    }),
+    // === Get Wishlist ===
+    getWishlist: builder.query({
+      query: () => ({
+        url: "/wishlist/",
+        method: "GET",
+      }),
+      providesTags: ["Wishlist"],
+    }),
   }),
 });
 
@@ -189,4 +205,6 @@ export const {
   useUpdateShippingAddressMutation,
   useUpdateCartMutation,
   useReturnExchangeMutation,
+  useToggleWishlistMutation,
+  useGetWishlistQuery,
 } = authApi;

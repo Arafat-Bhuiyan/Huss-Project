@@ -163,7 +163,7 @@ export default function ProductViewPage() {
 
       {/* Review Sidebar */}
       {showReviewBox && (
-        <div className="flex justify-center pt-6 lg:pt-0">
+        <div className="flex justify-center pt-6 lg:pt-5">
           <div className="w-full max-w-lg bg-[#FAF8F2] p-4 rounded-lg shadow-md h-fit">
             <h3 className="text-lg font-semibold mb-3">Write a Review</h3>
 
