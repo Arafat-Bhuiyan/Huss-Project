@@ -193,7 +193,7 @@ export default function ProductViewPage() {
               name="review"
               value={formData.review}
               onChange={handleChange}
-              className="w-full border p-2 rounded-md h-24 mb-3"
+              className="w-full border p-2 rounded-md h-24"
               required
             />
 
