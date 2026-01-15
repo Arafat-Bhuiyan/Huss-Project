@@ -180,6 +180,15 @@ export const authApi = api.injectEndpoints({
       }),
       providesTags: ["Wishlist"],
     }),
+    // === Add Review ===
+    addReview: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/products/${id}/review/`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Review"],
+    }),
   }),
 });
 
@@ -207,4 +216,5 @@ export const {
   useReturnExchangeMutation,
   useToggleWishlistMutation,
   useGetWishlistQuery,
+  useAddReviewMutation,
 } = authApi;

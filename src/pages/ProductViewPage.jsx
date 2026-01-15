@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { ScrollRestoration, useParams } from "react-router-dom";
-import { useGetProductDetailsQuery } from "../redux/api/authApi";
+import {
+  useGetProductDetailsQuery,
+  useAddReviewMutation,
+} from "../redux/api/authApi";
 import { ProductImgDet } from "../components/ProductImgDet";
 import ReviewImg from "../assets/img/review.png";
 import { toast } from "react-toastify";
@@ -8,11 +11,13 @@ import { toast } from "react-toastify";
 export default function ProductViewPage() {
   const { id } = useParams();
   const { data: product, isLoading, error } = useGetProductDetailsQuery(id);
+  const [addReview, { isLoading: isSubmitting }] = useAddReviewMutation();
 
   const [showReviewBox, setShowReviewBox] = useState(false);
   const [formData, setFormData] = useState({
     review: "",
     photo: null, // file object
+    rating: 0,
   });
 
   const handleChange = (e) => {
@@ -31,21 +36,36 @@ export default function ProductViewPage() {
     }
   };
 
-  const handleSubmit = () => {
-    if (!formData.review.trim() && !formData.photo) {
-      toast.warn("Please provide your review before submitting.");
+  const handleSubmit = async () => {
+    if (formData.rating === 0) {
+      toast.warn("Please select a rating.");
+      return;
+    }
+    if (!formData.review.trim()) {
+      toast.warn("Please provide your review message before submitting.");
       return;
     }
 
-    console.log("Review:", formData.review);
-    console.log("Product Image:", formData.photo);
+    const data = new FormData();
+    data.append("rating", formData.rating.toString());
+    data.append("comment", formData.review);
+    if (formData.photo) {
+      data.append("review_image", formData.photo);
+    }
 
-    setFormData({
-      review: "",
-      photo: null,
-    });
+    try {
+      const response = await addReview({ id, data }).unwrap();
+      toast.success(response?.message || "Review submitted successfully!");
 
-    toast.success("Your review has been submitted successfully. Thank you!");
+      setFormData({
+        review: "",
+        photo: null,
+        rating: 0,
+      });
+      setShowReviewBox(false);
+    } catch (error) {
+      toast.error(error?.data?.message || "Something went wrong.");
+    }
   };
 
   if (error) {
@@ -207,26 +227,42 @@ export default function ProductViewPage() {
                 </div>
               </div>
             </div>
-            <div className="flex gap-2 mb-3">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <label
-                  key={star}
-                  className="flex items-center gap-1 cursor-pointer"
-                >
-                  <span className="text-yellow-500 text-xl pb-1">★</span>
-                  <input
-                    type="checkbox"
-                    className="appearance-none w-4 h-4 rounded-full border border-gray-300 checked:bg-yellow-500 checked:border-transparent"
-                  />
-                </label>
-              ))}
+            <div className="reviegap-2 my-3">
+              <p className="font-medium text-base">Your Rating</p>
+              <div className="flex items-center gap-1">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <button
+                    key={star}
+                    type="button"
+                    onClick={() =>
+                      setFormData((prev) => ({ ...prev, rating: star }))
+                    }
+                    className="flex items-center gap-1 cursor-pointer focus:outline-none"
+                  >
+                    <span
+                      className={`text-2xl pb-1 ${
+                        star <= formData.rating
+                          ? "text-yellow-500"
+                          : "text-gray-300"
+                      }`}
+                    >
+                      ★
+                    </span>
+                  </button>
+                ))}
+              </div>
             </div>
 
             <button
               onClick={() => handleSubmit()}
-              className="bg-yellow-400 text-white w-full py-2 rounded-md font-semibold"
+              disabled={isSubmitting}
+              className={`text-white w-full py-2 rounded-md font-semibold transition ${
+                isSubmitting
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-yellow-400 hover:bg-yellow-500"
+              }`}
             >
-              Submit Review
+              {isSubmitting ? "Submitting..." : "Submit Review"}
             </button>
           </div>
         </div>
