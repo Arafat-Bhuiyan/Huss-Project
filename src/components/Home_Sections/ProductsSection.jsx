@@ -1,8 +1,5 @@
 import { useState } from "react";
 import Headphone from "../../assets/img/headphone.png";
-import controller from "../../assets/img/controller.png";
-import microscope from "../../assets/img/microscope.png";
-import laser from "../../assets/img/laser.png";
 import white_save from "../../assets/img/white_save.png";
 import { useNavigate } from "react-router-dom";
 import {
@@ -20,7 +17,10 @@ const ProductsSection = () => {
   const [addToCart] = useAddToCartMutation();
   const [toggleWishlist] = useToggleWishlistMutation();
   const [showAll, setShowAll] = useState(false);
-  const products = productList || [];
+  const products = productList
+    ? productList.filter((product) => product.is_published === true)
+    : [];
+  console.log("Products", products);
   const displayedProducts = showAll ? products : products.slice(0, 8);
 
   const handleAddToCart = async (productId) => {

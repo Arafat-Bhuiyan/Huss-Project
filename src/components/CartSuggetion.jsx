@@ -15,7 +15,10 @@ export const CartSuggetion = () => {
     useGetProductListQuery();
   const [addToCart, { isLoading: isAdding }] = useAddToCartMutation();
 
-  const products = productList || [];
+  const products = productList
+    ? productList.filter((product) => product.is_published === true)
+    : [];
+    console.log("Products", products);
   // Show only a few suggestions, e.g., 4
   const suggestedProducts = products.slice(0, 4);
 
