@@ -115,6 +115,7 @@ export const Navbar = () => {
                           if (routeMap[cat.category_name]) {
                             navigate(routeMap[cat.category_name]);
                           }
+                          setShowCategories(false);
                         }}
                       >
                         <li className="px-4 py-2 hover:bg-gray-100 text-gray-800 cursor-pointer">
