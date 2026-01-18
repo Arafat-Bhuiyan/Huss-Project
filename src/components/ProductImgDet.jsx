@@ -47,13 +47,13 @@ export const ProductImgDet = ({ product, isLoading }) => {
         <img
           src={product.image ? `${BASE_URL}${product.image}` : Headphone}
           alt={product.product_name}
-          className="rounded-xl w-full h-[300px] sm:h-[400px] object-cover"
+          className="rounded-xl w-full h-[300px] sm:h-[400px] object-contain bg-white border"
         />
         <div className="flex gap-2 justify-center sm:justify-start">
           <img
             src={product.image ? `${BASE_URL}${product.image}` : Headphone}
             alt="thumbnail"
-            className="w-16 h-16 sm:w-24 sm:h-24 object-cover rounded-md cursor-pointer border-2 border-yellow-500"
+            className="w-16 h-16 sm:w-24 sm:h-24 object-contain rounded-md cursor-pointer border-2 border-yellow-500 bg-white"
           />
         </div>
       </div>

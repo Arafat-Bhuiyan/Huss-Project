@@ -46,10 +46,10 @@ export const CategorySection = () => {
                 const imageUrl = category.image
                   ? `${BASE_URL}${category.image}`
                   : category.category_name.includes("Electronics")
-                  ? electronicImg
-                  : category.category_name.includes("Survey")
-                  ? surveyImg
-                  : testingImg;
+                    ? electronicImg
+                    : category.category_name.includes("Survey")
+                      ? surveyImg
+                      : testingImg;
 
                 return (
                   <div
@@ -59,7 +59,7 @@ export const CategorySection = () => {
                     <img
                       src={imageUrl}
                       alt={category.category_name}
-                      className="w-full h-56 object-cover"
+                      className="w-full h-56 object-contain p-4 bg-white"
                     />
                     <div className="p-5 flex flex-col justify-between flex-grow">
                       <h3 className="text-xl md:text-2xl font-semibold text-gray-800 mb-2">
