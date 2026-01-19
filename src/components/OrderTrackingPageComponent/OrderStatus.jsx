@@ -42,7 +42,7 @@ const StatusStep = ({
 
 export const OrderStatus = () => {
   const [searchParams] = useSearchParams();
-  const orderId = searchParams.get("order_id");
+  const orderId = searchParams.get("order_uuid");
 
   const { data, isLoading, isError } = useOrderTrackingQuery(orderId, {
     skip: !orderId,

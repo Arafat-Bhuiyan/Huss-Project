@@ -7,7 +7,7 @@ import { useOrderTrackingQuery } from "../../redux/api/authApi";
 
 const DeliveryDetailsForm = () => {
   const [searchParams] = useSearchParams();
-  const orderId = searchParams.get("order_id");
+  const orderId = searchParams.get("order_uuid");
 
   const { data, isLoading } = useOrderTrackingQuery(orderId, {
     skip: !orderId,

@@ -52,8 +52,8 @@ export const CheckoutOrder = () => {
     try {
       const response = await placeOrderMutation(payload).unwrap();
       if (response.stripe_url) {
-        if (response.order_id) {
-          dispatch(setOrderId(response.order_id));
+        if (response.order_uuid) {
+          dispatch(setOrderId(response.order_uuid));
         }
         window.location.href = response.stripe_url;
       } else {

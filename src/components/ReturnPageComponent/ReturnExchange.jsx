@@ -6,7 +6,7 @@ import { useReturnExchangeMutation } from "../../redux/api/authApi";
 export const ReturnExchangeForm = () => {
   const [returnExchange, { isLoading }] = useReturnExchangeMutation();
   const [formData, setFormData] = useState({
-    order_id: "",
+    order_uuid: "",
     product_id: "",
     reason: "",
     image: null,
@@ -24,7 +24,7 @@ export const ReturnExchangeForm = () => {
     e.preventDefault();
 
     const data = new FormData();
-    data.append("order_id", formData.order_id);
+    data.append("order_uuid", formData.order_uuid);
     data.append("product_id", formData.product_id);
     data.append("reason", formData.reason);
     if (formData.image) {
@@ -36,7 +36,7 @@ export const ReturnExchangeForm = () => {
       toast.success(response?.message || "Return Request Submitted!");
 
       setFormData({
-        order_id: "",
+        order_uuid: "",
         product_id: "",
         reason: "",
         image: null,
@@ -70,8 +70,8 @@ export const ReturnExchangeForm = () => {
               </label>
               <input
                 type="text"
-                name="order_id"
-                value={formData.order_id}
+                name="order_uuid"
+                value={formData.order_uuid}
                 onChange={handleChange}
                 placeholder="Enter Order ID"
                 className="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"

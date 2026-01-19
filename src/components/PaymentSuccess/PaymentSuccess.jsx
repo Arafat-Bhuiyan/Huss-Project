@@ -1,10 +1,18 @@
 import tic from "../../assets/img/tic.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 export const PaymentSuccess = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const orderId = searchParams.get("order_uuid");
+
   const handleTrackOrder = () => {
-    navigate("/add-to-cart/checkout/confirm-order");
+    if (orderId) {
+      navigate(`/add-to-cart/checkout/confirm-order?order_uuid=${orderId}`);
+    } else {
+      // Fallback if no order ID is present (though ideally shouldn't happen in this flow)
+      navigate("/add-to-cart/checkout/confirm-order");
+    }
   };
   return (
     <div className="flex flex-col justify-center items-center gap-4 bg-white max-w-3xl mx-auto p-4 sm:p-6 md:p-8 rounded-xl shadow-sm min-h-[80vh]">

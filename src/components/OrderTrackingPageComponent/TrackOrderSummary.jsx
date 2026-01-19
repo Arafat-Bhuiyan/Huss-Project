@@ -7,7 +7,7 @@ import { useSuccessOrderQuery } from "../../redux/api/authApi";
 export const TrackOrderSummary = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const orderId = searchParams.get("order_id");
+  const orderId = searchParams.get("order_uuid");
 
   const { data, isLoading, isError } = useSuccessOrderQuery(orderId, {
     skip: !orderId,

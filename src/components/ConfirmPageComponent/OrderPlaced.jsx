@@ -8,8 +8,9 @@ export const OrderPlaced = () => {
   const [searchParams] = useSearchParams();
   const { orderId: persistedOrderId } = useSelector((state) => state.checkout);
 
-  // Use order_id from URL if present, otherwise fall back to Redux state
-  const orderId = searchParams.get("order_id") || persistedOrderId;
+  // Use order_uuid from URL if present, otherwise fall back to Redux state
+  const orderId = searchParams.get("order_uuid") || persistedOrderId;
+  console.log("orderId", orderId);
 
   const { data, isLoading } = useSuccessOrderQuery(orderId, {
     skip: !orderId,
@@ -21,7 +22,7 @@ export const OrderPlaced = () => {
 
   const handleTrackOrder = () => {
     navigate(
-      `/add-to-cart/checkout/confirm-order/order-tracking?order_id=${orderId}`
+      `/add-to-cart/checkout/confirm-order/order-tracking?order_uuid=${orderId}`,
     );
   };
 
