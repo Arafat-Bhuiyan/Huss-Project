@@ -95,7 +95,7 @@ const DeliveryDetailsForm = () => {
       </div>
 
       {/* Landmark Description */}
-      <div className="mb-4">
+      {/* <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700 mb-1">
           Landmark Description
         </label>
@@ -107,10 +107,10 @@ const DeliveryDetailsForm = () => {
           className="w-full text-base font-normal px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-500 placeholder-gray-400"
           required
         />
-      </div>
+      </div> */}
 
       {/* GPS Pinning */}
-      <div className="mb-4">
+      {/* <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700 mb-1">
           GPS Pinning
         </label>
@@ -137,10 +137,10 @@ const DeliveryDetailsForm = () => {
             />
           </button>
         </div>
-      </div>
+      </div> */}
 
       {/* Note to Driver */}
-      <div className="mb-6">
+      {/* <div className="mb-6">
         <label className="block text-sm font-medium text-gray-700 mb-1">
           Note to Driver
         </label>
@@ -152,7 +152,7 @@ const DeliveryDetailsForm = () => {
           className="w-full text-base font-normal px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-500 placeholder-gray-400"
           required
         ></textarea>
-      </div>
+      </div> */}
 
       {/* Save Button */}
       {/* <button
