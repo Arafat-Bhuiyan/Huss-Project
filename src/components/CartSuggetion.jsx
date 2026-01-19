@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import {
   useGetProductListQuery,
   useAddToCartMutation,
+  useToggleWishlistMutation,
 } from "../redux/api/authApi";
 import { useNavigate } from "react-router-dom";
 
@@ -14,11 +15,12 @@ export const CartSuggetion = () => {
   const { data: productList, isLoading: isProductsLoading } =
     useGetProductListQuery();
   const [addToCart, { isLoading: isAdding }] = useAddToCartMutation();
+  const [toggleWishlist] = useToggleWishlistMutation();
 
   const products = productList
     ? productList.filter((product) => product.is_published === true)
     : [];
-    console.log("Products", products);
+  console.log("Products", products);
   // Show only a few suggestions, e.g., 4
   const suggestedProducts = products.slice(0, 4);
 
@@ -32,6 +34,16 @@ export const CartSuggetion = () => {
       toast.success(response.message || "Product added to cart!");
       // Scroll to top to see cart updates
       window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (error) {
+      toast.error(error?.data?.message || "Something went wrong.");
+    }
+  };
+
+  const handleToggleWishlist = async (productId) => {
+    try {
+      const response = await toggleWishlist(productId).unwrap();
+      toast.success(response.message || "Wishlist updated.");
+      navigate("/wishlist");
     } catch (error) {
       toast.error(error?.data?.message || "Something went wrong.");
     }
@@ -67,7 +79,7 @@ export const CartSuggetion = () => {
           >
             {/* Save Button */}
             <button
-              onClick={() => navigate("/wishlist")}
+              onClick={() => handleToggleWishlist(product.id)}
               className="absolute top-2 right-2 w-6 h-6 rounded-full shadow text-sm flex items-center justify-center bg-white"
             >
               <img src={white_save} alt="Save" />

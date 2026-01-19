@@ -110,7 +110,7 @@ export const Navbar = () => {
                         key={cat.id || cat.category_name}
                         onClick={() => {
                           const routeMap = {
-                            "Survey Equipment": "/gaming-equipent/gaming-pc",
+                            "Gaming Equipment": "/gaming-equipent/gaming-pc",
                           };
                           if (routeMap[cat.category_name]) {
                             navigate(routeMap[cat.category_name]);

@@ -99,7 +99,7 @@ const MyWishlist = () => {
             <img
               src={product.image ? `${BASE_URL}${product.image}` : ""}
               alt={product.product_name}
-              className="w-full h-52 object-cover cursor-pointer"
+              className="w-full h-52 object-contain p-2 cursor-pointer"
               onClick={() => navigate(`/products/${product.id}/detail`)}
             />
 

@@ -37,6 +37,14 @@ const Footer = () => {
           <ul className="space-y-1 text-white font-normal text-base">
             <li>
               <Link
+                to="/my-orders"
+                className="hover:text-yellow-500 cursor-pointer"
+              >
+                My Orders
+              </Link>
+            </li>
+            <li>
+              <Link
                 to="/return-policy"
                 className="hover:text-yellow-500 cursor-pointer"
               >

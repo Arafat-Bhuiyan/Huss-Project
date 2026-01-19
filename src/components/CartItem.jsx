@@ -63,11 +63,11 @@ export const CartItem = ({ item }) => {
             isUpdating ? "opacity-50 cursor-not-allowed" : ""
           }`}
         />
-        <img
+        {/* <img
           src={x}
           alt="Remove item"
           className="cursor-pointer w-5 h-5 ml-2"
-        />
+        /> */}
       </div>
     </div>
   );

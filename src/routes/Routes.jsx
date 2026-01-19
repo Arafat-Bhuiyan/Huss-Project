@@ -18,6 +18,7 @@ import { ProfileSettings } from "../pages/ProfileSettings";
 import { Return } from "../pages/Return";
 import { PaymentSuccess } from "../components/PaymentSuccess/PaymentSuccess";
 import { CancelOrder } from "../components/CancelOrder/CancelOrder";
+import { MyOrders } from "../components/MyOrders/MyOrders";
 
 export const router = createBrowserRouter([
   {
@@ -91,6 +92,10 @@ export const router = createBrowserRouter([
       {
         path: "/profile-settings",
         element: <ProfileSettings />,
+      },
+      {
+        path: "/my-orders",
+        element: <MyOrders />,
       },
       {
         path: "/return-policy",

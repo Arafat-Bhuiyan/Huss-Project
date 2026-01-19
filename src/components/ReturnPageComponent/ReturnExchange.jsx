@@ -1,16 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import upload from "../../assets/img/upload.png";
 import { toast } from "react-toastify";
 import { useReturnExchangeMutation } from "../../redux/api/authApi";
+import { useSearchParams } from "react-router-dom";
 
 export const ReturnExchangeForm = () => {
   const [returnExchange, { isLoading }] = useReturnExchangeMutation();
+  const [searchParams] = useSearchParams();
+  const urlOrderUuid = searchParams.get("id");
+
   const [formData, setFormData] = useState({
-    order_uuid: "",
-    product_id: "",
+    id: "",
     reason: "",
     image: null,
   });
+
+  useEffect(() => {
+    if (urlOrderUuid) {
+      setFormData((prev) => ({
+        ...prev,
+        id: urlOrderUuid,
+      }));
+    }
+  }, [urlOrderUuid]);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -24,9 +36,10 @@ export const ReturnExchangeForm = () => {
     e.preventDefault();
 
     const data = new FormData();
-    data.append("order_uuid", formData.order_uuid);
-    data.append("product_id", formData.product_id);
+    data.append("order_id", formData.id);
     data.append("reason", formData.reason);
+    // User requested to remove product_id, so we don't append it.
+    // data.append("product_id", formData.product_id);
     if (formData.image) {
       data.append("image", formData.image);
     }
@@ -35,14 +48,21 @@ export const ReturnExchangeForm = () => {
       const response = await returnExchange(data).unwrap();
       toast.success(response?.message || "Return Request Submitted!");
 
+      // Only reset reason and image, keep id if user wants to submit another?
+      // Or reset all. Let's reset all but likely user will navigate away.
       setFormData({
-        order_uuid: "",
-        product_id: "",
+        id: urlOrderUuid || "", // Keep the ID if we are on that specific page
         reason: "",
         image: null,
       });
     } catch (error) {
-      toast.error(error?.data?.message || "Failed to submit return request.");
+      // Handle "A return request for this order has already been submitted." specifically if needed,
+      // otherwise show whatever backend sends.
+      toast.error(
+        error?.data?.error ||
+          error?.data?.message ||
+          "Failed to submit return request.",
+      );
     }
   };
 
@@ -53,42 +73,29 @@ export const ReturnExchangeForm = () => {
       </h2>
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Step 1: Order and Product IDs */}
+        {/* Step 1: Order Details */}
         <div className="bg-white p-5 rounded-xl shadow space-y-4">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-full bg-yellow-500 text-white flex items-center justify-center font-bold text-lg">
               1
             </div>
             <h3 className="font-semibold text-gray-800 text-lg">
-              Order and Product Details
+              Order Details
             </h3>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700">
                 Order ID
               </label>
               <input
                 type="text"
-                name="order_uuid"
-                value={formData.order_uuid}
+                name="id"
+                value={formData.id}
                 onChange={handleChange}
                 placeholder="Enter Order ID"
-                className="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">
-                Product ID
-              </label>
-              <input
-                type="text"
-                name="product_id"
-                value={formData.product_id}
-                onChange={handleChange}
-                placeholder="Enter Product ID"
-                className="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                className={`mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 ${urlOrderUuid ? "bg-gray-100 cursor-not-allowed" : ""}`}
+                readOnly={!!urlOrderUuid}
                 required
               />
             </div>

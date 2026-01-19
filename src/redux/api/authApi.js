@@ -156,6 +156,14 @@ export const authApi = api.injectEndpoints({
       }),
       invalidatesTags: ["Cart"],
     }),
+    // === Get My Orders ===
+    getMyOrders: builder.query({
+      query: () => ({
+        url: "/get-user-orders/",
+        method: "GET",
+      }),
+      providesTags: ["MyOrders"],
+    }),
     // === Return ===
     returnExchange: builder.mutation({
       query: (data) => ({
@@ -217,4 +225,5 @@ export const {
   useToggleWishlistMutation,
   useGetWishlistQuery,
   useAddReviewMutation,
+  useGetMyOrdersQuery,
 } = authApi;
