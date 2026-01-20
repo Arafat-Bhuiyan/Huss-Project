@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import HomeIcon from "../assets/img/icons/home-icon.png";
 import goArrow from "../assets/img/icons/go-arrow.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useGetCategoryListQuery } from "../redux/api/authApi";
 
 const SubNavBar = () => {
+  const navigate = useNavigate();
   const { data: categoryList, isLoading } = useGetCategoryListQuery();
   const subNavItems = categoryList || [];
   const [openIndex, setOpenIndex] = useState(null);
@@ -13,6 +14,12 @@ const SubNavBar = () => {
 
   const handleClick = (index) => {
     setOpenIndex((prev) => (prev === index ? null : index)); // toggle same index
+  };
+
+  const handleCategoryClick = (categoryName) => {
+    navigate(`/category/${encodeURIComponent(categoryName)}`);
+    setOpenIndex(null);
+    setIsMobileMenuOpen(false);
   };
 
   useEffect(() => {
@@ -43,7 +50,7 @@ const SubNavBar = () => {
             <div key={index} className="relative">
               <div
                 className="text-[16px] font-medium text-gray-800 cursor-pointer hover:text-yellow-500 transition"
-                onClick={() => handleClick(index)}
+                onClick={() => handleCategoryClick(item.category_name)}
               >
                 {item.category_name}
               </div>
@@ -112,7 +119,7 @@ const SubNavBar = () => {
               <li key={index} className="border-b last:border-b-0">
                 <div
                   className="flex justify-between items-center py-3 text-[16px] font-medium text-gray-800 cursor-pointer"
-                  onClick={() => handleClick(index)}
+                  onClick={() => handleCategoryClick(item.category_name)}
                 >
                   <span>{item.category_name}</span>
                   <svg

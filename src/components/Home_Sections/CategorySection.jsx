@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useGetCategoryListQuery } from "../../redux/api/authApi";
+import { useNavigate } from "react-router-dom";
 import electronicImg from "../../assets/img/electronic.png";
 import testingImg from "../../assets/img/testing.png";
 import surveyImg from "../../assets/img/survey.png";
@@ -7,6 +8,7 @@ import surveyImg from "../../assets/img/survey.png";
 const BASE_URL = "http://10.10.13.20:8001";
 
 export const CategorySection = () => {
+  const navigate = useNavigate();
   const { data: categoryList, isLoading } = useGetCategoryListQuery();
   const [currentPage, setCurrentPage] = useState(0);
 
@@ -70,7 +72,16 @@ export const CategorySection = () => {
                           "No description available for this category."}
                       </p>
                       <div className="flex justify-center">
-                        <button className="bg-[#ffc107] text-white text-base font-semibold px-5 py-2 rounded-md w-fit mx-auto sm:mx-0 hover:bg-[#e6ac00] transition">
+                        <button
+                          onClick={() =>
+                            navigate(
+                              `/category/${encodeURIComponent(
+                                category.category_name,
+                              )}`,
+                            )
+                          } // Updated onClick to navigate
+                          className="bg-[#ffc107] text-white text-base font-semibold px-5 py-2 rounded-md w-fit mx-auto sm:mx-0 hover:bg-[#e6ac00] transition"
+                        >
                           Explore
                         </button>
                       </div>
