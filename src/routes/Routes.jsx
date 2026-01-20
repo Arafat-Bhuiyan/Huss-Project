@@ -6,7 +6,6 @@ import Register from "../pages/Register";
 import Home from "../pages/Home";
 import TermsAndConditions from "../pages/TermsAndCondition";
 import PrivacyPolicy from "../pages/PrivacyPolicy";
-import GamingPCPage from "../pages/GamingPc";
 import { Wishlist } from "../pages/Wishlist";
 import { AddToCart } from "../pages/AddToCart";
 import ProductViewPage from "../pages/ProductViewPage";
@@ -19,6 +18,7 @@ import { Return } from "../pages/Return";
 import { PaymentSuccess } from "../components/PaymentSuccess/PaymentSuccess";
 import { CancelOrder } from "../components/CancelOrder/CancelOrder";
 import { MyOrders } from "../components/MyOrders/MyOrders";
+import CatWiseProduct from "../pages/CatWiseProduct";
 
 export const router = createBrowserRouter([
   {
@@ -50,8 +50,8 @@ export const router = createBrowserRouter([
         element: <PrivacyPolicy />,
       },
       {
-        path: "/gaming-equipent/gaming-pc",
-        element: <GamingPCPage />,
+        path: "/category/:categoryName",
+        element: <CatWiseProduct />,
       },
       {
         path: "/wishlist",

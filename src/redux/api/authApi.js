@@ -88,8 +88,10 @@ export const authApi = api.injectEndpoints({
     }),
     // === Product List ===
     getProductList: builder.query({
-      query: () => ({
-        url: "/products/list/",
+      query: (categoryName) => ({
+        url: categoryName
+          ? `/products/list/?category_name=${categoryName}`
+          : "/products/list/",
         method: "GET",
       }),
     }),

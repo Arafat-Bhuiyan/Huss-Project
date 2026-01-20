@@ -109,12 +109,9 @@ export const Navbar = () => {
                         className="flex items-center justify-between"
                         key={cat.id || cat.category_name}
                         onClick={() => {
-                          const routeMap = {
-                            "Gaming Equipment": "/gaming-equipent/gaming-pc",
-                          };
-                          if (routeMap[cat.category_name]) {
-                            navigate(routeMap[cat.category_name]);
-                          }
+                          navigate(
+                            `/category/${encodeURIComponent(cat.category_name)}`,
+                          );
                           setShowCategories(false);
                         }}
                       >
@@ -272,12 +269,9 @@ export const Navbar = () => {
                       key={cat.id || cat.category_name}
                       className="hover:text-yellow-500 cursor-pointer"
                       onClick={() => {
-                        const routeMap = {
-                          "Gaming Equipment": "/gaming-equipent/gaming-pc",
-                        };
-                        if (routeMap[cat.category_name]) {
-                          navigate(routeMap[cat.category_name]);
-                        }
+                        navigate(
+                          `/category/${encodeURIComponent(cat.category_name)}`,
+                        );
                         setIsMobileMenuOpen(false);
                       }}
                     >
