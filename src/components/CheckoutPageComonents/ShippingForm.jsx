@@ -1,18 +1,45 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useUpdateShippingAddressMutation } from "../../redux/api/authApi";
+import { toast } from "react-toastify";
 
-const ShippingForm = ({ onClose }) => {
+const ShippingForm = ({ onClose, profileData, setShippingAddress }) => {
+  const [updateShippingAddress, { isLoading }] =
+    useUpdateShippingAddressMutation();
+
+  // Initialize form data from profileData
   const [formData, setFormData] = useState({
-    fullName: "Sarif Uddin Bhuiyan",
-    phoneNumber: "+1 (674) 443-6502",
-    emailAddress: "sarif@gmail.com",
-    streetAddress: "Mirpur",
-    apartmentName: "Dream Place",
-    floorNumber: "5",
-    flatNumber: "A",
-    city: "Dhaka",
-    zipCode: "1216",
+    fullName: "",
+    phoneNumber: "",
+    emailAddress: "",
+    streetAddress: "",
+    apartmentName: "",
+    floorNumber: "",
+    flatNumber: "",
+    city: "",
+    zipCode: "",
     billingInfoSame: true,
   });
+
+  // Pre-populate form when profileData is available
+  useEffect(() => {
+    if (profileData) {
+      const fullName =
+        `${profileData.first_name || ""} ${profileData.last_name || ""}`.trim();
+
+      setFormData({
+        fullName: fullName || "",
+        phoneNumber: profileData.phone || "",
+        emailAddress: profileData.email || "",
+        streetAddress: profileData.address || "",
+        apartmentName: "",
+        floorNumber: "",
+        flatNumber: "",
+        city: "",
+        zipCode: "",
+        billingInfoSame: true,
+      });
+    }
+  }, [profileData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,9 +49,47 @@ const ShippingForm = ({ onClose }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (onClose) onClose();
+
+    // Prepare payload according to API structure
+    const payload = {
+      full_name: formData.fullName,
+      email: formData.emailAddress,
+      phone: formData.phoneNumber,
+      street_address: formData.streetAddress,
+      apartment_name: formData.apartmentName,
+      floor_number: formData.floorNumber,
+      flat_number: formData.flatNumber,
+      city: formData.city,
+      zip_code: formData.zipCode,
+    };
+
+    try {
+      const response = await updateShippingAddress(payload).unwrap();
+
+      // Show success message
+      toast.success(response.message || "Address updated successfully!");
+
+      // Save the updated address data to localStorage
+      if (response.data) {
+        localStorage.setItem("shippingAddress", JSON.stringify(response.data));
+
+        // Update parent component state
+        if (setShippingAddress) {
+          setShippingAddress(response.data);
+        }
+      }
+
+      // Close the form after successful update
+      if (onClose) onClose();
+    } catch (error) {
+      // Handle error
+      console.error("Failed to update address:", error);
+      toast.error(
+        error?.data?.message || "Failed to update address. Please try again.",
+      );
+    }
   };
 
   return (
@@ -94,6 +159,7 @@ const ShippingForm = ({ onClose }) => {
             onChange={handleChange}
             placeholder="Enter email address"
             className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
+            required
           />
         </div>
 
@@ -247,9 +313,10 @@ const ShippingForm = ({ onClose }) => {
 
       <button
         type="submit"
-        className="w-full py-3 mt-5 mb-8 bg-yellow-500 text-white rounded-xl shadow hover:bg-yellow-600"
+        disabled={isLoading}
+        className="w-full py-3 mt-5 mb-8 bg-yellow-500 text-white rounded-xl shadow hover:bg-yellow-600 disabled:bg-gray-400 disabled:cursor-not-allowed"
       >
-        Save Address
+        {isLoading ? "Updating..." : "Save Address"}
       </button>
     </form>
   );
