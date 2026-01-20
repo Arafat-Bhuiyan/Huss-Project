@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 
-export const OrderSection = ({ summary }) => {
+export const OrderSection = ({ summary, orderId }) => {
   const navigate = useNavigate();
 
   const handleGoToCheckout = () => {
-    navigate("/add-to-cart/checkout");
+    navigate("/add-to-cart/checkout", { state: { orderId: orderId } });
   };
 
   const handleContinueShopping = () => {

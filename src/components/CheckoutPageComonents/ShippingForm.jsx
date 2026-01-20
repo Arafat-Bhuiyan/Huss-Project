@@ -1,47 +1,18 @@
-import { useDispatch, useSelector } from "react-redux";
-import { setShippingInfo } from "../../redux/features/checkoutSlice";
-import { useState, useEffect } from "react";
-import { useUpdateShippingAddressMutation } from "../../redux/api/authApi";
-import { toast } from "react-toastify";
+import { useState } from "react";
 
 const ShippingForm = ({ onClose }) => {
-  const dispatch = useDispatch();
-  const { shippingInfo } = useSelector((state) => state.checkout);
-  const [updateShippingAddress, { isLoading }] =
-    useUpdateShippingAddressMutation();
-
   const [formData, setFormData] = useState({
-    fullName: "",
-    phoneNumber: "",
-    emailAddress: "",
-    streetAddress: "",
-    apartmentName: "",
-    floorNumber: "",
-    flatNumber: "",
-    city: "",
-    zipCode: "",
+    fullName: "Sarif Uddin Bhuiyan",
+    phoneNumber: "+1 (674) 443-6502",
+    emailAddress: "sarif@gmail.com",
+    streetAddress: "Mirpur",
+    apartmentName: "Dream Place",
+    floorNumber: "5",
+    flatNumber: "A",
+    city: "Dhaka",
+    zipCode: "1216",
     billingInfoSame: true,
   });
-
-  useEffect(() => {
-    if (shippingInfo) {
-      setFormData({
-        fullName: shippingInfo.fullName || shippingInfo.full_name || "",
-        phoneNumber: shippingInfo.phoneNumber || shippingInfo.phone || "",
-        emailAddress: shippingInfo.emailAddress || shippingInfo.email || "",
-        streetAddress:
-          shippingInfo.streetAddress || shippingInfo.street_address || "",
-        apartmentName:
-          shippingInfo.apartmentName || shippingInfo.apartment_name || "",
-        floorNumber:
-          shippingInfo.floorNumber || shippingInfo.floor_number || "",
-        flatNumber: shippingInfo.flatNumber || shippingInfo.flat_number || "",
-        city: shippingInfo.city || "",
-        zipCode: shippingInfo.zipCode || shippingInfo.zip_code || "",
-        billingInfoSame: shippingInfo.billingInfoSame ?? true,
-      });
-    }
-  }, [shippingInfo]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -51,56 +22,9 @@ const ShippingForm = ({ onClose }) => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    const addressId = shippingInfo?.id || 49; // Fallback to 49 as per user example if id is missing
-
-    const apiBody = {
-      full_name: formData.fullName,
-      email: formData.emailAddress,
-      phone: formData.phoneNumber,
-      street_address: formData.streetAddress,
-      apartment_name: formData.apartmentName,
-      floor_number: formData.floorNumber,
-      flat_number: formData.flatNumber,
-      city: formData.city,
-      zip_code: formData.zipCode,
-      location_type: shippingInfo?.location_type || "home", // preserve or default
-      landmark: shippingInfo?.landmark || "Near the park",
-      latitude: shippingInfo?.latitude || 23.8103,
-      longitude: shippingInfo?.longitude || 90.4125,
-      note_to_driver:
-        shippingInfo?.note_to_driver || "Please call when you arrive",
-    };
-
-    try {
-      const response = await updateShippingAddress({
-        id: addressId,
-        data: apiBody,
-      }).unwrap();
-
-      // Map back to camelCase for Redux consistency if needed,
-      // or save the API response directly. Let's map for consistency.
-      const updatedInfo = {
-        ...response.data,
-        id: response.data.id,
-        fullName: response.data.full_name,
-        phoneNumber: response.data.phone,
-        emailAddress: response.data.email,
-        streetAddress: response.data.street_address,
-        apartmentName: response.data.apartment_name,
-        floorNumber: response.data.floor_number,
-        flatNumber: response.data.flat_number,
-        zipCode: response.data.zip_code,
-      };
-
-      dispatch(setShippingInfo(updatedInfo));
-      toast.success("Shipping address updated!");
-      if (onClose) onClose();
-    } catch (error) {
-      toast.error(error?.data?.message || "Failed to update address");
-    }
+    if (onClose) onClose();
   };
 
   return (
@@ -323,12 +247,9 @@ const ShippingForm = ({ onClose }) => {
 
       <button
         type="submit"
-        disabled={isLoading}
-        className={`w-full py-3 mt-5 mb-8 bg-yellow-500 text-white rounded-xl shadow hover:bg-yellow-600 ${
-          isLoading ? "opacity-50 cursor-not-allowed" : ""
-        }`}
+        className="w-full py-3 mt-5 mb-8 bg-yellow-500 text-white rounded-xl shadow hover:bg-yellow-600"
       >
-        {isLoading ? "Updating..." : "Save Address"}
+        Save Address
       </button>
     </form>
   );

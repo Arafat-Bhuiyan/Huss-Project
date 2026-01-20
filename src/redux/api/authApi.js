@@ -141,9 +141,9 @@ export const authApi = api.injectEndpoints({
     }),
     // === Update Shipping ===
     updateShippingAddress: builder.mutation({
-      query: ({ id, data }) => ({
-        url: `/update-address/${id}/`,
-        method: "PATCH",
+      query: (data) => ({
+        url: `/update-address/`,
+        method: "POST",
         body: data,
       }),
     }),
