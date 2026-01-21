@@ -1,7 +1,10 @@
 import React from "react";
 import Headphone from "../assets/img/headphone.png";
 import { useNavigate } from "react-router-dom";
-import { useAddToCartMutation } from "../redux/api/authApi";
+import {
+  useAddToCartMutation,
+  useToggleWishlistMutation,
+} from "../redux/api/authApi";
 import { toast } from "react-toastify";
 
 const BASE_URL = "http://10.10.13.20:8001";
@@ -9,6 +12,7 @@ const BASE_URL = "http://10.10.13.20:8001";
 export const ProductImgDet = ({ product, isLoading }) => {
   const navigate = useNavigate();
   const [addToCart, { isLoading: isAdding }] = useAddToCartMutation();
+  const [toggleWishlist] = useToggleWishlistMutation();
 
   const handleAddToCart = async () => {
     if (!product) return;
@@ -20,7 +24,27 @@ export const ProductImgDet = ({ product, isLoading }) => {
       toast.success("Added to cart!");
       navigate("/add-to-cart");
     } catch (error) {
-      toast.error(error?.data?.message || "Failed to add to cart");
+      // Check for 401 Unauthorized error
+      if (
+        error?.status === 401 ||
+        error?.data?.detail === "Authentication credentials were not provided."
+      ) {
+        toast.error("Please login to add products to cart.");
+        navigate("/login");
+      } else {
+        toast.error(error?.data?.message || "Failed to add to cart");
+      }
+    }
+  };
+
+  const handleToggleWishlist = async () => {
+    if (!product) return;
+    try {
+      const response = await toggleWishlist(product.id).unwrap();
+      toast.success(response.message || "Wishlist updated.");
+      navigate("/wishlist");
+    } catch (error) {
+      toast.error(error?.data?.message || "Something went wrong.");
     }
   };
 
@@ -100,7 +124,7 @@ export const ProductImgDet = ({ product, isLoading }) => {
 
         <div className="flex flex-col min-[420px]:flex-row w-full gap-3 mt-6 text-white">
           <button
-            onClick={() => navigate("/wishlist")}
+            onClick={handleToggleWishlist}
             className="bg-[#FD5757] px-4 py-2.5 rounded-lg font-bold text-base w-full min-[420px]:w-1/3"
           >
             Add Wishlist

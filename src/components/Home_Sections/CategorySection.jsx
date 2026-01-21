@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useGetCategoryListQuery } from "../../redux/api/authApi";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import electronicImg from "../../assets/img/electronic.png";
 import testingImg from "../../assets/img/testing.png";
 import surveyImg from "../../assets/img/survey.png";
@@ -12,6 +13,9 @@ export const CategorySection = () => {
   const { data: categoryList, isLoading } = useGetCategoryListQuery();
   const [currentPage, setCurrentPage] = useState(0);
 
+  // Check if user is logged in
+  const isAuthenticated = useSelector((state) => state.auth?.access);
+
   // Group categories into chunks of 3 for the carousel
   const categories = categoryList || [];
   const chunks = [];
@@ -22,6 +26,11 @@ export const CategorySection = () => {
   const handlePageChange = (index) => {
     setCurrentPage(index);
   };
+
+  // Don't render if user is not logged in
+  if (!isAuthenticated) {
+    return null;
+  }
 
   return (
     <div className="py-16 bg-white text-center px-4 sm:px-6 lg:px-8">

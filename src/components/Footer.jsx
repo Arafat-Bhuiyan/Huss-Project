@@ -43,14 +43,14 @@ const Footer = () => {
                 My Orders
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link
                 to="/return-policy"
                 className="hover:text-yellow-500 cursor-pointer"
               >
                 Return & Return Policy
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link
                 to="/customer-support"

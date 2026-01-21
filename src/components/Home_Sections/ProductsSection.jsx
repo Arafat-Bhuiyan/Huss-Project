@@ -33,7 +33,16 @@ const ProductsSection = () => {
       navigate("/add-to-cart");
       toast.success(response.message || "Added to cart.");
     } catch (error) {
-      toast.error(error?.data?.message || "Something went wrong.");
+      // Check for 401 Unauthorized error
+      if (
+        error?.status === 401 ||
+        error?.data?.detail === "Authentication credentials were not provided."
+      ) {
+        toast.error("Please login to add products to cart.");
+        navigate("/login");
+      } else {
+        toast.error(error?.data?.message || "Something went wrong.");
+      }
     }
   };
 

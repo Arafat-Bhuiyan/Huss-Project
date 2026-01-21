@@ -3,6 +3,7 @@ import HomeIcon from "../assets/img/icons/home-icon.png";
 import goArrow from "../assets/img/icons/go-arrow.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useGetCategoryListQuery } from "../redux/api/authApi";
+import { useSelector } from "react-redux";
 
 const SubNavBar = () => {
   const navigate = useNavigate();
@@ -11,6 +12,9 @@ const SubNavBar = () => {
   const [openIndex, setOpenIndex] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navRef = useRef(null);
+
+  // Check if user is logged in
+  const isAuthenticated = useSelector((state) => state.auth?.access);
 
   const handleClick = (index) => {
     setOpenIndex((prev) => (prev === index ? null : index)); // toggle same index
@@ -35,6 +39,11 @@ const SubNavBar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [navRef]);
+
+  // Don't render if user is not logged in
+  if (!isAuthenticated) {
+    return null;
+  }
 
   return (
     <nav className="bg-white shadow-sm border-b" ref={navRef}>

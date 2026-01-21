@@ -82,7 +82,7 @@ const DeliveryDetailsForm = () => {
       </div>
 
       {/* Tracking Number */}
-      <div className="mb-4">
+      {/* <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700 mb-1">
           Tracking Number
         </label>
@@ -92,7 +92,7 @@ const DeliveryDetailsForm = () => {
           readOnly
           className="w-full text-base font-normal px-4 py-2 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none"
         />
-      </div>
+      </div> */}
 
       {/* Landmark Description */}
       {/* <div className="mb-4">
