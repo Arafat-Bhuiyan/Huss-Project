@@ -1,12 +1,24 @@
 import { useState, useEffect } from "react";
-import { useUpdateShippingAddressMutation } from "../../redux/api/authApi";
+import {
+  useUpdateShippingAddressMutation,
+  useGetShippingAddressQuery,
+} from "../../redux/api/authApi";
 import { toast } from "react-toastify";
 
-const ShippingForm = ({ onClose, profileData, setShippingAddress }) => {
-  const [updateShippingAddress, { isLoading }] =
+const ShippingForm = () => {
+  const [isEditMode, setIsEditMode] = useState(false);
+
+  // Fetch shipping address data
+  const {
+    data: shippingData,
+    isLoading: isFetching,
+    refetch,
+  } = useGetShippingAddressQuery();
+
+  const [updateShippingAddress, { isLoading: isUpdating }] =
     useUpdateShippingAddressMutation();
 
-  // Initialize form data from profileData
+  // Form state
   const [formData, setFormData] = useState({
     fullName: "",
     phoneNumber: "",
@@ -20,26 +32,23 @@ const ShippingForm = ({ onClose, profileData, setShippingAddress }) => {
     billingInfoSame: true,
   });
 
-  // Pre-populate form when profileData is available
+  // Populate form when shipping data is fetched
   useEffect(() => {
-    if (profileData) {
-      const fullName =
-        `${profileData.first_name || ""} ${profileData.last_name || ""}`.trim();
-
+    if (shippingData) {
       setFormData({
-        fullName: fullName || "",
-        phoneNumber: profileData.phone || "",
-        emailAddress: profileData.email || "",
-        streetAddress: profileData.address || "",
-        apartmentName: "",
-        floorNumber: "",
-        flatNumber: "",
-        city: "",
-        zipCode: "",
+        fullName: shippingData.full_name || "",
+        phoneNumber: shippingData.phone || "",
+        emailAddress: shippingData.email || "",
+        streetAddress: shippingData.street_address || "",
+        apartmentName: shippingData.apartment_name || "",
+        floorNumber: shippingData.floor_number || "",
+        flatNumber: shippingData.flat_number || "",
+        city: shippingData.city || "",
+        zipCode: shippingData.zip_code || "",
         billingInfoSame: true,
       });
     }
-  }, [profileData]);
+  }, [shippingData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,6 +56,29 @@ const ShippingForm = ({ onClose, profileData, setShippingAddress }) => {
       ...formData,
       [name]: value,
     });
+  };
+
+  const handleEditClick = () => {
+    setIsEditMode(true);
+  };
+
+  const handleCancelEdit = () => {
+    setIsEditMode(false);
+    // Reset form to original data
+    if (shippingData) {
+      setFormData({
+        fullName: shippingData.full_name || "",
+        phoneNumber: shippingData.phone || "",
+        emailAddress: shippingData.email || "",
+        streetAddress: shippingData.street_address || "",
+        apartmentName: shippingData.apartment_name || "",
+        floorNumber: shippingData.floor_number || "",
+        flatNumber: shippingData.flat_number || "",
+        city: shippingData.city || "",
+        zipCode: shippingData.zip_code || "",
+        billingInfoSame: true,
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -71,18 +103,11 @@ const ShippingForm = ({ onClose, profileData, setShippingAddress }) => {
       // Show success message
       toast.success(response.message || "Address updated successfully!");
 
-      // Save the updated address data to localStorage
-      if (response.data) {
-        localStorage.setItem("shippingAddress", JSON.stringify(response.data));
+      // Refetch shipping address data
+      refetch();
 
-        // Update parent component state
-        if (setShippingAddress) {
-          setShippingAddress(response.data);
-        }
-      }
-
-      // Close the form after successful update
-      if (onClose) onClose();
+      // Exit edit mode
+      setIsEditMode(false);
     } catch (error) {
       // Handle error
       console.error("Failed to update address:", error);
@@ -92,11 +117,33 @@ const ShippingForm = ({ onClose, profileData, setShippingAddress }) => {
     }
   };
 
+  // Loading state
+  if (isFetching) {
+    return (
+      <div className="p-4 sm:p-6 md:p-8 lg:p-12 w-full bg-white rounded-lg shadow-lg">
+        <p className="text-center text-lg font-medium">
+          Loading shipping address...
+        </p>
+      </div>
+    );
+  }
+
   return (
     <form
       onSubmit={handleSubmit}
-      className="p-4 sm:p-6 md:p-8 lg:p-12 w-full bg-white rounded-lg shadow-lg"
+      className="p-4 sm:p-6 md:p-8 lg:p-12 w-full bg-white rounded-lg shadow-lg relative"
     >
+      {/* Edit Button - Top Right Corner */}
+      {!isEditMode && (
+        <button
+          type="button"
+          onClick={handleEditClick}
+          className="absolute top-4 right-4 bg-yellow-500 hover:bg-yellow-600 text-white font-bold text-sm px-4 py-2 rounded-lg"
+        >
+          Edit
+        </button>
+      )}
+
       <h2 className="text-xl sm:text-2xl font-semibold mb-6">
         Shipping Information
       </h2>
@@ -117,8 +164,9 @@ const ShippingForm = ({ onClose, profileData, setShippingAddress }) => {
               name="fullName"
               value={formData.fullName}
               onChange={handleChange}
+              disabled={!isEditMode}
               placeholder="Enter full name"
-              className="mt-1 text-sm font-medium w-full px-4 py-2.5 bg-[#f9f6ee] shadow rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
+              className="mt-1 text-sm font-medium w-full px-4 py-2.5 bg-[#f9f6ee] shadow rounded-xl focus:ring-yellow-500 focus:border-yellow-500 disabled:opacity-60 disabled:cursor-not-allowed"
               required
             />
           </div>
@@ -137,8 +185,9 @@ const ShippingForm = ({ onClose, profileData, setShippingAddress }) => {
               name="phoneNumber"
               value={formData.phoneNumber}
               onChange={handleChange}
+              disabled={!isEditMode}
               placeholder="Enter phone number"
-              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
+              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500 disabled:opacity-60 disabled:cursor-not-allowed"
               required
             />
           </div>
@@ -157,8 +206,9 @@ const ShippingForm = ({ onClose, profileData, setShippingAddress }) => {
             name="emailAddress"
             value={formData.emailAddress}
             onChange={handleChange}
+            disabled={!isEditMode}
             placeholder="Enter email address"
-            className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
+            className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500 disabled:opacity-60 disabled:cursor-not-allowed"
             required
           />
         </div>
@@ -176,8 +226,9 @@ const ShippingForm = ({ onClose, profileData, setShippingAddress }) => {
             name="streetAddress"
             value={formData.streetAddress}
             onChange={handleChange}
+            disabled={!isEditMode}
             placeholder="House number and street name"
-            className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
+            className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500 disabled:opacity-60 disabled:cursor-not-allowed"
             required
           />
         </div>
@@ -196,8 +247,9 @@ const ShippingForm = ({ onClose, profileData, setShippingAddress }) => {
               name="apartmentName"
               value={formData.apartmentName}
               onChange={handleChange}
+              disabled={!isEditMode}
               placeholder="Enter apartment name"
-              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
+              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500 disabled:opacity-60 disabled:cursor-not-allowed"
               required
             />
           </div>
@@ -214,8 +266,9 @@ const ShippingForm = ({ onClose, profileData, setShippingAddress }) => {
               name="floorNumber"
               value={formData.floorNumber}
               onChange={handleChange}
+              disabled={!isEditMode}
               placeholder="00"
-              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
+              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500 disabled:opacity-60 disabled:cursor-not-allowed"
               required
             />
           </div>
@@ -235,8 +288,9 @@ const ShippingForm = ({ onClose, profileData, setShippingAddress }) => {
               name="flatNumber"
               value={formData.flatNumber}
               onChange={handleChange}
+              disabled={!isEditMode}
               placeholder="00"
-              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
+              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500 disabled:opacity-60 disabled:cursor-not-allowed"
               required
             />
           </div>
@@ -254,8 +308,9 @@ const ShippingForm = ({ onClose, profileData, setShippingAddress }) => {
               name="city"
               value={formData.city}
               onChange={handleChange}
+              disabled={!isEditMode}
               placeholder="Enter city"
-              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
+              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500 disabled:opacity-60 disabled:cursor-not-allowed"
               required
             />
           </div>
@@ -275,8 +330,9 @@ const ShippingForm = ({ onClose, profileData, setShippingAddress }) => {
               name="zipCode"
               value={formData.zipCode}
               onChange={handleChange}
+              disabled={!isEditMode}
               placeholder="Enter zip code"
-              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500"
+              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500 disabled:opacity-60 disabled:cursor-not-allowed"
               required
             />
           </div>
@@ -298,7 +354,8 @@ const ShippingForm = ({ onClose, profileData, setShippingAddress }) => {
                   billingInfoSame: !formData.billingInfoSame,
                 })
               }
-              className="text-yellow-500"
+              disabled={!isEditMode}
+              className="text-yellow-500 disabled:opacity-60 disabled:cursor-not-allowed"
               required
             />
             <label
@@ -311,13 +368,26 @@ const ShippingForm = ({ onClose, profileData, setShippingAddress }) => {
         </div>
       </div>
 
-      <button
-        type="submit"
-        disabled={isLoading}
-        className="w-full py-3 mt-5 mb-8 bg-yellow-500 text-white rounded-xl shadow hover:bg-yellow-600 disabled:bg-gray-400 disabled:cursor-not-allowed"
-      >
-        {isLoading ? "Updating..." : "Save Address"}
-      </button>
+      {/* Save and Cancel Buttons - Only show in edit mode */}
+      {isEditMode && (
+        <div className="flex gap-3">
+          <button
+            type="submit"
+            disabled={isUpdating}
+            className="flex-1 py-3 mt-5 mb-8 bg-yellow-500 text-white rounded-xl shadow hover:bg-yellow-600 disabled:bg-gray-400 disabled:cursor-not-allowed"
+          >
+            {isUpdating ? "Updating..." : "Save Address"}
+          </button>
+          <button
+            type="button"
+            onClick={handleCancelEdit}
+            disabled={isUpdating}
+            className="flex-1 py-3 mt-5 mb-8 bg-gray-500 text-white rounded-xl shadow hover:bg-gray-600 disabled:bg-gray-400 disabled:cursor-not-allowed"
+          >
+            Cancel
+          </button>
+        </div>
+      )}
     </form>
   );
 };

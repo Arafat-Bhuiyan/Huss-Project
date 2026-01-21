@@ -149,6 +149,13 @@ export const authApi = api.injectEndpoints({
         body: data,
       }),
     }),
+    // === Get Shipping Address ===
+    getShippingAddress: builder.query({
+      query: () => ({
+        url: `/get-shipping-address/`,
+        method: "GET",
+      }),
+    }),
     // === Update Cart ===
     updateCart: builder.mutation({
       query: ({ id, data }) => ({
@@ -222,6 +229,7 @@ export const {
   useSuccessOrderQuery,
   useOrderTrackingQuery,
   useUpdateShippingAddressMutation,
+  useGetShippingAddressQuery,
   useUpdateCartMutation,
   useReturnExchangeMutation,
   useToggleWishlistMutation,

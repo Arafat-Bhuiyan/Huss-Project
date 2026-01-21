@@ -17,6 +17,8 @@ const CatWiseProduct = () => {
     isError,
   } = useGetProductListQuery(categoryName);
 
+  console.log("Products", products);
+
   // Calculate pagination
   const totalProducts = products?.length || 0;
   const totalPages = Math.ceil(totalProducts / productsPerPage);
