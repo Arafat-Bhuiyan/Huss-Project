@@ -12,10 +12,15 @@ const CatWiseProduct = () => {
 
   // Fetch products filtered by category
   const {
-    data: products,
+    data: productList,
     isLoading,
     isError,
   } = useGetProductListQuery(categoryName);
+
+  // Filter only published products
+  const products = productList
+    ? productList.filter((product) => product.is_published === true)
+    : [];
 
   console.log("Products", products);
 
