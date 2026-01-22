@@ -1,4 +1,3 @@
-import React from "react";
 import Headphone from "../assets/img/headphone.png";
 import { useNavigate } from "react-router-dom";
 import {
@@ -6,6 +5,7 @@ import {
   useToggleWishlistMutation,
 } from "../redux/api/authApi";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 const BASE_URL = "http://10.10.13.20:8001";
 
@@ -14,8 +14,18 @@ export const ProductImgDet = ({ product, isLoading }) => {
   const [addToCart, { isLoading: isAdding }] = useAddToCartMutation();
   const [toggleWishlist] = useToggleWishlistMutation();
 
+  // Check if user is logged in
+  const isAuthenticated = useSelector((state) => state.auth?.access);
+
   const handleAddToCart = async () => {
     if (!product) return;
+
+    if (!isAuthenticated) {
+      toast.error("Please login to add products to cart.");
+      navigate("/login");
+      return;
+    }
+
     try {
       await addToCart({
         product_id: product.id.toString(),
@@ -39,6 +49,13 @@ export const ProductImgDet = ({ product, isLoading }) => {
 
   const handleToggleWishlist = async () => {
     if (!product) return;
+
+    if (!isAuthenticated) {
+      toast.error("Please login to add products to wishlist.");
+      navigate("/login");
+      return;
+    }
+
     try {
       const response = await toggleWishlist(product.id).unwrap();
       toast.success(response.message || "Wishlist updated.");

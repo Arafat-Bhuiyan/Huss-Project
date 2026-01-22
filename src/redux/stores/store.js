@@ -3,17 +3,19 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import authReducer from "../features/authSlice";
 import checkoutReducer from "../features/checkoutSlice";
+import productReducer from "../../features/products/productSlice";
 import { api } from "../api/api";
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth", "checkout"],
+  whitelist: ["auth", "checkout", "product"],
 };
 
 const rootReducer = combineReducers({
   auth: authReducer,
   checkout: checkoutReducer,
+  product: productReducer,
   [api.reducerPath]: api.reducer,
 });
 

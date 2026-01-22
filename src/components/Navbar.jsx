@@ -10,12 +10,14 @@ import goArrow from "../assets/img/icons/go-arrow.png";
 import logo from "../assets/img/mtech-logo2.png";
 import { LogOut } from "lucide-react";
 import { logout } from "../redux/features/authSlice";
+import { setSearchTerm } from "../features/products/productSlice";
 import { useGetCategoryListQuery } from "../redux/api/authApi";
 
 export const Navbar = () => {
   const { data: categoryList } = useGetCategoryListQuery();
   const subCategories = categoryList || [];
   const { user } = useSelector((state) => state.auth);
+  const searchTerm = useSelector((state) => state.product.searchTerm);
   const dispatch = useDispatch();
   const [showCategories, setShowCategories] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -64,6 +66,8 @@ export const Navbar = () => {
             <input
               type="text"
               placeholder="Search for Products..."
+              value={searchTerm}
+              onChange={(e) => dispatch(setSearchTerm(e.target.value))}
               className="w-full px-4 py-2 rounded-full placeholder:text-base placeholder:font-normal placeholder:text-gray-100 border border-gray-100 bg-black focus:outline-none focus:ring-2 focus:ring-gray-300 transition"
             />
           </div>
@@ -215,6 +219,8 @@ export const Navbar = () => {
           <input
             type="text"
             placeholder="Search for Products..."
+            value={searchTerm}
+            onChange={(e) => dispatch(setSearchTerm(e.target.value))}
             className="w-full px-4 py-2 rounded-full placeholder:text-sm placeholder:font-normal placeholder:text-gray-100 border border-gray-100 bg-black focus:outline-none focus:ring-2 focus:ring-gray-300 transition"
           />
         </div>

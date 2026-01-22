@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import Headphone from "../../assets/img/headphone.png";
 import white_save from "../../assets/img/white_save.png";
 import { useNavigate } from "react-router-dom";
@@ -13,12 +14,17 @@ const BASE_URL = "http://10.10.13.20:8001";
 
 const ProductsSection = () => {
   const navigate = useNavigate();
+  const searchTerm = useSelector((state) => state.product.searchTerm);
   const { data: productList, isLoading } = useGetProductListQuery();
   const [addToCart] = useAddToCartMutation();
   const [toggleWishlist] = useToggleWishlistMutation();
   const [showAll, setShowAll] = useState(false);
   const products = productList
-    ? productList.filter((product) => product.is_published === true)
+    ? productList
+        .filter((product) => product.is_published === true)
+        .filter((product) =>
+          product.product_name.toLowerCase().includes(searchTerm.toLowerCase()),
+        )
     : [];
   console.log("Products", products);
   const displayedProducts = showAll ? products : products.slice(0, 8);
