@@ -3,11 +3,15 @@ import { useGetMyOrdersQuery } from "../../redux/api/authApi";
 import { ScrollRestoration, useNavigate } from "react-router-dom";
 import left from "../../assets/img/left-angle.png";
 import right from "../../assets/img/right-angle.png";
+import { MoreVertical, Eye, RotateCcw } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 export const MyOrders = () => {
   const navigate = useNavigate();
   const { data: myOrders, isLoading } = useGetMyOrdersQuery();
   const [currentPage, setCurrentPage] = useState(1);
+  const [openMenuId, setOpenMenuId] = useState(null);
+  const menuRef = useRef(null);
   const itemsPerPage = 6;
 
   // Calculate pagination
@@ -23,6 +27,16 @@ export const MyOrders = () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setOpenMenuId(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   // Generate page numbers
   const getPageNumbers = () => {
@@ -121,25 +135,47 @@ export const MyOrders = () => {
                       </div>
                     </div>
 
-                    <div className="flex gap-2 self-end sm:self-center">
+                    <div
+                      className="relative"
+                      ref={openMenuId === order.id ? menuRef : null}
+                    >
                       <button
                         onClick={() =>
-                          navigate(`/return-policy?id=${order.id}`)
-                        }
-                        className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded-lg text-sm transition-colors whitespace-nowrap"
-                      >
-                        Return Item
-                      </button>
-                      <button
-                        onClick={() =>
-                          navigate(
-                            `/add-to-cart/checkout/confirm-order?order_uuid=${order.order_uuid}`,
+                          setOpenMenuId(
+                            openMenuId === order.id ? null : order.id,
                           )
                         }
-                        className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-6 rounded-lg text-sm transition-colors whitespace-nowrap"
+                        className="p-2 hover:bg-gray-200 rounded-full transition-colors"
                       >
-                        View Details
+                        <MoreVertical size={20} className="text-gray-600" />
                       </button>
+
+                      {openMenuId === order.id && (
+                        <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-xl z-50 overflow-hidden animate-in fade-in zoom-in duration-200">
+                          <button
+                            onClick={() => {
+                              navigate(
+                                `/add-to-cart/checkout/confirm-order?order_uuid=${order.order_uuid}`,
+                              );
+                              setOpenMenuId(null);
+                            }}
+                            className="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-yellow-50 transition-colors border-b border-gray-100"
+                          >
+                            <Eye size={16} className="text-yellow-600" />
+                            View Details
+                          </button>
+                          <button
+                            onClick={() => {
+                              navigate(`/return-policy?id=${order.id}`);
+                              setOpenMenuId(null);
+                            }}
+                            className="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-red-50 transition-colors"
+                          >
+                            <RotateCcw size={16} className="text-red-600" />
+                            Return Item
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </div>
                 ))}
