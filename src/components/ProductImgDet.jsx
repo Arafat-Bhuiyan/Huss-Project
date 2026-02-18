@@ -7,7 +7,7 @@ import {
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 
-const BASE_URL = "http://10.10.13.20:8001";
+const BASE_URL = "https://1ezybuy.com/";
 
 export const ProductImgDet = ({ product, isLoading }) => {
   const navigate = useNavigate();

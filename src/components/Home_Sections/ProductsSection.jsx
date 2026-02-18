@@ -10,7 +10,7 @@ import {
 } from "../../redux/api/authApi";
 import { toast } from "react-toastify";
 
-const BASE_URL = "http://10.10.13.20:8001";
+const BASE_URL = "https://1ezybuy.com/";
 
 const ProductsSection = () => {
   const navigate = useNavigate();

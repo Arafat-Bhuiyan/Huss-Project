@@ -6,7 +6,7 @@ import electronicImg from "../../assets/img/electronic.png";
 import testingImg from "../../assets/img/testing.png";
 import surveyImg from "../../assets/img/survey.png";
 
-const BASE_URL = "http://10.10.13.20:8001";
+const BASE_URL = "https://1ezybuy.com/";
 
 export const CategorySection = () => {
   const navigate = useNavigate();

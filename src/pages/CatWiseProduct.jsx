@@ -73,7 +73,7 @@ const CatWiseProduct = () => {
     // If the path already includes the base URL, return as is
     if (imagePath.startsWith("http")) return imagePath;
     // Otherwise, prepend the base URL (remove /api/v1 from base URL for media files)
-    return `http://10.10.13.20:8001${imagePath}`;
+    return `https://1ezybuy.com/${imagePath}`;
   };
 
   if (isLoading) {

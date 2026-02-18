@@ -8,7 +8,7 @@ import {
 } from "../redux/api/authApi";
 import { useNavigate } from "react-router-dom";
 
-const BASE_URL = "http://10.10.13.20:8001";
+const BASE_URL = "https://1ezybuy.com/";
 
 export const CartSuggetion = () => {
   const navigate = useNavigate();
