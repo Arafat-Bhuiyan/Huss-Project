@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import rightImg from "../../assets/img/HomeSec1_img.png";
+import rightImg from "../../assets/img/H.png";
 
 export const Hero = () => {
   const navigate = useNavigate();
@@ -10,8 +10,8 @@ export const Hero = () => {
         <div className="text-center md:text-left max-w-xl">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-black leading-tight mb-4">
             Discover Your Perfect <br />
-            <span className="text-yellow-500">
-              M<span className="text-black">tech</span>
+            <span className="text-[#D5B56E]">
+              1<span className="text-[#0B3C5D]">ezy</span><span className="text-[#D5B56E]">buy</span>
             </span>
           </h1>
           <p className="text-gray-700 text-lg sm:text-xl font-medium mb-8">

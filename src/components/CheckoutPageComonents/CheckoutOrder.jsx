@@ -118,7 +118,7 @@ export const CheckoutOrder = () => {
           </button>
           <div className="py-2 flex flex-col justify-center items-center text-center text-xs sm:text-sm font-medium">
             <p className="text-black">
-              By clicking Place Order, you accept Mtech
+              By clicking Place Order, you accept 1ezybuy
             </p>
             <p className="text-yellow-400 hover:underline cursor-pointer">
               return & shipping policies
@@ -168,7 +168,7 @@ export const CheckoutOrder = () => {
           </button>
           <div className="py-2 flex flex-col justify-center items-center text-center text-xs sm:text-sm font-medium">
             <p className="text-black">
-              By clicking Place Order, you accept Mtech
+              By clicking Place Order, you accept 1ezybuy
             </p>
             <p className="text-yellow-400 hover:underline cursor-pointer">
               return & shipping policies

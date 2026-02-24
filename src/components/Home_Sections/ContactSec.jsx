@@ -160,7 +160,7 @@ export const ContactSec = () => {
               </li>
               <li className="flex items-center gap-4">
                 <img src={mail} alt="" className="mt-1.5" />
-                <span>support@mtech.com</span>
+                <span>support@1ezybuy.com</span>
               </li>
             </ul>
           </div>

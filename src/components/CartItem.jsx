@@ -38,7 +38,7 @@ export const CartItem = ({ item }) => {
           <h1 className="font-bold text-base sm:text-lg md:text-xl leading-tight">
             {item.product_name}
           </h1>
-          <p className="font-normal text-sm text-gray-500">by Mtech.com</p>
+          <p className="font-normal text-sm text-gray-500">by 1ezybuy.com</p>
           <h3 className="font-bold text-base sm:text-lg md:text-xl mt-1">
             Price: ${item.price}
           </h3>
