@@ -7,7 +7,7 @@ import categoryIcon from "../assets/img/icons/category.png";
 import cartIcon from "../assets/img/icons/cart.png";
 import accountIcon from "../assets/img/icons/accout.png";
 import goArrow from "../assets/img/icons/go-arrow.png";
-import logo from "../assets/img/mtech-logo2.png";
+import logo from "../assets/img/1ezybuy-logo.png";
 import { LogOut } from "lucide-react";
 import { logout } from "../redux/features/authSlice";
 import { setSearchTerm } from "../features/products/productSlice";
@@ -49,9 +49,13 @@ export const Navbar = () => {
     <header className="bg-black text-white shadow relative" ref={categoriesRef}>
       <nav className="flex items-center justify-between px-4 sm:px-6 lg:px-28 py-3">
         {/* Left: Brand */}
-        <div className="flex-1 lg:flex">
-          <Link to="/" className="transition">
-            <img src={logo} alt="Mtech Logo" className="h-8 sm:h-10 w-auto" />
+        <div className="flex-1 flex items-center">
+          <Link to="/" className="transition hover:opacity-80">
+            <img
+              src={logo}
+              alt="1ezybuy Logo"
+              className="h-14 sm:h-20 w-auto object-contain"
+            />
           </Link>
         </div>
 

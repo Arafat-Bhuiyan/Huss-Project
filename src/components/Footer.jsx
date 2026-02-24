@@ -7,7 +7,12 @@ const Footer = () => {
         {/* Brand Description */}
         <div className="sm:col-span-2 md:col-span-1">
           <h2 className="text-3xl font-bold mb-2">
-            <Link className="text-yellow-500" to="/">M<span className="text-white">tech</span></Link>
+            <Link to="/">
+              <span className="text-[#D5B56E]">
+                1<span className="text-[#0B3C5D]">ezy</span>
+                <span className="text-[#D5B56E]">buy</span>
+              </span>
+            </Link>
           </h2>
           <p className="text-white font-normal text-base">
             Your one-stop destination for quality products and exceptional
@@ -24,8 +29,12 @@ const Footer = () => {
                 Home
               </Link>
             </li>
-            <li className="hover:text-yellow-500 cursor-pointer"><Link to="/#products">Products</Link></li>
-            <li className="hover:text-yellow-500 cursor-pointer"><Link to="/#contact">Contact</Link></li>
+            <li className="hover:text-yellow-500 cursor-pointer">
+              <Link to="/#products">Products</Link>
+            </li>
+            <li className="hover:text-yellow-500 cursor-pointer">
+              <Link to="/#contact">Contact</Link>
+            </li>
           </ul>
         </div>
 
@@ -67,8 +76,9 @@ const Footer = () => {
       <div className="border-t border-gray-700 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center text-sm sm:text-base font-semibold text-white">
         <p>
           © 2023{" "}
-          <span className="text-yellow-500">
-            M<span className="text-white">tech</span>
+          <span className="text-[#D5B56E]">
+            1<span className="text-[#0B3C5D]">ezy</span>
+            <span className="text-[#D5B56E]">buy</span>
           </span>{" "}
           . All rights reserved.
         </p>

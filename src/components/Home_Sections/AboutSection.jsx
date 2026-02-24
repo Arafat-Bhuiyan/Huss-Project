@@ -9,9 +9,9 @@ const AboutSection = () => {
     <section className="bg-white py-16 px-4 sm:px-6 md:px-8 lg:px-16">
       <div className="max-w-6xl mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-8 md:mb-16">
-          About <span className="text-yellow-500">
-            M<span className="text-black">tech</span>
-          </span>
+          About <span className="text-[#D5B56E]">
+              1<span className="text-[#0B3C5D]">ezy</span><span className="text-[#D5B56E]">buy</span>
+            </span>
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-10">
