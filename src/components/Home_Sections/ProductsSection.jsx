@@ -10,7 +10,6 @@ import {
 } from "../../redux/api/authApi";
 import { toast } from "react-toastify";
 
-const BASE_URL = "https://api.1ezybuy.com/";
 
 const ProductsSection = () => {
   const navigate = useNavigate();
@@ -104,7 +103,7 @@ const ProductsSection = () => {
 
             {/* Image */}
             <img
-              src={product.image ? `${BASE_URL}${product.image}` : Headphone}
+              src={product.image ? `${import.meta.env.VITE_BASE_URL_MEDIA}${product.image}` : Headphone}
               alt={product.product_name}
               className="w-full h-52 object-contain p-2 cursor-pointer"
               onClick={() => navigate(`/products/${product.id}/detail`)}

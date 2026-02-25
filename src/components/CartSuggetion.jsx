@@ -8,7 +8,6 @@ import {
 } from "../redux/api/authApi";
 import { useNavigate } from "react-router-dom";
 
-const BASE_URL = "https://api.1ezybuy.com/";
 
 export const CartSuggetion = () => {
   const navigate = useNavigate();
@@ -87,7 +86,7 @@ export const CartSuggetion = () => {
 
             {/* Image */}
             <img
-              src={product.image ? `${BASE_URL}${product.image}` : Headphone}
+              src={product.image ? `${import.meta.env.VITE_BASE_URL_MEDIA}${product.image}` : Headphone}
               alt={product.product_name}
               className="w-full h-52 object-contain p-2 cursor-pointer"
               onClick={() => navigate(`/products/${product.id}/detail`)}

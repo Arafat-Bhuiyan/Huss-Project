@@ -7,7 +7,6 @@ import {
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 
-const BASE_URL = "https://api.1ezybuy.com/";
 
 export const ProductImgDet = ({ product, isLoading }) => {
   const navigate = useNavigate();
@@ -86,13 +85,13 @@ export const ProductImgDet = ({ product, isLoading }) => {
       {/* Product Images */}
       <div className="flex flex-col gap-5 w-full lg:w-1/2">
         <img
-          src={product.image ? `${BASE_URL}${product.image}` : Headphone}
+          src={product.image ? `${import.meta.env.VITE_BASE_URL_MEDIA}${product.image}` : Headphone}
           alt={product.product_name}
           className="rounded-xl w-full h-[300px] sm:h-[400px] object-contain bg-white border"
         />
         <div className="flex gap-2 justify-center sm:justify-start">
           <img
-            src={product.image ? `${BASE_URL}${product.image}` : Headphone}
+            src={product.image ? `${import.meta.env.VITE_BASE_URL_MEDIA}${product.image}` : Headphone}
             alt="thumbnail"
             className="w-16 h-16 sm:w-24 sm:h-24 object-contain rounded-md cursor-pointer border-2 border-yellow-500 bg-white"
           />
