@@ -6,7 +6,6 @@ import electronicImg from "../../assets/img/electronic.png";
 import testingImg from "../../assets/img/testing.png";
 import surveyImg from "../../assets/img/survey.png";
 
-const BASE_URL = "https://api.1ezybuy.com/";
 
 export const CategorySection = () => {
   const navigate = useNavigate();
@@ -55,7 +54,7 @@ export const CategorySection = () => {
             >
               {chunk.map((category, index) => {
                 const imageUrl = category.image
-                  ? `${BASE_URL}${category.image}`
+                  ? `${import.meta.env.VITE_BASE_URL_MEDIA}${category.image}`
                   : category.category_name.includes("Electronics")
                     ? electronicImg
                     : category.category_name.includes("Survey")
