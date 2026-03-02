@@ -206,6 +206,23 @@ export const authApi = api.injectEndpoints({
       }),
       invalidatesTags: ["Review"],
     }),
+    // === Get Profile ===
+    getProfile: builder.query({
+      query: () => ({
+        url: "/accounts/profile/",
+        method: "GET",
+      }),
+      providesTags: ["Profile"],
+    }),
+    // === Update Profile ===
+    updateProfile: builder.mutation({
+      query: (data) => ({
+        url: "/accounts/update-profile/",
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["Profile"],
+    }),
   }),
 });
 

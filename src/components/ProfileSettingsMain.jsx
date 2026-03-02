@@ -5,6 +5,7 @@ import { useGetProfileQuery, useUpdateProfileMutation } from "../redux/api/authA
 
 export const ProfileSettingsMain = () => {
   const { data: userData, refetch } = useGetProfileQuery();
+  console.log(userData);
   const [updateProfile, { isLoading }] = useUpdateProfileMutation();
   const [formData, setFormData] = useState({
     fullName: "",

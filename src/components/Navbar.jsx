@@ -11,10 +11,14 @@ import logo from "../assets/img/1ezybuy-logo.png";
 import { LogOut } from "lucide-react";
 import { logout } from "../redux/features/authSlice";
 import { setSearchTerm } from "../features/products/productSlice";
-import { useGetCategoryListQuery } from "../redux/api/authApi";
+import {
+  useGetCategoryListQuery,
+  useGetProfileQuery,
+} from "../redux/api/authApi";
 
 export const Navbar = () => {
   const { data: categoryList } = useGetCategoryListQuery();
+  const { data: userData } = useGetProfileQuery();
   const subCategories = categoryList || [];
   const { user } = useSelector((state) => state.auth);
   const searchTerm = useSelector((state) => state.product.searchTerm);
@@ -23,6 +27,7 @@ export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const categoriesRef = useRef(null);
   const navigate = useNavigate();
+  console.log(userData);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -150,16 +155,16 @@ export const Navbar = () => {
           </div>
 
           {/* Account */}
-          {user ? (
+          {userData ? (
             <div className="flex items-center gap-2">
               <img
                 onClick={() => navigate("/profile-settings")}
-                src={user.photo}
+                src={userData.picture}
                 alt="Profile"
                 className="w-8 h-8 rounded-full"
               />
               <span onClick={() => navigate("/profile-settings")}>
-                {user.name}
+                {userData.first_name + " " + userData.last_name}
               </span>
               <LogOut
                 size={20}
@@ -303,15 +308,45 @@ export const Navbar = () => {
             </NavLink>
 
             {/* Account */}
-            {/* You can add the same user logic here if needed */}
-            <NavLink
-              to="/login"
-              className="flex items-center gap-3 hover:text-yellow-500"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              <img src={accountIcon} alt="Account" className="w-5 h-5" />
-              <span>Account</span>
-            </NavLink>
+            {userData ? (
+              <>
+                <div
+                  className="flex items-center gap-3 hover:text-yellow-500 cursor-pointer"
+                  onClick={() => {
+                    navigate("/profile-settings");
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
+                  <img
+                    src={userData.picture}
+                    alt="Profile"
+                    className="w-8 h-8 rounded-full shadow-sm"
+                  />
+                  <span className="font-medium">
+                    {userData.first_name + " " + userData.last_name}
+                  </span>
+                </div>
+                <div
+                  className="flex items-center gap-3 hover:text-red-500 cursor-pointer transition-colors"
+                  onClick={() => {
+                    handleLogout();
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
+                  <LogOut size={20} color="#FFBA07" />
+                  <span className="font-medium">Logout</span>
+                </div>
+              </>
+            ) : (
+              <NavLink
+                to="/login"
+                className="flex items-center gap-3 hover:text-yellow-500"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <img src={accountIcon} alt="Account" className="w-5 h-5" />
+                <span className="font-medium">Account</span>
+              </NavLink>
+            )}
           </div>
         </div>
       )}
