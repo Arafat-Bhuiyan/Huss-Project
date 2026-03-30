@@ -3,12 +3,17 @@ import googleImg from "../assets/img/google.png";
 import reg_side_img from "../assets/img/img-of-2.png";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useSignupMutation } from "../redux/api/authApi";
+import { useSignupMutation, useGoogleRegisterMutation } from "../redux/api/authApi";
+import { useGoogleLogin } from "@react-oauth/google";
+import { useDispatch } from "react-redux";
+import { setUser } from "../redux/features/authSlice";
 import { Eye, EyeOff } from "lucide-react";
 
 const Register = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [signup, { isLoading }] = useSignupMutation();
+  const [googleRegister, { isLoading: isGoogleLoading }] = useGoogleRegisterMutation();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
@@ -50,6 +55,47 @@ const Register = () => {
       }
     }
   };
+
+  const handleGoogleRegister = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        // Fetch user info from Google using the access token
+        const res = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+          headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+        });
+        const googleUser = await res.json();
+
+        // Call the backend with the user's data for registration
+        const resData = await googleRegister({
+          email: googleUser.email,
+          first_name: googleUser.given_name,
+          last_name: googleUser.family_name,
+          name: googleUser.name,
+        }).unwrap();
+
+        // Dispatch set user data to redux store upon successful registration/login
+        dispatch(
+          setUser({
+            user: {
+              ...resData.data,
+              name: `${resData.data?.first_name || googleUser.given_name} ${resData.data?.last_name || googleUser.family_name}`,
+              photo: resData.data?.picture || googleUser.picture,
+            },
+            token: resData.access_token,
+          })
+        );
+
+        toast.success(resData.message || "Google registration successful!");
+        navigate("/");
+      } catch (err) {
+        console.error("Google Registration failed:", err);
+        toast.error(err?.data?.detail || "Registration failed. This email might already be registered.");
+      }
+    },
+    onError: () => {
+      toast.error("Google Registration failed.");
+    },
+  });
 
   return (
     <div className="bg-[#f9f6ee] px-4 sm:px-6 md:px-12 lg:px-28 py-4">
@@ -165,19 +211,26 @@ const Register = () => {
             </form>
 
             {/* Divider */}
-            <div className="flex items-center my-4 text-sm text-gray-500">
+            {/* <div className="flex items-center my-4 text-sm text-gray-500">
               <div className="flex-grow border-t border-gray-300"></div>
               <span className="px-2">Or continue with</span>
               <div className="flex-grow border-t border-gray-300"></div>
-            </div>
+            </div> */}
 
             {/* Social media buttons */}
-            <div className="mt-4 flex justify-center">
-              <button className="px-4 py-2 flex gap-2 justify-center items-center bg-white border border-gray-300 rounded-full hover:bg-gray-100">
+            {/* <div className="mt-4 flex justify-center">
+              <button
+                type="button"
+                onClick={() => handleGoogleRegister()}
+                disabled={isGoogleLoading}
+                className="px-4 py-2 flex gap-2 justify-center items-center bg-white border border-gray-300 rounded-full hover:bg-gray-100 disabled:opacity-50"
+              >
                 <img src={googleImg} alt="Google" className="w-6 h-6" />
-                <p className="text-gray-500 text-sm">Google</p>
+                <p className="text-gray-500 text-sm">
+                  {isGoogleLoading ? "Loading..." : "Google"}
+                </p>
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

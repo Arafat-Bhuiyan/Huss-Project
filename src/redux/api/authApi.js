@@ -223,6 +223,22 @@ export const authApi = api.injectEndpoints({
       }),
       invalidatesTags: ["Profile"],
     }),
+    // === Google Login ===
+    googleLogin: builder.mutation({
+      query: (data) => ({
+        url: "/accounts/google-login/",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    // === Google Register ===
+    googleRegister: builder.mutation({
+      query: (data) => ({
+        url: "/accounts/google-signup/",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -253,4 +269,6 @@ export const {
   useGetWishlistQuery,
   useAddReviewMutation,
   useGetMyOrdersQuery,
+  useGoogleLoginMutation,
+  useGoogleRegisterMutation,
 } = authApi;

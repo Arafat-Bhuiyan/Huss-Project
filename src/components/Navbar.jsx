@@ -18,7 +18,10 @@ import {
 
 export const Navbar = () => {
   const { data: categoryList } = useGetCategoryListQuery();
-  const { data: userData } = useGetProfileQuery();
+  const { access: token } = useSelector((state) => state.auth);
+  const { data: userData } = useGetProfileQuery(undefined, {
+    skip: !token && !localStorage.getItem("access"),
+  });
   const subCategories = categoryList || [];
   const { user } = useSelector((state) => state.auth);
   const searchTerm = useSelector((state) => state.product.searchTerm);
