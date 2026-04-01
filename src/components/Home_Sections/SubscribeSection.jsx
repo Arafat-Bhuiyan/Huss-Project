@@ -2,7 +2,15 @@ import React from "react";
 
 const SubscribeSection = () => {
   return (
-    <section className="bg-[#FFF0CC] py-16 px-4 sm:px-8">
+    <section className=" py-16 px-4 sm:px-8"
+    style={{
+        backgroundColor: '#f3f4f6',
+        backgroundImage: `
+          radial-gradient(at 50% 10%, rgba(213, 181, 110, 0.1) 0px, transparent 40%),
+          radial-gradient(at 0% 90%, rgba(213, 181, 110, 0.08) 0px, transparent 40%),
+          linear-gradient(115deg, transparent 40%, rgba(213, 181, 110, 0.03) 44%, rgba(213, 181, 110, 0.08) 48%, rgba(213, 181, 110, 0.12) 50%, rgba(213, 181, 110, 0.08) 52%, rgba(213, 181, 110, 0.03) 56%, transparent 60%)
+        `
+      }}>
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-3xl sm:text-4xl font-bold mb-4">
           Join Our VIP List

@@ -10,7 +10,6 @@ import {
 } from "../../redux/api/authApi";
 import { toast } from "react-toastify";
 
-
 const ProductsSection = () => {
   const navigate = useNavigate();
   const searchTerm = useSelector((state) => state.product.searchTerm);
@@ -64,7 +63,15 @@ const ProductsSection = () => {
   return (
     <div
       id="products"
-      className="py-16 bg-[#f9f6ee] px-4 sm:px-6 lg:px-8 xl:px-28"
+      className="py-16 px-4 sm:px-6 lg:px-8 xl:px-28"
+      style={{
+        backgroundColor: '#f3f4f6',
+        backgroundImage: `
+          radial-gradient(at 10% 20%, rgba(213, 181, 110, 0.08) 0px, transparent 40%),
+          radial-gradient(at 90% 80%, rgba(213, 181, 110, 0.12) 0px, transparent 40%),
+          linear-gradient(115deg, transparent 40%, rgba(213, 181, 110, 0.03) 44%, rgba(213, 181, 110, 0.08) 48%, rgba(213, 181, 110, 0.12) 50%, rgba(213, 181, 110, 0.08) 52%, rgba(213, 181, 110, 0.03) 56%, transparent 60%)
+        `
+      }}
     >
       {/* Header */}
       <div className="max-w-7xl mx-auto mb-10 flex flex-col md:flex-row md:justify-between md:items-center">
@@ -103,7 +110,11 @@ const ProductsSection = () => {
 
             {/* Image */}
             <img
-              src={product.image ? `${import.meta.env.VITE_BASE_URL_MEDIA}${product.image}` : Headphone}
+              src={
+                product.image
+                  ? `${import.meta.env.VITE_BASE_URL_MEDIA}${product.image}`
+                  : Headphone
+              }
               alt={product.product_name}
               className="w-full h-52 object-contain p-2 cursor-pointer"
               onClick={() => navigate(`/products/${product.id}/detail`)}

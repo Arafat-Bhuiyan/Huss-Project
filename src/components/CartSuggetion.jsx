@@ -62,7 +62,7 @@ export const CartSuggetion = () => {
         <div className="self-end sm:self-center">
           <a
             href="/#products"
-            className="text-sm text-yellow-500 font-semibold hover:underline"
+            className="text-sm text-[#D5B56E] font-semibold hover:underline"
           >
             See All
           </a>

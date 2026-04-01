@@ -7,7 +7,7 @@ import categoryIcon from "../assets/img/icons/category.png";
 import cartIcon from "../assets/img/icons/cart.png";
 import accountIcon from "../assets/img/icons/accout.png";
 import goArrow from "../assets/img/icons/go-arrow.png";
-import logo from "../assets/img/1ezybuy-logo.png";
+import logo from "../assets/img/1ezybuy-logo2.png";
 import { LogOut } from "lucide-react";
 import { logout } from "../redux/features/authSlice";
 import { setSearchTerm } from "../features/products/productSlice";

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useHelpSupportMutation } from "../../redux/api/authApi";
-import { toast } from "react-toastify"
-import clock from "../../assets/img/icons/clock.png"
-import location from "../../assets/img/icons/location.png"
-import phone from "../../assets/img/icons/phone.png"
-import mail from "../../assets/img/icons/mail.png"
+import { toast } from "react-toastify";
+import clock from "../../assets/img/icons/clock.png";
+import location from "../../assets/img/icons/location.png";
+import phone from "../../assets/img/icons/phone.png";
+import mail from "../../assets/img/icons/mail.png";
 
 export const ContactSec = () => {
   const [helpSupport, { isLoading }] = useHelpSupportMutation();
@@ -28,7 +28,7 @@ export const ContactSec = () => {
     try {
       const response = await helpSupport(formData).unwrap();
       toast.success(
-        response?.message || "Support request submitted successfully."
+        response?.message || "Support request submitted successfully.",
       );
       setFormData({
         name: "",
@@ -38,7 +38,7 @@ export const ContactSec = () => {
       });
     } catch (error) {
       toast.error(
-        error?.data?.message || "Something went wrong. Please try again."
+        error?.data?.message || "Something went wrong. Please try again.",
       );
     }
   };
@@ -46,7 +46,15 @@ export const ContactSec = () => {
   return (
     <div
       id="contact"
-      className=" flex items-center justify-center bg-white px-4 sm:px-6 md:px-8 lg:px-16 py-12"
+      className=" flex items-center justify-center px-4 sm:px-6 md:px-8 lg:px-16 py-12"
+      style={{
+        backgroundColor: '#f3f4f6',
+        backgroundImage: `
+          radial-gradient(at 50% 10%, rgba(213, 181, 110, 0.1) 0px, transparent 40%),
+          radial-gradient(at 0% 90%, rgba(213, 181, 110, 0.08) 0px, transparent 40%),
+          linear-gradient(115deg, transparent 40%, rgba(213, 181, 110, 0.03) 44%, rgba(213, 181, 110, 0.08) 48%, rgba(213, 181, 110, 0.12) 50%, rgba(213, 181, 110, 0.08) 52%, rgba(213, 181, 110, 0.03) 56%, transparent 60%)
+        `
+      }}
     >
       <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Left: Contact Form */}
@@ -120,7 +128,7 @@ export const ContactSec = () => {
         </div>
 
         {/* Right: Business Hours & Contact Info */}
-        <div className="bg-yellow-50 p-6 rounded-md shadow-sm">
+        <div className="bg-white p-6 rounded-md shadow-sm">
           {/* Business Hours */}
           <div className="mb-6">
             <h3 className="text-lg font-semibold mb-2">Business Hours</h3>
@@ -149,9 +157,11 @@ export const ContactSec = () => {
               <li className="flex items-start gap-4">
                 <img src={location} className="mt-1" alt="" />{" "}
                 <span>
-                  123 Commerce Street, Suite 500
+                  PO Box 69
                   <br />
-                  New York, NY 10001
+                  Chester Hill 2162
+                  <br />
+                  Sydney NSW
                 </span>
               </li>
               <li className="flex items-center gap-4">
