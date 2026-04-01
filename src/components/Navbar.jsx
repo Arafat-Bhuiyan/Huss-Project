@@ -71,7 +71,7 @@ export const Navbar = () => {
         <div className="hidden lg:flex flex-1 justify-center px-4">
           <div className="relative w-72 md:w-96 flex items-center">
             <span className="absolute right-0 h-full flex items-center">
-              <span className="bg-yellow-500 rounded-r-full px-6 py-[10px] border border-gray-100 flex items-center">
+              <span className="bg-[#D5B56E] rounded-r-full px-6 py-[10px] border border-gray-100 flex items-center">
                 <img src={searchIcon} alt="Search" className="w-5 h-5" />
               </span>
             </span>
@@ -97,7 +97,7 @@ export const Navbar = () => {
             </div>
             <NavLink
               to="/wishlist"
-              className="text-white font-medium text-xl hover:text-yellow-500 transition"
+              className="text-white font-medium text-xl hover:text-[#D5B56E] transition"
             >
               Wishlist
             </NavLink>
@@ -109,7 +109,7 @@ export const Navbar = () => {
             </div>
             <div>
               <button
-                className="text-white font-medium text-xl hover:text-yellow-500 transition"
+                className="text-white font-medium text-xl hover:text-[#D5B56E] transition"
                 onClick={() => setShowCategories((prev) => !prev)}
               >
                 Categories
@@ -151,7 +151,7 @@ export const Navbar = () => {
             </div>
             <NavLink
               to="/add-to-cart"
-              className="text-white font-medium text-xl hover:text-yellow-500 transition"
+              className="text-white font-medium text-xl hover:text-[#D5B56E] transition"
             >
               Cart
             </NavLink>
@@ -183,7 +183,7 @@ export const Navbar = () => {
               </div>
               <NavLink
                 to="/login"
-                className="text-white font-medium text-xl hover:text-yellow-500 transition"
+                className="text-white font-medium text-xl hover:text-[#D5B56E] transition"
               >
                 Account
               </NavLink>
@@ -224,7 +224,7 @@ export const Navbar = () => {
       <div className="lg:hidden px-4 sm:px-6 pb-3">
         <div className="relative w-full flex items-center">
           <span className="absolute right-0 h-full flex items-center">
-            <span className="bg-yellow-500 rounded-r-full px-4 py-[10px] border border-gray-100 flex items-center">
+            <span className="bg-[#D5B56E] rounded-r-full px-4 py-[10px] border border-gray-100 flex items-center">
               <img src={searchIcon} alt="Search" className="w-5 h-5" />
             </span>
           </span>
@@ -245,7 +245,7 @@ export const Navbar = () => {
             {/* Wishlist */}
             <NavLink
               to="/wishlist"
-              className="flex items-center gap-3 hover:text-yellow-500"
+              className="flex items-center gap-3 hover:text-[#D5B56E]"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <img src={heartIcon} alt="Wishlist" className="w-5 h-5" />
@@ -285,7 +285,7 @@ export const Navbar = () => {
                   {subCategories.map((cat) => (
                     <li
                       key={cat.id || cat.category_name}
-                      className="hover:text-yellow-500 cursor-pointer"
+                      className="hover:text-[#D5B56E] cursor-pointer"
                       onClick={() => {
                         navigate(
                           `/category/${encodeURIComponent(cat.category_name)}`,
@@ -303,7 +303,7 @@ export const Navbar = () => {
             {/* Cart */}
             <NavLink
               to="/add-to-cart"
-              className="flex items-center gap-3 hover:text-yellow-500"
+              className="flex items-center gap-3 hover:text-[#D5B56E]"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <img src={cartIcon} alt="Cart" className="w-5 h-5" />
@@ -314,7 +314,7 @@ export const Navbar = () => {
             {userData ? (
               <>
                 <div
-                  className="flex items-center gap-3 hover:text-yellow-500 cursor-pointer"
+                  className="flex items-center gap-3 hover:text-[#D5B56E] cursor-pointer"
                   onClick={() => {
                     navigate("/profile-settings");
                     setIsMobileMenuOpen(false);
@@ -343,7 +343,7 @@ export const Navbar = () => {
             ) : (
               <NavLink
                 to="/login"
-                className="flex items-center gap-3 hover:text-yellow-500"
+                className="flex items-center gap-3 hover:text-[#D5B56E]"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <img src={accountIcon} alt="Account" className="w-5 h-5" />

@@ -8,7 +8,7 @@ export const FilterWithCheckbox = ({ title, options }) => {
     setSelectedItems((prevSelectedItems) =>
       prevSelectedItems.includes(item)
         ? prevSelectedItems.filter((selectedItem) => selectedItem !== item)
-        : [...prevSelectedItems, item]
+        : [...prevSelectedItems, item],
     );
   };
 
@@ -28,7 +28,7 @@ export const FilterWithCheckbox = ({ title, options }) => {
               id={item}
               checked={selectedItems.includes(item)}
               onChange={() => handleCheckboxChange(item)}
-              className="form-checkbox h-4 w-4 text-yellow-400"
+              className="form-checkbox h-4 w-4 text-[#D5B56E]"
             />
             <label htmlFor={item} className="text-sm font-medium text-gray-700">
               {item}
@@ -39,5 +39,3 @@ export const FilterWithCheckbox = ({ title, options }) => {
     </div>
   );
 };
-
-

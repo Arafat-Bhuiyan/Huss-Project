@@ -31,7 +31,7 @@ export const PaymentSuccess = () => {
 
         <button
           onClick={handleTrackOrder}
-          className="w-full flex items-center justify-center rounded-lg py-2.5 bg-yellow-400 hover:bg-yellow-500 text-white text-lg sm:text-xl font-bold shadow transition-colors"
+          className="w-full flex items-center justify-center rounded-lg py-2.5 bg-[#D5B56E] hover:bg-[#D5B56E]/90 text-white text-lg sm:text-xl font-bold shadow transition-colors"
         >
           Go for order details
         </button>

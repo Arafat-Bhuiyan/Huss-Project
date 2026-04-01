@@ -76,7 +76,7 @@ export const ReturnExchangeForm = () => {
         {/* Step 1: Order Details */}
         <div className="bg-white p-5 rounded-xl shadow space-y-4">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-yellow-500 text-white flex items-center justify-center font-bold text-lg">
+            <div className="w-8 h-8 rounded-full bg-[#D5B56E] text-white flex items-center justify-center font-bold text-lg">
               1
             </div>
             <h3 className="font-semibold text-gray-800 text-lg">
@@ -94,7 +94,7 @@ export const ReturnExchangeForm = () => {
                 value={formData.id}
                 onChange={handleChange}
                 placeholder="Enter Order ID"
-                className={`mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 ${urlOrderUuid ? "bg-gray-100 cursor-not-allowed" : ""}`}
+                className={`mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#D5B56E] ${urlOrderUuid ? "bg-gray-100 cursor-not-allowed" : ""}`}
                 readOnly={!!urlOrderUuid}
                 required
               />
@@ -105,7 +105,7 @@ export const ReturnExchangeForm = () => {
         {/* Step 2: Reason */}
         <div className="bg-white p-5 rounded-xl shadow space-y-4">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-yellow-500 text-white flex items-center justify-center font-bold text-lg">
+            <div className="w-8 h-8 rounded-full bg-[#D5B56E] text-white flex items-center justify-center font-bold text-lg">
               2
             </div>
             <h3 className="font-semibold text-gray-800 text-lg">
@@ -118,7 +118,7 @@ export const ReturnExchangeForm = () => {
             value={formData.reason}
             onChange={handleChange}
             placeholder="Enter your Reason"
-            className="mt-2 w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            className="mt-2 w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#D5B56E]"
             required
           />
         </div>
@@ -126,7 +126,7 @@ export const ReturnExchangeForm = () => {
         {/* Step 3: Photo Upload */}
         <div className="bg-white p-5 rounded-xl shadow space-y-4">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-yellow-500 text-white flex items-center justify-center font-bold text-lg">
+            <div className="w-8 h-8 rounded-full bg-[#D5B56E] text-white flex items-center justify-center font-bold text-lg">
               3
             </div>
             <h3 className="font-semibold text-gray-800 text-lg">
@@ -136,7 +136,7 @@ export const ReturnExchangeForm = () => {
 
           <label
             htmlFor="image"
-            className="mt-3 flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-xl px-4 py-6 cursor-pointer text-center hover:border-yellow-500"
+            className="mt-3 flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-xl px-4 py-6 cursor-pointer text-center hover:border-[#D5B56E]"
           >
             <img src={upload} className="mb-2" alt="" />
             <p className="text-gray-500">
@@ -164,7 +164,7 @@ export const ReturnExchangeForm = () => {
             className={`text-white text-lg font-semibold py-3 px-6 rounded-lg shadow transition ${
               isLoading
                 ? "bg-gray-400 cursor-not-allowed"
-                : "bg-yellow-500 hover:bg-yellow-600"
+                : "bg-[#D5B56E] hover:bg-[#D5B56E]/90"
             }`}
           >
             {isLoading ? "Submitting..." : "Submit Return Request"}

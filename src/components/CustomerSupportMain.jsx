@@ -32,7 +32,7 @@ export const CustomerSupportMain = () => {
     try {
       const response = await helpSupport(payload).unwrap();
       toast.success(
-        response?.message || "Support request submitted successfully."
+        response?.message || "Support request submitted successfully.",
       );
       setFormData({
         name: "",
@@ -42,7 +42,7 @@ export const CustomerSupportMain = () => {
       });
     } catch (error) {
       toast.error(
-        error?.data?.message || "Something went wrong. Please try again."
+        error?.data?.message || "Something went wrong. Please try again.",
       );
     }
   };
@@ -78,7 +78,7 @@ export const CustomerSupportMain = () => {
               value={formData.name}
               onChange={handleChange}
               placeholder="Enter your name"
-              className="mt-2 block text-base font-normal w-full px-4 py-2 shadow bg-white rounded-md border border-gray-300 focus:ring-yellow-500 focus:border-yellow-500"
+              className="mt-2 block text-base font-normal w-full px-4 py-2 shadow bg-white rounded-md border border-gray-300 focus:ring-[#D5B56E] focus:border-[#D5B56E]"
               required
             />
           </div>
@@ -97,7 +97,7 @@ export const CustomerSupportMain = () => {
               value={formData.emailAddress}
               onChange={handleChange}
               placeholder="Enter email address"
-              className="mt-2 block text-base font-normal w-full px-4 py-2 shadow bg-white rounded-md border border-gray-300 focus:ring-yellow-500 focus:border-yellow-500"
+              className="mt-2 block text-base font-normal w-full px-4 py-2 shadow bg-white rounded-md border border-gray-300 focus:ring-[#D5B56E] focus:border-[#D5B56E]"
               required
             />
           </div>
@@ -116,7 +116,7 @@ export const CustomerSupportMain = () => {
               onChange={handleChange}
               placeholder="Enter your subject"
               rows={1}
-              className="mt-2 block text-base font-normal w-full px-4 py-2 shadow bg-white rounded-md border border-gray-300 focus:ring-yellow-500 focus:border-yellow-500 resize-none"
+              className="mt-2 block text-base font-normal w-full px-4 py-2 shadow bg-white rounded-md border border-gray-300 focus:ring-[#D5B56E] focus:border-[#D5B56E] resize-none"
               required
             />
           </div>
@@ -134,7 +134,7 @@ export const CustomerSupportMain = () => {
               onChange={handleChange}
               placeholder="Enter your message"
               rows={5}
-              className="mt-2 block text-base font-normal w-full px-4 py-2 shadow bg-white rounded-md border border-gray-300 focus:ring-yellow-500 focus:border-yellow-500 resize-none"
+              className="mt-2 block text-base font-normal w-full px-4 py-2 shadow bg-white rounded-md border border-gray-300 focus:ring-[#D5B56E] focus:border-[#D5B56E] resize-none"
               required
             />
           </div>
@@ -145,7 +145,7 @@ export const CustomerSupportMain = () => {
             className={`w-60 h-14 font-semibold text-2xl py-3 mt-5 mb-8 text-white rounded-xl shadow ${
               isLoading
                 ? "bg-gray-400 cursor-not-allowed"
-                : "bg-yellow-500 hover:bg-yellow-600"
+                : "bg-[#D5B56E] hover:bg-[#D5B56E]/90"
             }`}
           >
             {isLoading ? "Sending..." : "Send Message"}

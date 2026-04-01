@@ -104,7 +104,7 @@ const DeliveryDetailsForm = () => {
           placeholder="Near Central Mosque, opposite University"
           value={landmark}
           onChange={(e) => setLandmark(e.target.value)}
-          className="w-full text-base font-normal px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-500 placeholder-gray-400"
+          className="w-full text-base font-normal px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D5B56E] placeholder-gray-400"
           required
         />
       </div> */}
@@ -119,14 +119,14 @@ const DeliveryDetailsForm = () => {
             type="text"
             value={gps1}
             onChange={(e) => setGps1(e.target.value)}
-            className="w-full text-base font-normal px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            className="w-full text-base font-normal px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D5B56E]"
             required
           />
           <input
             type="text"
             value={gps2}
             onChange={(e) => setGps2(e.target.value)}
-            className="w-full text-base font-normal px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            className="w-full text-base font-normal px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D5B56E]"
             required
           />
           <button type="button" className="w-full sm:w-auto py-2 sm:py-0">
@@ -149,7 +149,7 @@ const DeliveryDetailsForm = () => {
           value={note}
           onChange={(e) => setNote(e.target.value)}
           placeholder="Call when you arrive. House has a blue gate."
-          className="w-full text-base font-normal px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-500 placeholder-gray-400"
+          className="w-full text-base font-normal px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D5B56E] placeholder-gray-400"
           required
         ></textarea>
       </div> */}
@@ -157,7 +157,7 @@ const DeliveryDetailsForm = () => {
       {/* Save Button */}
       {/* <button
         type="submit"
-        className="w-full bg-yellow-400 hover:bg-yellow-500 text-white font-bold text-lg md:text-xl py-2 rounded-xl transition"
+        className="w-full bg-[#D5B56E] hover:bg-[#D5B56E]/90 text-white font-bold text-lg md:text-xl py-2 rounded-xl transition"
       >
         Save
       </button> */}

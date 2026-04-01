@@ -8,7 +8,6 @@ import {
 } from "../redux/api/authApi";
 import { useNavigate } from "react-router-dom";
 
-
 export const CartSuggetion = () => {
   const navigate = useNavigate();
   const { data: productList, isLoading: isProductsLoading } =
@@ -86,7 +85,11 @@ export const CartSuggetion = () => {
 
             {/* Image */}
             <img
-              src={product.image ? `${import.meta.env.VITE_BASE_URL_MEDIA}${product.image}` : Headphone}
+              src={
+                product.image
+                  ? `${import.meta.env.VITE_BASE_URL_MEDIA}${product.image}`
+                  : Headphone
+              }
               alt={product.product_name}
               className="w-full h-52 object-contain p-2 cursor-pointer"
               onClick={() => navigate(`/products/${product.id}/detail`)}
@@ -107,7 +110,7 @@ export const CartSuggetion = () => {
                 <button
                   onClick={() => handleAddToCart(product.id)}
                   disabled={isAdding}
-                  className={`bg-[#ffc107] text-white px-4 py-1 rounded hover:bg-[#e6ac00] transition text-sm font-medium ${
+                  className={`bg-[#D5B56E] text-white px-4 py-1 rounded hover:bg-[#D5B56E]/90 transition text-sm font-medium ${
                     isAdding ? "opacity-50 cursor-not-allowed" : ""
                   }`}
                 >

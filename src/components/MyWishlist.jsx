@@ -10,7 +10,6 @@ import {
 } from "../redux/api/authApi";
 import { toast } from "react-toastify";
 
-
 const MyWishlist = () => {
   const navigate = useNavigate();
   const { data: wishlist = [], isLoading } = useGetWishlistQuery();
@@ -61,7 +60,7 @@ const MyWishlist = () => {
         <h2 className="text-3xl font-bold mb-4">Your Wishlist is Empty</h2>
         <button
           onClick={() => navigate("/")}
-          className="bg-yellow-500 text-white px-6 py-2 rounded-lg font-bold"
+          className="bg-[#D5B56E] text-white px-6 py-2 rounded-lg font-bold"
         >
           Go Shopping
         </button>
@@ -96,7 +95,11 @@ const MyWishlist = () => {
 
             {/* Image */}
             <img
-              src={product.image ? `${import.meta.env.VITE_BASE_URL_MEDIA}${product.image}` : ""}
+              src={
+                product.image
+                  ? `${import.meta.env.VITE_BASE_URL_MEDIA}${product.image}`
+                  : ""
+              }
               alt={product.product_name}
               className="w-full h-52 object-contain p-2 cursor-pointer"
               onClick={() => navigate(`/products/${product.id}/detail`)}
@@ -116,7 +119,7 @@ const MyWishlist = () => {
                 </span>
                 <button
                   onClick={() => handleAddToCart(product.id)}
-                  className="bg-[#ffc107] text-white px-4 py-1 rounded hover:bg-[#e6ac00] transition text-sm font-medium"
+                  className="bg-[#D5B56E] text-white px-4 py-1 rounded hover:bg-[#D5B56E]/90 transition text-sm font-medium"
                 >
                   Add to Cart
                 </button>
@@ -142,7 +145,7 @@ const MyWishlist = () => {
               onClick={() => setCurrentPage(i + 1)}
               className={`p-2 rounded w-8 h-8 flex justify-center items-center ${
                 currentPage === i + 1
-                  ? "bg-[#CBA135] text-white"
+                  ? "bg-[#D5B56E] text-white"
                   : "border border-gray-400 hover:bg-gray-100"
               }`}
             >

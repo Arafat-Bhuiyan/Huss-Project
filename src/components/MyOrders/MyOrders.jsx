@@ -161,7 +161,7 @@ export const MyOrders = () => {
                             }}
                             className="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-yellow-50 transition-colors border-b border-gray-100"
                           >
-                            <Eye size={16} className="text-yellow-600" />
+                            <Eye size={16} className="text-[#D5B56E]" />
                             View Details
                           </button>
                           <button
@@ -205,7 +205,7 @@ export const MyOrders = () => {
                           onClick={() => handlePageChange(page)}
                           className={`p-2 rounded w-8 h-8 flex justify-center items-center font-medium ${
                             currentPage === page
-                              ? "bg-[#CBA135] text-white shadow"
+                              ? "bg-[#D5B56E] text-white shadow"
                               : "border border-gray-400 hover:bg-gray-100"
                           }`}
                         >

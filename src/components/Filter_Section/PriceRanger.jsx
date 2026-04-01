@@ -71,24 +71,28 @@ export const PriceRanger = () => {
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-4">
         {/* Min Price Input */}
         <div className="relative w-full sm:w-1/2">
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
+            $
+          </span>
           <input
             type="text"
             value={formatPrice(minPrice)}
             readOnly
-            className="w-full text-sm font-medium pl-7 pr-2 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 bg-gray-50"
+            className="w-full text-sm font-medium pl-7 pr-2 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D5B56E] bg-gray-50"
             aria-label="Minimum price display"
           />
         </div>
 
         {/* Max Price Input */}
         <div className="relative w-full sm:w-1/2">
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
+            $
+          </span>
           <input
             type="text"
             value={formatPrice(maxPrice)}
             readOnly
-            className="w-full text-sm font-medium pl-7 pr-2 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 bg-gray-50"
+            className="w-full text-sm font-medium pl-7 pr-2 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D5B56E] bg-gray-50"
             aria-label="Maximum price display"
           />
         </div>

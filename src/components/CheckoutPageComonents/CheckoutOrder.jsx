@@ -99,20 +99,20 @@ export const CheckoutOrder = () => {
           <div className="border-b border-gray-300"></div>
           <div className="flex justify-between items-center">
             <p className="font-semibold text-xl sm:text-2xl">Total</p>
-            <p className="font-semibold text-2xl sm:text-3xl text-yellow-400">
+            <p className="font-semibold text-2xl sm:text-3xl text-[#D5B56E]">
               ${orderSummary?.total || 0}
             </p>
           </div>
           <button
             onClick={handleCheckout}
             disabled={isPlacingOrder}
-            className="flex items-center justify-center rounded-lg py-2.5 bg-yellow-400 hover:bg-yellow-500 text-white text-lg sm:text-xl font-bold shadow"
+            className="flex items-center justify-center rounded-lg py-2.5 bg-[#D5B56E] hover:bg-[#D5B56E]/90 text-white text-lg sm:text-xl font-bold shadow"
           >
             Proceed to Checkout
           </button>
           <button
             onClick={handleContinueShopping}
-            className="flex items-center justify-center border rounded-lg py-2.5 border-yellow-400 bg-white hover:bg-gray-50 text-black text-lg sm:text-xl font-bold shadow"
+            className="flex items-center justify-center border rounded-lg py-2.5 border-[#D5B56E] bg-white hover:bg-gray-50 text-black text-lg sm:text-xl font-bold shadow"
           >
             Continue Shopping
           </button>
@@ -120,7 +120,7 @@ export const CheckoutOrder = () => {
             <p className="text-black">
               By clicking Place Order, you accept 1ezybuy
             </p>
-            <p className="text-yellow-400 hover:underline cursor-pointer">
+            <p className="text-[#D5B56E] hover:underline cursor-pointer">
               return & shipping policies
             </p>
           </div>
@@ -154,7 +154,7 @@ export const CheckoutOrder = () => {
           <div className="border-b border-gray-300"></div>
           <div className="flex justify-between items-center">
             <p className="font-semibold text-xl sm:text-2xl">Total</p>
-            <p className="font-semibold text-2xl sm:text-3xl text-yellow-400">
+            <p className="font-semibold text-2xl sm:text-3xl text-[#D5B56E]">
               ${orderSummary?.total || 0}
             </p>
           </div>
@@ -162,7 +162,7 @@ export const CheckoutOrder = () => {
           <button
             onClick={handlePlaceOrder}
             disabled={isPlacingOrder}
-            className="flex items-center justify-center rounded-lg py-2.5 bg-yellow-400 hover:bg-yellow-500 text-white text-lg sm:text-xl font-bold shadow disabled:opacity-50"
+            className="flex items-center justify-center rounded-lg py-2.5 bg-[#D5B56E] hover:bg-[#D5B56E]/90 text-white text-lg sm:text-xl font-bold shadow disabled:opacity-50"
           >
             {isPlacingOrder ? "Placing Order..." : "Place Order"}
           </button>
@@ -170,7 +170,7 @@ export const CheckoutOrder = () => {
             <p className="text-black">
               By clicking Place Order, you accept 1ezybuy
             </p>
-            <p className="text-yellow-400 hover:underline cursor-pointer">
+            <p className="text-[#D5B56E] hover:underline cursor-pointer">
               return & shipping policies
             </p>
           </div>

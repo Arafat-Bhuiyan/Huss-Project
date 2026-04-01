@@ -54,9 +54,11 @@ const PaymentMethod = () => {
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-4">
               <div className="flex items-center gap-2">
                 <img src={Lock} alt="" />
-                <h2 className="text-xl sm:text-2xl font-medium">Payment Method</h2>
+                <h2 className="text-xl sm:text-2xl font-medium">
+                  Payment Method
+                </h2>
               </div>
-              <span className="text-sm sm:text-base text-yellow-500 font-normal">
+              <span className="text-sm sm:text-base text-[#D5B56E] font-normal">
                 Secure & Encrypted
               </span>
             </div>
@@ -67,20 +69,22 @@ const PaymentMethod = () => {
                   key={method.id}
                   className={`flex items-start gap-3 p-4 border rounded-xl cursor-pointer transition ${
                     selectedMethod === method.id
-                      ? "border-yellow-500 bg-yellow-50"
-                      : "shadow bg-[#f9f6ee] hover:border-yellow-400"
+                      ? "border-[#D5B56E] bg-yellow-50"
+                      : "shadow bg-[#f9f6ee] hover:border-[#D5B56E]"
                   }`}
                 >
                   <input
                     type="radio"
                     name="payment"
-                    className="mt-1 h-5 w-5 text-yellow-500 focus:ring-yellow-500 rounded-full"
+                    className="mt-1 h-5 w-5 text-[#D5B56E] focus:ring-[#D5B56E] rounded-full"
                     value={method.id}
                     checked={selectedMethod === method.id}
                     onChange={() => setSelectedMethod(method.id)}
                   />
                   <div>
-                    <p className="text-base sm:text-lg font-medium">{method.title}</p>
+                    <p className="text-base sm:text-lg font-medium">
+                      {method.title}
+                    </p>
                     <p className="text-sm sm:text-base font-normal text-gray-600">
                       {method.subtitle}
                     </p>
@@ -89,13 +93,13 @@ const PaymentMethod = () => {
               ))}
             </div>
 
-            <div className="mt-4 text-sm sm:text-base font-normal text-yellow-500 bg-[#f9f6ee] p-2 rounded-xl flex items-center gap-2 shadow">
+            <div className="mt-4 text-sm sm:text-base font-normal text-[#D5B56E] bg-[#f9f6ee] p-2 rounded-xl flex items-center gap-2 shadow">
               <img src={secure} alt="" />
               <span>Your payment information is encrypted and secure</span>
             </div>
 
             <button
-              className="w-full mt-5 font-bold text-lg sm:text-xl bg-yellow-400 hover:bg-yellow-500 text-white py-3 rounded-xl transition"
+              className="w-full mt-5 font-bold text-lg sm:text-xl bg-[#D5B56E] hover:bg-[#D5B56E]/90 text-white py-3 rounded-xl transition"
               onClick={() => confirmButton()}
             >
               Confirm Order

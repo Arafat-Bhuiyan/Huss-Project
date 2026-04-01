@@ -45,7 +45,7 @@ export const LocationSelection = () => {
               className={`flex items-center px-4 py-2 cursor-pointer rounded-sm mt-0.5 transition-all duration-300 ${
                 selected.code === location.code
                   ? "bg-gray-50 mt-2"
-                  : "bg-gray-200 hover:bg-amber-400"
+                  : "bg-gray-200 hover:bg-[#D5B56E]/90"
               }`}
             >
               {location.name}

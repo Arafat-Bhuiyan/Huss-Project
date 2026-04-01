@@ -93,7 +93,7 @@ const CatWiseProduct = () => {
           </p>
           <button
             onClick={() => navigate("/")}
-            className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-lg"
+            className="bg-[#D5B56E] hover:bg-[#D5B56E]/90 text-white px-6 py-2 rounded-lg"
           >
             Go Back Home
           </button>
@@ -111,7 +111,7 @@ const CatWiseProduct = () => {
           </p>
           <button
             onClick={() => navigate("/")}
-            className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-lg"
+            className="bg-[#D5B56E] hover:bg-[#D5B56E]/90 text-white px-6 py-2 rounded-lg"
           >
             Go Back Home
           </button>
@@ -177,7 +177,7 @@ const CatWiseProduct = () => {
               {/* Price and Actions */}
               <div className="flex justify-between items-center p-4">
                 <div className="flex flex-col">
-                  <span className="text-xl font-bold text-yellow-600">
+                  <span className="text-xl font-bold text-[#D5B56E]">
                     ${product.discounted_price}
                   </span>
                   {product.discount_percent > 0 && (
@@ -188,7 +188,7 @@ const CatWiseProduct = () => {
                 </div>
                 <button
                   onClick={() => navigate(`/products/${product.id}/detail`)}
-                  className="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded font-medium"
+                  className="bg-[#D5B56E] hover:bg-[#D5B56E]/90 text-white px-4 py-2 rounded font-medium"
                 >
                   View Details
                 </button>
@@ -223,7 +223,7 @@ const CatWiseProduct = () => {
                     onClick={() => handlePageChange(page)}
                     className={`p-2 rounded w-8 h-8 flex justify-center items-center ${
                       currentPage === page
-                        ? "bg-[#CBA135] text-white shadow"
+                        ? "bg-[#D5B56E] text-white shadow"
                         : "border border-gray-400 hover:bg-gray-100"
                     }`}
                   >

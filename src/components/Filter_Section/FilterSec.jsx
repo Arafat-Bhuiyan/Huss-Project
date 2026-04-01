@@ -23,9 +23,7 @@ const sampleData = {
 // This avoids code repetition and keeps the main component clean.
 const FilterSection = ({ title, options }) => (
   <div className="border-b border-gray-200 last:border-b-0">
-    <h3 className="font-semibold text-base p-2.5">
-      {title}
-    </h3>
+    <h3 className="font-semibold text-base p-2.5">{title}</h3>
     <div className="p-4 pt-0 space-y-2">
       {options.map((option, index) => (
         <div key={index} className="flex items-center">
@@ -57,7 +55,7 @@ const FilterSec = () => {
       <div className="bg-black w-full text-white flex justify-between px-4 py-2.5 items-center rounded-t-lg">
         <h2 className="text-lg font-semibold">Filter By</h2>
         <div className="flex items-center gap-4">
-          <button className="font-semibold text-xs hover:text-yellow-400">
+          <button className="font-semibold text-xs hover:text-[#D5B56E]">
             Reset
           </button>
           <button
@@ -79,10 +77,8 @@ const FilterSec = () => {
         } lg:block`}
       >
         <div className="border-b border-gray-200">
-            <h3 className="font-semibold text-base p-2.5">
-                Price Range
-            </h3>
-            <PriceRanger />
+          <h3 className="font-semibold text-base p-2.5">Price Range</h3>
+          <PriceRanger />
         </div>
         <FilterSection title="Brand" options={sampleData.Brand} />
         <FilterSection title="Availability" options={sampleData.Availability} />

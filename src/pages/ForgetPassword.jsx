@@ -43,7 +43,9 @@ const ForgetPassword = () => {
       toast.success(res.message || "OTP has been sent to your email.");
     } catch (err) {
       console.error(err);
-      toast.error(err?.data?.message || "Failed to send OTP. Please try again.");
+      toast.error(
+        err?.data?.message || "Failed to send OTP. Please try again.",
+      );
     }
   };
 
@@ -63,7 +65,7 @@ const ForgetPassword = () => {
           </div>
           <div className="bg-[#f9f6ee] pt-8 pb-14 flex flex-col items-center justify-center px-4">
             {/* Login Box */}
-            <div className="w-full max-w-md border border-yellow-400 rounded-md p-6 sm:p-8 bg-white shadow-md">
+            <div className="w-full max-w-md border border-[#D5B56E] rounded-md p-6 sm:p-8 bg-white shadow-md">
               <form onSubmit={handleSubmit}>
                 <h3 className="text-gray-500 font-semibold text-xl sm:text-2xl mb-4">
                   Forget Password
@@ -84,7 +86,7 @@ const ForgetPassword = () => {
                     value={form.email}
                     onChange={handleChange}
                     placeholder="Enter email"
-                    className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                    className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#D5B56E]"
                     required
                   />
                 </div>
@@ -93,7 +95,7 @@ const ForgetPassword = () => {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className={`w-full ${isLoading ? "bg-gray-400 cursor-not-allowed" : "bg-yellow-500 hover:bg-yellow-600"} text-white font-medium text-lg sm:text-xl py-3 rounded-md transition`}
+                  className={`w-full ${isLoading ? "bg-gray-400 cursor-not-allowed" : "bg-[#D5B56E] hover:bg-[#D5B56E]/90"} text-white font-medium text-lg sm:text-xl py-3 rounded-md transition`}
                 >
                   {isLoading ? "Sending..." : "Send OTP"}
                 </button>
@@ -102,7 +104,7 @@ const ForgetPassword = () => {
                 <div className="flex items-center justify-center my-4 text-sm text-gray-500">
                   <p>
                     Back to{" "}
-                    <span className="text-yellow-500">
+                    <span className="text-[#D5B56E]">
                       <Link to="/login">Login</Link>
                     </span>
                   </p>

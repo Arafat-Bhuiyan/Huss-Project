@@ -25,14 +25,14 @@ const Footer = () => {
           <h3 className="text-white font-bold text-xl mb-2">Quick Links</h3>
           <ul className="space-y-1 text-white font-normal text-base">
             <li>
-              <Link to="/" className="hover:text-yellow-500 cursor-pointer">
+              <Link to="/" className="hover:text-[#D5B56E] cursor-pointer">
                 Home
               </Link>
             </li>
-            <li className="hover:text-yellow-500 cursor-pointer">
+            <li className="hover:text-[#D5B56E] cursor-pointer">
               <Link to="/#products">Products</Link>
             </li>
-            <li className="hover:text-yellow-500 cursor-pointer">
+            <li className="hover:text-[#D5B56E] cursor-pointer">
               <Link to="/#contact">Contact</Link>
             </li>
           </ul>
@@ -47,7 +47,7 @@ const Footer = () => {
             <li>
               <Link
                 to="/my-orders"
-                className="hover:text-yellow-500 cursor-pointer"
+                className="hover:text-[#D5B56E] cursor-pointer"
               >
                 My Orders
               </Link>
@@ -55,7 +55,7 @@ const Footer = () => {
             {/* <li>
               <Link
                 to="/return-policy"
-                className="hover:text-yellow-500 cursor-pointer"
+                className="hover:text-[#D5B56E] cursor-pointer"
               >
                 Return & Return Policy
               </Link>
@@ -63,7 +63,7 @@ const Footer = () => {
             <li>
               <Link
                 to="/customer-support"
-                className="hover:text-yellow-500 cursor-pointer"
+                className="hover:text-[#D5B56E] cursor-pointer"
               >
                 Customer Support
               </Link>
@@ -87,13 +87,13 @@ const Footer = () => {
         <div className="flex gap-4 mt-2 md:mt-0">
           <Link
             to="/terms-of-conditions"
-            className="hover:text-yellow-500 cursor-pointer"
+            className="hover:text-[#D5B56E] cursor-pointer"
           >
             Terms of Conditions
           </Link>
           <Link
             to="/privacy-policy"
-            className="hover:text-yellow-500 cursor-pointer"
+            className="hover:text-[#D5B56E] cursor-pointer"
           >
             Privacy Policy
           </Link>

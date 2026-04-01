@@ -3,7 +3,10 @@ import googleImg from "../assets/img/google.png";
 import reg_side_img from "../assets/img/img-of-2.png";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useSignupMutation, useGoogleRegisterMutation } from "../redux/api/authApi";
+import {
+  useSignupMutation,
+  useGoogleRegisterMutation,
+} from "../redux/api/authApi";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
 import { setUser } from "../redux/features/authSlice";
@@ -13,7 +16,8 @@ const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [signup, { isLoading }] = useSignupMutation();
-  const [googleRegister, { isLoading: isGoogleLoading }] = useGoogleRegisterMutation();
+  const [googleRegister, { isLoading: isGoogleLoading }] =
+    useGoogleRegisterMutation();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
@@ -32,7 +36,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Map local state (camelCase) to API expectation (snake_case)
     const submitData = {
       first_name: formData.firstName,
@@ -49,7 +53,9 @@ const Register = () => {
       console.error("Registration failed:", err);
       // Handle validation errors (e.g., "user with this email already exists")
       if (err?.data) {
-        Object.values(err.data).flat().forEach((msg) => toast.error(msg));
+        Object.values(err.data)
+          .flat()
+          .forEach((msg) => toast.error(msg));
       } else {
         toast.error("Something went wrong. Please try again.");
       }
@@ -60,9 +66,12 @@ const Register = () => {
     onSuccess: async (tokenResponse) => {
       try {
         // Fetch user info from Google using the access token
-        const res = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
-          headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
-        });
+        const res = await fetch(
+          "https://www.googleapis.com/oauth2/v3/userinfo",
+          {
+            headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+          },
+        );
         const googleUser = await res.json();
 
         // Call the backend with the user's data for registration
@@ -82,14 +91,17 @@ const Register = () => {
               photo: resData.data?.picture || googleUser.picture,
             },
             token: resData.access_token,
-          })
+          }),
         );
 
         toast.success(resData.message || "Google registration successful!");
         navigate("/");
       } catch (err) {
         console.error("Google Registration failed:", err);
-        toast.error(err?.data?.detail || "Registration failed. This email might already be registered.");
+        toast.error(
+          err?.data?.detail ||
+            "Registration failed. This email might already be registered.",
+        );
       }
     },
     onError: () => {
@@ -105,12 +117,14 @@ const Register = () => {
           <span className="text-gray-600 font-medium text-lg sm:text-xl">
             Account /{" "}
           </span>
-          <span className="text-black font-bold text-lg sm:text-xl">Register</span>
+          <span className="text-black font-bold text-lg sm:text-xl">
+            Register
+          </span>
         </div>
 
         <p className="text-base font-normal">
           Already have an account?{" "}
-          <span className="text-yellow-500 hover:underline">
+          <span className="text-[#D5B56E] hover:underline">
             <Link to="/login">Login</Link>
           </span>
         </p>
@@ -125,7 +139,7 @@ const Register = () => {
           />
 
           {/* Right side: Registration form */}
-          <div className="w-full xl:w-1/2 border border-yellow-400 rounded-md p-6 sm:p-8 bg-white shadow-md flex flex-col justify-center">
+          <div className="w-full xl:w-1/2 border border-[#D5B56E] rounded-md p-6 sm:p-8 bg-white shadow-md flex flex-col justify-center">
             <h2 className="text-2xl font-semibold text-gray-500 mb-6 text-center lg:text-left">
               Register Account
             </h2>
@@ -141,7 +155,7 @@ const Register = () => {
                     value={formData.firstName}
                     onChange={handleChange}
                     placeholder="First Name"
-                    className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                    className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#D5B56E]"
                     required
                   />
                 </div>
@@ -156,7 +170,7 @@ const Register = () => {
                     value={formData.lastName}
                     onChange={handleChange}
                     placeholder="Last Name"
-                    className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                    className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#D5B56E]"
                     required
                   />
                 </div>
@@ -172,7 +186,7 @@ const Register = () => {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="Enter email"
-                  className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#D5B56E]"
                   required
                 />
               </div>
@@ -188,7 +202,7 @@ const Register = () => {
                     value={formData.password}
                     onChange={handleChange}
                     placeholder="Password"
-                    className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 pr-10"
+                    className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#D5B56E] pr-10"
                     required
                   />
                   <button
@@ -196,7 +210,11 @@ const Register = () => {
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
                   >
-                    {showPassword ? <EyeOff strokeWidth={1} /> : <Eye strokeWidth={1} />}
+                    {showPassword ? (
+                      <EyeOff strokeWidth={1} />
+                    ) : (
+                      <Eye strokeWidth={1} />
+                    )}
                   </button>
                 </div>
               </div>

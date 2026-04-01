@@ -65,12 +65,12 @@ const ProductsSection = () => {
       id="products"
       className="py-16 px-4 sm:px-6 lg:px-8 xl:px-28"
       style={{
-        backgroundColor: '#f3f4f6',
+        backgroundColor: "#f3f4f6",
         backgroundImage: `
           radial-gradient(at 10% 20%, rgba(213, 181, 110, 0.08) 0px, transparent 40%),
           radial-gradient(at 90% 80%, rgba(213, 181, 110, 0.12) 0px, transparent 40%),
           linear-gradient(115deg, transparent 40%, rgba(213, 181, 110, 0.03) 44%, rgba(213, 181, 110, 0.08) 48%, rgba(213, 181, 110, 0.12) 50%, rgba(213, 181, 110, 0.08) 52%, rgba(213, 181, 110, 0.03) 56%, transparent 60%)
-        `
+        `,
       }}
     >
       {/* Header */}
@@ -134,7 +134,7 @@ const ProductsSection = () => {
                 </span>
                 <button
                   onClick={() => handleAddToCart(product.id)}
-                  className="bg-[#ffc107] text-white px-4 py-1 rounded hover:bg-[#e6ac00] transition text-sm font-medium"
+                  className="bg-[#D5B56E] text-white px-4 py-1 rounded hover:bg-[#D5B56E]/90 transition text-sm font-medium"
                 >
                   Add to Cart
                 </button>

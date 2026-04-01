@@ -30,7 +30,7 @@ const StatusStep = ({
         {/* Vertical line for mobile */}
         <div
           className={`h-8 w-px md:hidden ${
-            connectorColor === "yellow" ? "bg-yellow-400" : "bg-gray-300"
+            connectorColor === "yellow" ? "bg-[#D5B56E]" : "bg-gray-300"
           }`}
         ></div>
         {/* Horizontal line for desktop */}
@@ -80,7 +80,7 @@ export const OrderStatus = () => {
           icon={steps.shipped ? yellowTic : grayTic}
           title="Shipped"
           date={steps.shipped ? updated_at : "Pending"}
-          colorClass={steps.shipped ? "text-yellow-400" : "text-gray-400"}
+          colorClass={steps.shipped ? "text-[#D5B56E]" : "text-gray-400"}
           connector={steps.out_for_delivery ? yellowLine : grayLine}
           connectorColor={steps.out_for_delivery ? "yellow" : "gray"}
         />
@@ -89,7 +89,7 @@ export const OrderStatus = () => {
           title="Out for Delivery"
           date={steps.out_for_delivery ? updated_at : "Pending"}
           colorClass={
-            steps.out_for_delivery ? "text-yellow-400" : "text-gray-400"
+            steps.out_for_delivery ? "text-[#D5B56E]" : "text-gray-400"
           }
           connector={steps.delivered ? yellowLine : grayLine}
           connectorColor={steps.delivered ? "yellow" : "gray"}
@@ -98,7 +98,7 @@ export const OrderStatus = () => {
           icon={steps.delivered ? yellowTic : grayTic}
           title="Delivered"
           date={steps.delivered ? updated_at : "Pending"}
-          colorClass={steps.delivered ? "text-yellow-400" : "text-gray-400"}
+          colorClass={steps.delivered ? "text-[#D5B56E]" : "text-gray-400"}
           isLast={true}
         />
       </div>

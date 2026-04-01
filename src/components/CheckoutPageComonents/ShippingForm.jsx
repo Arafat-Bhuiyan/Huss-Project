@@ -138,7 +138,7 @@ const ShippingForm = () => {
         <button
           type="button"
           onClick={handleEditClick}
-          className="absolute top-4 right-4 bg-yellow-500 hover:bg-yellow-600 text-white font-bold text-sm px-4 py-2 rounded-lg"
+          className="absolute top-4 right-4 bg-[#D5B56E] hover:bg-[#D5B56E]/90 text-white font-bold text-sm px-4 py-2 rounded-lg"
         >
           Edit
         </button>
@@ -166,7 +166,7 @@ const ShippingForm = () => {
               onChange={handleChange}
               disabled={!isEditMode}
               placeholder="Enter full name"
-              className="mt-1 text-sm font-medium w-full px-4 py-2.5 bg-[#f9f6ee] shadow rounded-xl focus:ring-yellow-500 focus:border-yellow-500 disabled:opacity-60 disabled:cursor-not-allowed"
+              className="mt-1 text-sm font-medium w-full px-4 py-2.5 bg-[#f9f6ee] shadow rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
               required
             />
           </div>
@@ -187,7 +187,7 @@ const ShippingForm = () => {
               onChange={handleChange}
               disabled={!isEditMode}
               placeholder="Enter phone number"
-              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500 disabled:opacity-60 disabled:cursor-not-allowed"
+              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
               required
             />
           </div>
@@ -208,7 +208,7 @@ const ShippingForm = () => {
             onChange={handleChange}
             disabled={!isEditMode}
             placeholder="Enter email address"
-            className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500 disabled:opacity-60 disabled:cursor-not-allowed"
+            className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
             required
           />
         </div>
@@ -228,7 +228,7 @@ const ShippingForm = () => {
             onChange={handleChange}
             disabled={!isEditMode}
             placeholder="House number and street name"
-            className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500 disabled:opacity-60 disabled:cursor-not-allowed"
+            className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
             required
           />
         </div>
@@ -249,7 +249,7 @@ const ShippingForm = () => {
               onChange={handleChange}
               disabled={!isEditMode}
               placeholder="Enter apartment name"
-              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500 disabled:opacity-60 disabled:cursor-not-allowed"
+              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
               required
             />
           </div>
@@ -268,7 +268,7 @@ const ShippingForm = () => {
               onChange={handleChange}
               disabled={!isEditMode}
               placeholder="00"
-              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500 disabled:opacity-60 disabled:cursor-not-allowed"
+              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
               required
             />
           </div>
@@ -290,7 +290,7 @@ const ShippingForm = () => {
               onChange={handleChange}
               disabled={!isEditMode}
               placeholder="00"
-              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500 disabled:opacity-60 disabled:cursor-not-allowed"
+              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
               required
             />
           </div>
@@ -310,7 +310,7 @@ const ShippingForm = () => {
               onChange={handleChange}
               disabled={!isEditMode}
               placeholder="Enter city"
-              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500 disabled:opacity-60 disabled:cursor-not-allowed"
+              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
               required
             />
           </div>
@@ -332,7 +332,7 @@ const ShippingForm = () => {
               onChange={handleChange}
               disabled={!isEditMode}
               placeholder="Enter zip code"
-              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-yellow-500 focus:border-yellow-500 disabled:opacity-60 disabled:cursor-not-allowed"
+              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
               required
             />
           </div>
@@ -355,7 +355,7 @@ const ShippingForm = () => {
                 })
               }
               disabled={!isEditMode}
-              className="text-yellow-500 disabled:opacity-60 disabled:cursor-not-allowed"
+              className="text-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
               required
             />
             <label
@@ -374,7 +374,7 @@ const ShippingForm = () => {
           <button
             type="submit"
             disabled={isUpdating}
-            className="flex-1 py-3 mt-5 mb-8 bg-yellow-500 text-white rounded-xl shadow hover:bg-yellow-600 disabled:bg-gray-400 disabled:cursor-not-allowed"
+            className="flex-1 py-3 mt-5 mb-8 bg-[#D5B56E] text-white rounded-xl shadow hover:bg-[#D5B56E]/90 disabled:bg-gray-400 disabled:cursor-not-allowed"
           >
             {isUpdating ? "Updating..." : "Save Address"}
           </button>

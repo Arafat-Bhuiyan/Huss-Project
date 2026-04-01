@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { OrderTrackMain } from "./OrderTrackMain";
 import { toast } from "react-toastify";
 
-
 export const TrackOrderID = () => {
   const [showOrderTrack, setShowOrderTrack] = useState(false);
   const [orderId, setOrderId] = useState("");
@@ -22,9 +21,13 @@ export const TrackOrderID = () => {
     <div>
       {!showOrderTrack ? (
         <div className="max-w-3xl mx-auto w-[90%] sm:w-full p-4 md:p-6 bg-white rounded-xl shadow-sm border border-gray-200 my-6 md:my-12">
-          <h1 className="font-semibold text-xl md:text-2xl py-3">Track Your Order</h1>
+          <h1 className="font-semibold text-xl md:text-2xl py-3">
+            Track Your Order
+          </h1>
           <div className="border-b border-gray-300"></div>
-          <h1 className="font-semibold text-xl md:text-2xl py-3">Enter your order Id</h1>
+          <h1 className="font-semibold text-xl md:text-2xl py-3">
+            Enter your order Id
+          </h1>
           <input
             type="text"
             value={orderId}
@@ -34,7 +37,7 @@ export const TrackOrderID = () => {
           />
           <button
             onClick={handleTrackOrder}
-            className="w-full mt-5 font-bold text-lg md:text-xl bg-yellow-400 hover:bg-yellow-500 text-white py-2 md:py-3 rounded-xl transition"
+            className="w-full mt-5 font-bold text-lg md:text-xl bg-[#D5B56E] hover:bg-[#D5B56E]/90 text-white py-2 md:py-3 rounded-xl transition"
           >
             Track My Order
           </button>

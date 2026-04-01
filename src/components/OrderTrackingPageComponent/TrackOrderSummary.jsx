@@ -64,7 +64,7 @@ export const TrackOrderSummary = () => {
       <div className="border-b border-gray-300"></div>
       <div className="flex justify-between">
         <p className="font-semibold text-xl sm:text-2xl">Total</p>
-        <p className="font-semibold text-2xl sm:text-3xl text-yellow-400">
+        <p className="font-semibold text-2xl sm:text-3xl text-[#D5B56E]">
           ${summary?.total_amount?.toFixed(2) || "0.00"}
         </p>
       </div>
@@ -83,7 +83,7 @@ export const TrackOrderSummary = () => {
 
       <button
         type="submit"
-        className="flex items-center justify-center rounded-lg py-1.5 bg-yellow-400 hover:bg-yellow-500 text-white text-lg md:text-xl font-bold shadow"
+        className="flex items-center justify-center rounded-lg py-1.5 bg-[#D5B56E] hover:bg-[#D5B56E]/90 text-white text-lg md:text-xl font-bold shadow"
       >
         Contact Support
       </button>

@@ -48,12 +48,12 @@ export const ContactSec = () => {
       id="contact"
       className=" flex items-center justify-center px-4 sm:px-6 md:px-8 lg:px-16 py-12"
       style={{
-        backgroundColor: '#f3f4f6',
+        backgroundColor: "#f3f4f6",
         backgroundImage: `
           radial-gradient(at 50% 10%, rgba(213, 181, 110, 0.1) 0px, transparent 40%),
           radial-gradient(at 0% 90%, rgba(213, 181, 110, 0.08) 0px, transparent 40%),
           linear-gradient(115deg, transparent 40%, rgba(213, 181, 110, 0.03) 44%, rgba(213, 181, 110, 0.08) 48%, rgba(213, 181, 110, 0.12) 50%, rgba(213, 181, 110, 0.08) 52%, rgba(213, 181, 110, 0.03) 56%, transparent 60%)
-        `
+        `,
       }}
     >
       <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -73,7 +73,7 @@ export const ContactSec = () => {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="Enter name"
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-yellow-400"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-[#D5B56E]"
                 required
               />
             </div>
@@ -85,7 +85,7 @@ export const ContactSec = () => {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Enter email"
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-yellow-400"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-[#D5B56E]"
                 required
               />
             </div>
@@ -97,7 +97,7 @@ export const ContactSec = () => {
                 value={formData.subject}
                 onChange={handleChange}
                 placeholder="Enter subject"
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-yellow-400"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-[#D5B56E]"
                 required
               />
             </div>
@@ -109,7 +109,7 @@ export const ContactSec = () => {
                 onChange={handleChange}
                 rows="4"
                 placeholder="Enter message..."
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-yellow-400"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-[#D5B56E]"
                 required
               ></textarea>
             </div>
@@ -119,7 +119,7 @@ export const ContactSec = () => {
               className={`text-white font-semibold px-6 py-2 rounded-md transition ${
                 isLoading
                   ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-yellow-400 hover:bg-yellow-500"
+                  : "bg-[#D5B56E] hover:bg-[#D5B56E]/90"
               }`}
             >
               {isLoading ? "Sending..." : "Send Message"}
@@ -132,7 +132,7 @@ export const ContactSec = () => {
           {/* Business Hours */}
           <div className="mb-6">
             <h3 className="text-lg font-semibold mb-2">Business Hours</h3>
-            <p className="flex items-center text-yellow-600 mb-2 gap-4">
+            <p className="flex items-center text-[#D5B56E] mb-2 gap-4">
               <img src={clock} alt="" />
               Open today from{" "}
               <span className="font-medium ml-1">09:00 am to 05:00 pm</span>

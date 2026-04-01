@@ -24,7 +24,7 @@ const Congratulation = () => {
 
       {/* Reset Password Form */}
       <div className="bg-[#f9f6ee] pt-8 pb-14 flex flex-col items-center justify-center px-4">
-        <div className="w-full max-w-md border border-yellow-400 rounded-md p-6 sm:p-8 bg-white shadow-md">
+        <div className="w-full max-w-md border border-[#D5B56E] rounded-md p-6 sm:p-8 bg-white shadow-md">
           <form
             className="flex flex-col justify-center items-center"
             onSubmit={handleSubmit}
@@ -40,7 +40,7 @@ const Congratulation = () => {
             {/* Explore Button */}
             <button
               type="submit"
-              className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-medium text-lg sm:text-xl py-3 rounded-md transition"
+              className="w-full bg-[#D5B56E] hover:bg-[#D5B56E]/90 text-white font-medium text-lg sm:text-xl py-3 rounded-md transition"
             >
               Explore
             </button>

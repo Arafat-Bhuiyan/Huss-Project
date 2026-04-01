@@ -162,7 +162,7 @@ export default function ProductViewPage() {
           <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-3">
             <h3 className="font-bold text-xl sm:text-2xl">Reviews</h3>
             <button
-              className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md text-sm font-medium self-start sm:self-center"
+              className="bg-[#D5B56E] hover:bg-[#D5B56E]/90 text-white px-4 py-2 rounded-md text-sm font-medium self-start sm:self-center"
               onClick={() => setShowReviewBox(!showReviewBox)}
             >
               Write a Review
@@ -242,7 +242,7 @@ export default function ProductViewPage() {
                     <span
                       className={`text-2xl pb-1 ${
                         star <= formData.rating
-                          ? "text-yellow-500"
+                          ? "text-[#D5B56E]"
                           : "text-gray-300"
                       }`}
                     >
@@ -259,7 +259,7 @@ export default function ProductViewPage() {
               className={`text-white w-full py-2 rounded-md font-semibold transition ${
                 isSubmitting
                   ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-yellow-400 hover:bg-yellow-500"
+                  : "bg-[#D5B56E] hover:bg-[#D5B56E]/90"
               }`}
             >
               {isSubmitting ? "Submitting..." : "Submit Review"}

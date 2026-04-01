@@ -32,7 +32,7 @@ export const CountrySelection = () => {
     <div className="relative w-full" ref={ref}>
       <div
         onClick={() => setOpen(!open)}
-        className="flex gap-2 items-center cursor-pointer px-4 py-2.5 bg-[#f9f6ee] shadow rounded-xl border border-transparent focus-within:ring-yellow-500 focus-within:border-yellow-500"
+        className="flex gap-2 items-center cursor-pointer px-4 py-2.5 bg-[#f9f6ee] shadow rounded-xl border border-transparent focus-within:ring-[#D5B56E] focus-within:border-[#D5B56E]"
       >
         <img src={selected.flag} alt={selected.name} className="w-5 h-5" />
         <img src={downArrow} alt="" />
@@ -47,7 +47,7 @@ export const CountrySelection = () => {
                 setSelected(country);
                 setOpen(false);
               }}
-              className="flex gap-2 items-center px-4 py-2 hover:bg-yellow-100 cursor-pointer"
+              className="flex gap-2 items-center px-4 py-2 hover:bg-[#D5B56E]/90 cursor-pointer"
             >
               <img src={country.flag} alt={country.name} className="w-5 h-5" />
             </div>

@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import personalInfoLogo from "../assets/img/personal-information.png";
 import { toast } from "react-toastify";
-import { useGetProfileQuery, useUpdateProfileMutation } from "../redux/api/authApi";
+import {
+  useGetProfileQuery,
+  useUpdateProfileMutation,
+} from "../redux/api/authApi";
 
 export const ProfileSettingsMain = () => {
   const { data: userData, refetch } = useGetProfileQuery();
@@ -20,7 +23,9 @@ export const ProfileSettingsMain = () => {
     if (userData) {
       setFormData((prev) => ({
         ...prev,
-        fullName: userData.full_name || `${userData.first_name} ${userData.last_name}`.trim(),
+        fullName:
+          userData.full_name ||
+          `${userData.first_name} ${userData.last_name}`.trim(),
         emailAddress: userData.email || "",
         phone: userData.phone || "",
         address: userData.address || "",
@@ -95,7 +100,7 @@ export const ProfileSettingsMain = () => {
                 value={formData.fullName}
                 onChange={handleChange}
                 placeholder="Enter your name"
-                className="mt-2 block text-xl font-normal w-full px-4 py-2 shadow bg-white rounded-xl border border-gray-300 focus:ring-yellow-500 focus:border-yellow-500"
+                className="mt-2 block text-xl font-normal w-full px-4 py-2 shadow bg-white rounded-xl border border-gray-300 focus:ring-[#D5B56E] focus:border-[#D5B56E]"
                 required
               />
             </div>
@@ -113,7 +118,7 @@ export const ProfileSettingsMain = () => {
                 value={formData.emailAddress}
                 onChange={handleChange}
                 placeholder="Enter your email"
-                className="mt-2 block text-xl font-normal w-full px-4 py-2 shadow bg-gray-100 rounded-xl border border-gray-300 focus:ring-yellow-500 focus:border-yellow-500 cursor-not-allowed"
+                className="mt-2 block text-xl font-normal w-full px-4 py-2 shadow bg-gray-100 rounded-xl border border-gray-300 focus:ring-[#D5B56E] focus:border-[#D5B56E] cursor-not-allowed"
                 readOnly
                 required
               />
@@ -132,7 +137,7 @@ export const ProfileSettingsMain = () => {
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder="Enter your phone number"
-                className="mt-2 block text-xl font-normal w-full px-4 py-2 shadow bg-white rounded-xl border border-gray-300 focus:ring-yellow-500 focus:border-yellow-500"
+                className="mt-2 block text-xl font-normal w-full px-4 py-2 shadow bg-white rounded-xl border border-gray-300 focus:ring-[#D5B56E] focus:border-[#D5B56E]"
                 required
               />
             </div>
@@ -150,7 +155,7 @@ export const ProfileSettingsMain = () => {
                 value={formData.address}
                 onChange={handleChange}
                 placeholder="Enter your address"
-                className="mt-2 block text-xl font-normal w-full px-4 py-2 shadow bg-white rounded-xl border border-gray-300 focus:ring-yellow-500 focus:border-yellow-500"
+                className="mt-2 block text-xl font-normal w-full px-4 py-2 shadow bg-white rounded-xl border border-gray-300 focus:ring-[#D5B56E] focus:border-[#D5B56E]"
                 required
               />
             </div>
@@ -172,7 +177,7 @@ export const ProfileSettingsMain = () => {
                 {/* Custom styled label */}
                 <label
                   htmlFor="photo"
-                  className="flex items-center px-4 py-2 text-white bg-yellow-500 rounded-l-xl cursor-pointer text-base font-medium whitespace-nowrap"
+                  className="flex items-center px-4 py-2 text-white bg-[#D5B56E] rounded-l-xl cursor-pointer text-base font-medium whitespace-nowrap"
                 >
                   Choose File
                 </label>
@@ -187,7 +192,7 @@ export const ProfileSettingsMain = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className={`w-full font-bold text-2xl py-2.5 my-7 ${isLoading ? "bg-gray-400 cursor-not-allowed" : "bg-yellow-500 hover:bg-yellow-600"} text-white rounded-xl shadow`}
+              className={`w-full font-bold text-2xl py-2.5 my-7 ${isLoading ? "bg-gray-400 cursor-not-allowed" : "bg-[#D5B56E] hover:bg-[#D5B56E]/90"} text-white rounded-xl shadow`}
             >
               {isLoading ? "Saving..." : "Save"}
             </button>

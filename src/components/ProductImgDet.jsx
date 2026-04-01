@@ -7,7 +7,6 @@ import {
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 
-
 export const ProductImgDet = ({ product, isLoading }) => {
   const navigate = useNavigate();
   const [addToCart, { isLoading: isAdding }] = useAddToCartMutation();
@@ -85,15 +84,23 @@ export const ProductImgDet = ({ product, isLoading }) => {
       {/* Product Images */}
       <div className="flex flex-col gap-5 w-full lg:w-1/2">
         <img
-          src={product.image ? `${import.meta.env.VITE_BASE_URL_MEDIA}${product.image}` : Headphone}
+          src={
+            product.image
+              ? `${import.meta.env.VITE_BASE_URL_MEDIA}${product.image}`
+              : Headphone
+          }
           alt={product.product_name}
           className="rounded-xl w-full h-[300px] sm:h-[400px] object-contain bg-white border"
         />
         <div className="flex gap-2 justify-center sm:justify-start">
           <img
-            src={product.image ? `${import.meta.env.VITE_BASE_URL_MEDIA}${product.image}` : Headphone}
+            src={
+              product.image
+                ? `${import.meta.env.VITE_BASE_URL_MEDIA}${product.image}`
+                : Headphone
+            }
             alt="thumbnail"
-            className="w-16 h-16 sm:w-24 sm:h-24 object-contain rounded-md cursor-pointer border-2 border-yellow-500 bg-white"
+            className="w-16 h-16 sm:w-24 sm:h-24 object-contain rounded-md cursor-pointer border-2 border-[#D5B56E] bg-white"
           />
         </div>
       </div>
@@ -105,11 +112,11 @@ export const ProductImgDet = ({ product, isLoading }) => {
         </h1>
         <div className="flex flex-col sm:flex-row sm:justify-between gap-1 text-sm sm:text-base md:text-lg">
           <p className="text-black font-semibold ">
-            Price: <span className=" text-yellow-500">${product.price}</span>
+            Price: <span className=" text-[#D5B56E]">${product.price}</span>
           </p>
           <p className="text-black font-semibold ">
             Status:{" "}
-            <span className=" text-yellow-500 capitalize">
+            <span className=" text-[#D5B56E] capitalize">
               {product.stock_status?.replace("_", " ") || "In Stock"}
             </span>
           </p>
@@ -118,16 +125,14 @@ export const ProductImgDet = ({ product, isLoading }) => {
         <div className="flex flex-col sm:flex-row sm:justify-between gap-1 text-sm sm:text-base md:text-lg">
           <p className="text-black font-semibold  text-left">
             Discount:{" "}
-            <span className=" text-yellow-500">
-              {product.discount_percent}%
-            </span>
+            <span className=" text-[#D5B56E]">{product.discount_percent}%</span>
           </p>
           <p className="text-black font-semibold  text-start">
             Quantity:{" "}
-            <span className=" text-yellow-500">{product.stock_quantity}</span>
+            <span className=" text-[#D5B56E]">{product.stock_quantity}</span>
           </p>
         </div>
-        <p className="text-yellow-500 mt-2 text-sm">
+        <p className="text-[#D5B56E] mt-2 text-sm">
           {"★".repeat(Math.round(product.rating || 0)) +
             "☆".repeat(5 - Math.round(product.rating || 0))}
           ({product.review_count || 0} reviews)
@@ -148,7 +153,7 @@ export const ProductImgDet = ({ product, isLoading }) => {
           <button
             onClick={handleAddToCart}
             disabled={isAdding}
-            className="bg-yellow-400 px-4 py-2.5 rounded-lg font-bold text-base w-full min-[420px]:w-1/3"
+            className="bg-[#D5B56E] px-4 py-2.5 rounded-lg font-bold text-base w-full min-[420px]:w-1/3"
           >
             {isAdding ? "Adding..." : "Add to Cart"}
           </button>

@@ -47,7 +47,7 @@ export const OrderPlaced = () => {
         </p>
         <button
           onClick={handleContinueShopping}
-          className="px-6 py-2 bg-yellow-400 font-bold rounded-lg hover:bg-yellow-500 transition-colors"
+          className="px-6 py-2 bg-[#D5B56E] font-bold rounded-lg hover:bg-[#D5B56E]/90 transition-colors"
         >
           Back to Shop
         </button>
@@ -113,7 +113,7 @@ export const OrderPlaced = () => {
 
         <div className="flex justify-between items-center pt-2">
           <p className="font-semibold text-xl sm:text-2xl">Total</p>
-          <p className="font-semibold text-2xl sm:text-3xl text-yellow-400">
+          <p className="font-semibold text-2xl sm:text-3xl text-[#D5B56E]">
             ${summary?.total_amount?.toFixed(2) || "0.00"}
           </p>
         </div>
@@ -121,13 +121,13 @@ export const OrderPlaced = () => {
 
       <button
         onClick={handleTrackOrder}
-        className="flex items-center justify-center rounded-lg py-2.5 bg-yellow-400 hover:bg-yellow-500 text-white text-lg sm:text-xl font-bold shadow transition-colors"
+        className="flex items-center justify-center rounded-lg py-2.5 bg-[#D5B56E] hover:bg-[#D5B56E]/90 text-white text-lg sm:text-xl font-bold shadow transition-colors"
       >
         Track My Order
       </button>
       <button
         onClick={handleContinueShopping}
-        className="flex items-center justify-center border rounded-lg py-2.5 border-yellow-400 bg-white hover:bg-gray-50 text-black text-lg sm:text-xl font-bold shadow transition-colors"
+        className="flex items-center justify-center border rounded-lg py-2.5 border-[#D5B56E] bg-white hover:bg-gray-50 text-black text-lg sm:text-xl font-bold shadow transition-colors"
       >
         Continue Shopping
       </button>

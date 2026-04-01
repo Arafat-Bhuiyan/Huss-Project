@@ -10,7 +10,7 @@ const orders = [
 
 export const OrderSelection = ({ selectedOrder, onChange }) => {
   const [selected, setSelected] = useState(
-    orders.find((o) => o.id === selectedOrder) || null
+    orders.find((o) => o.id === selectedOrder) || null,
   );
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
@@ -49,7 +49,7 @@ export const OrderSelection = ({ selectedOrder, onChange }) => {
             <div
               key={order.id}
               onClick={() => handleSelect(order)}
-              className={`px-4 py-2 cursor-pointer text-gray-800 rounded hover:bg-amber-400 transition-all duration-200 ${
+              className={`px-4 py-2 cursor-pointer text-gray-800 rounded hover:bg-[#D5B56E]/90 transition-all duration-200 ${
                 selected?.id === order.id ? "bg-gray-50 mt-2" : ""
               }`}
             >

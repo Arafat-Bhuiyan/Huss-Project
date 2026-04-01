@@ -58,7 +58,7 @@ const SubNavBar = () => {
           {subNavItems.map((item, index) => (
             <div key={index} className="relative">
               <div
-                className="text-[16px] font-medium text-gray-800 cursor-pointer hover:text-yellow-500 transition"
+                className="text-[16px] font-medium text-gray-800 cursor-pointer hover:text-[#D5B56E] transition"
                 onClick={() => handleCategoryClick(item.category_name)}
               >
                 {item.category_name}

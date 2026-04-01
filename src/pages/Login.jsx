@@ -51,8 +51,8 @@ const Login = () => {
       </div>
       <div className="pt-8 pb-14 flex flex-col items-center justify-center px-4">
         {/* Login Box */}
-        <div className="w-full max-w-md border border-yellow-400 rounded-md p-6 sm:p-8 bg-white shadow-md">
-          <h2 className="text-center text-2xl sm:text-3xl font-bold text-yellow-500 mb-4">
+        <div className="w-full max-w-md border border-[#D5B56E] rounded-md p-6 sm:p-8 bg-white shadow-md">
+          <h2 className="text-center text-2xl sm:text-3xl font-bold text-[#D5B56E] mb-4">
             Welcome
           </h2>
 
@@ -72,7 +72,7 @@ const Login = () => {
                 value={form.email}
                 onChange={handleChange}
                 placeholder="Enter email"
-                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#D5B56E]"
                 required
               />
             </div>
@@ -89,7 +89,7 @@ const Login = () => {
                   value={form.password}
                   onChange={handleChange}
                   placeholder="Enter password"
-                  className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 pr-10"
+                  className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#D5B56E] pr-10"
                   required
                 />
                 <button
@@ -107,7 +107,7 @@ const Login = () => {
               <div className="text-right mt-1 text-sm font-normal">
                 <Link
                   to="/forget-password"
-                  className="text-gray-500 hover:text-yellow-500"
+                  className="text-gray-500 hover:text-[#D5B56E]"
                 >
                   Forgotten Password?
                 </Link>

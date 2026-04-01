@@ -2,15 +2,17 @@ import React from "react";
 
 const SubscribeSection = () => {
   return (
-    <section className=" py-16 px-4 sm:px-8"
-    style={{
-        backgroundColor: '#f3f4f6',
+    <section
+      className=" py-16 px-4 sm:px-8"
+      style={{
+        backgroundColor: "#f3f4f6",
         backgroundImage: `
           radial-gradient(at 50% 10%, rgba(213, 181, 110, 0.1) 0px, transparent 40%),
           radial-gradient(at 0% 90%, rgba(213, 181, 110, 0.08) 0px, transparent 40%),
           linear-gradient(115deg, transparent 40%, rgba(213, 181, 110, 0.03) 44%, rgba(213, 181, 110, 0.08) 48%, rgba(213, 181, 110, 0.12) 50%, rgba(213, 181, 110, 0.08) 52%, rgba(213, 181, 110, 0.03) 56%, transparent 60%)
-        `
-      }}>
+        `,
+      }}
+    >
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-3xl sm:text-4xl font-bold mb-4">
           Join Our VIP List
@@ -24,11 +26,11 @@ const SubscribeSection = () => {
           <input
             type="email"
             placeholder="Your email address"
-            className="w-full sm:flex-1 px-4 py-3 rounded-lg border text-base sm:text-lg font-normal border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+            className="w-full sm:flex-1 px-4 py-3 rounded-lg border text-base sm:text-lg font-normal border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D5B56E]"
           />
           <button
             type="submit"
-            className="w-full sm:w-auto bg-yellow-400 hover:bg-yellow-500 text-white font-semibold px-6 py-3 rounded-lg transition text-base sm:text-lg"
+            className="w-full sm:w-auto bg-[#D5B56E] hover:bg-[#D5B56E]/90 text-white font-semibold px-6 py-3 rounded-lg transition text-base sm:text-lg"
           >
             Subscribe
           </button>

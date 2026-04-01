@@ -34,12 +34,12 @@ export const CategorySection = () => {
     <div
       className="py-16 text-center px-4 sm:px-6 lg:px-8"
       style={{
-        backgroundColor: '#f3f4f6',
+        backgroundColor: "#f3f4f6",
         backgroundImage: `
           radial-gradient(at 50% 10%, rgba(213, 181, 110, 0.1) 0px, transparent 40%),
           radial-gradient(at 0% 90%, rgba(213, 181, 110, 0.08) 0px, transparent 40%),
           linear-gradient(115deg, transparent 40%, rgba(213, 181, 110, 0.03) 44%, rgba(213, 181, 110, 0.08) 48%, rgba(213, 181, 110, 0.12) 50%, rgba(213, 181, 110, 0.08) 52%, rgba(213, 181, 110, 0.03) 56%, transparent 60%)
-        `
+        `,
       }}
     >
       {/* Heading */}
@@ -97,7 +97,7 @@ export const CategorySection = () => {
                               )}`,
                             )
                           } // Updated onClick to navigate
-                          className="bg-[#ffc107] text-white text-base font-semibold px-5 py-2 rounded-md w-fit mx-auto sm:mx-0 hover:bg-[#e6ac00] transition"
+                          className="bg-[#D5B56E] text-white text-base font-semibold px-5 py-2 rounded-md w-fit mx-auto sm:mx-0 hover:bg-[#D5B56E]/90 transition"
                         >
                           Explore
                         </button>
@@ -118,7 +118,7 @@ export const CategorySection = () => {
             key={index}
             onClick={() => handlePageChange(index)}
             className={`w-3 h-3 rounded-full transition-colors duration-300 ${
-              currentPage === index ? "bg-[#ffc107]" : "bg-gray-300"
+              currentPage === index ? "bg-[#D5B56E]" : "bg-gray-300"
             }`}
           />
         ))}
