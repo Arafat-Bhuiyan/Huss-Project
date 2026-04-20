@@ -28,6 +28,8 @@ const ShippingForm = () => {
     floorNumber: "",
     flatNumber: "",
     city: "",
+    state: "NSW",
+    country: "Australia",
     zipCode: "",
     billingInfoSame: true,
   });
@@ -44,6 +46,8 @@ const ShippingForm = () => {
         floorNumber: shippingData.floor_number || "",
         flatNumber: shippingData.flat_number || "",
         city: shippingData.city || "",
+        state: shippingData.state || "NSW",
+        country: shippingData.country || "Australia",
         zipCode: shippingData.zip_code || "",
         billingInfoSame: true,
       });
@@ -75,6 +79,8 @@ const ShippingForm = () => {
         floorNumber: shippingData.floor_number || "",
         flatNumber: shippingData.flat_number || "",
         city: shippingData.city || "",
+        state: shippingData.state || "NSW",
+        country: shippingData.country || "Australia",
         zipCode: shippingData.zip_code || "",
         billingInfoSame: true,
       });
@@ -94,6 +100,8 @@ const ShippingForm = () => {
       floor_number: formData.floorNumber,
       flat_number: formData.flatNumber,
       city: formData.city,
+      state: formData.state,
+      country: formData.country,
       zip_code: formData.zipCode,
     };
 
@@ -239,7 +247,8 @@ const ShippingForm = () => {
               htmlFor="apartmentName"
               className="block text-sm font-medium text-gray-700"
             >
-              Apartment Name
+               Address Line 1
+Unit / Level / Street Address
             </label>
             <input
               type="text"
@@ -248,17 +257,18 @@ const ShippingForm = () => {
               value={formData.apartmentName}
               onChange={handleChange}
               disabled={!isEditMode}
-              placeholder="Enter apartment name"
+              placeholder=""
               className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
               required
             />
           </div>
-          <div className="w-full sm:w-32">
+          <div className="w-full ">
             <label
               htmlFor="floorNumber"
               className="block text-sm font-medium text-gray-700"
             >
-              Floor Number
+             Address Line 2 (Optional)
+Building name, complex, etc.
             </label>
             <input
               type="text"
@@ -267,8 +277,8 @@ const ShippingForm = () => {
               value={formData.floorNumber}
               onChange={handleChange}
               disabled={!isEditMode}
-              placeholder="00"
-              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
+              placeholder=""
+              className="mt-1 block text-sm  font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
               required
             />
           </div>
@@ -280,7 +290,7 @@ const ShippingForm = () => {
               htmlFor="flatNumber"
               className="block text-sm font-medium text-gray-700"
             >
-              Flat Number
+             Suburb
             </label>
             <input
               type="text"
@@ -314,15 +324,67 @@ const ShippingForm = () => {
               required
             />
           </div>
+          <div className="w-full">
+            <label
+              htmlFor="state"
+              className="block text-sm font-medium text-gray-700"
+            >
+              State
+            </label>
+            <input
+              type="text"
+              id="state"
+              name="state"
+              list="state-options"
+              value={formData.state}
+              onChange={handleChange}
+              disabled={!isEditMode}
+              placeholder="Select or type state"
+              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
+              required
+            />
+            <datalist id="state-options">
+              <option value="NSW" />
+              <option value="VIC" />
+              <option value="QLD" />
+              <option value="WA" />
+              <option value="SA" />
+              <option value="TAS" />
+              <option value="ACT" />
+              <option value="NT" />
+            </datalist>
+          </div>
         </div>
 
         <div className="flex flex-col sm:flex-row justify-between gap-4">
           <div className="w-full">
             <label
+              htmlFor="country"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Country
+            </label>
+            <input
+              type="text"
+              id="country"
+              name="country"
+              value={formData.country}
+              onChange={handleChange}
+              disabled={!isEditMode}
+              placeholder="Australia"
+              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
+              required
+            />
+          </div>
+          <div className="w-full">
+            <label
               htmlFor="zipCode"
               className="block text-sm font-medium text-gray-700"
             >
-              Zip Code
+              Postcode
+              <span className=" ml-1 text-xs text-gray-500">
+                (4-digit number, for example: 2162)
+              </span>
             </label>
             <input
               type="text"

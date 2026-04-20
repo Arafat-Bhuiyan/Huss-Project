@@ -1,12 +1,22 @@
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import ResetPassword from "./ResetPassword";
-import { useVerifyOtpMutation } from "../redux/api/authApi";
+import { useVerifyOtpMutation, useSendOtpMutation } from "../redux/api/authApi";
 
 const Verify = ({ email }) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [isVerified, setIsVerified] = useState(false);
+  const [countdown, setCountdown] = useState(0);
   const [verifyOtpApi, { isLoading }] = useVerifyOtpMutation();
+  const [sendOtpApi, { isLoading: isSending }] = useSendOtpMutation();
+
+  // Countdown timer effect
+  useEffect(() => {
+    if (countdown > 0) {
+      const timer = setTimeout(() => setCountdown(countdown - 1), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [countdown]);
 
   // OTP ইনপুট হ্যান্ডলার
   const handleOtpChange = (e, index) => {
@@ -56,10 +66,16 @@ const Verify = ({ email }) => {
     }
   };
 
-  const handleResendOtp = (e) => {
-    toast.success(
-      "We've sent a new OTP to your email. Please check your inbox.",
-    );
+  const handleResendOtp = async () => {
+    if (countdown > 0 || isSending) return;
+
+    try {
+      const res = await sendOtpApi({ email }).unwrap();
+      toast.success(res.message || "OTP sent successfully!");
+      setCountdown(60);
+    } catch (err) {
+      toast.error(err?.data?.message || "Failed to send OTP. Please try again.");
+    }
   };
 
   return (
@@ -116,8 +132,11 @@ const Verify = ({ email }) => {
                 <div className="flex items-center justify-center my-4 text-sm font-medium text-gray-500">
                   <p>
                     Didn't get the code?{" "}
-                    <span onClick={handleResendOtp} className="text-[#D5B56E]">
-                      Resend OTP
+                    <span
+                      onClick={handleResendOtp}
+                      className={`cursor-pointer ${countdown > 0 || isSending ? 'text-gray-400 cursor-not-allowed' : 'text-[#D5B56E]'}`}
+                    >
+                      Resend OTP {countdown > 0 && `(${countdown}s)`}
                     </span>
                   </p>
                 </div>

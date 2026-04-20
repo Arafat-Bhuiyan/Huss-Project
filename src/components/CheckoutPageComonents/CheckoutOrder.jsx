@@ -3,6 +3,7 @@ import { CheckoutOrderItems } from "./CheckoutOrderItems";
 import { useNavigate } from "react-router-dom";
 import {
   useGetCartQuery,
+  useGetShippingAddressQuery,
   usePlaceOrderMutation,
 } from "../../redux/api/authApi";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,12 +17,18 @@ export const CheckoutOrder = () => {
   const { data, isLoading } = useGetCartQuery();
   const [placeOrderMutation, { isLoading: isPlacingOrder }] =
     usePlaceOrderMutation();
-  const { shippingInfo } = useSelector((state) => state.checkout);
-
+  // const { shippingInfo } = useSelector((state) => state.checkout);
+  const {
+    data: shippingInfo ,
+    isLoading: isFetching,
+    refetch,
+  } = useGetShippingAddressQuery();
+  console.log("Shipping Info:", shippingInfo);
   const cartDetails = data?.cart_details || [];
   const orderSummary = data?.order_summary;
 
   const handleCheckout = () => {
+
     if (!shippingInfo) {
       toast.error("Please add a shipping address first.");
       return;
@@ -37,15 +44,15 @@ export const CheckoutOrder = () => {
 
     const payload = {
       shipping_info: {
-        full_name: shippingInfo.fullName,
-        email: shippingInfo.emailAddress,
-        phone: shippingInfo.phoneNumber,
-        street_address: shippingInfo.streetAddress,
-        apartment_name: shippingInfo.apartmentName,
-        floor_number: shippingInfo.floorNumber,
-        flat_number: shippingInfo.flatNumber,
+        full_name: shippingInfo.full_name,
+        email: shippingInfo.email,
+        phone: shippingInfo.phone,
+        street_address: shippingInfo.street_address,
+        apartment_name: shippingInfo.apartment_name,
+        floor_number: shippingInfo.floor_number,
+        flat_number: shippingInfo.flat_number,
         city: shippingInfo.city,
-        zip_code: shippingInfo.zipCode,
+        zip_code: shippingInfo.zip_code,
       },
     };
 

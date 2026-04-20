@@ -8,6 +8,8 @@ export const authApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["Auth"],
+      
     }),
 
     login: builder.mutation({
@@ -16,6 +18,7 @@ export const authApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["Auth"],
     }),
 
     getUser: builder.query({

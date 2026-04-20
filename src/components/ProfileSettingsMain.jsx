@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from "react";
 import personalInfoLogo from "../assets/img/personal-information.png";
 import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../redux/features/authSlice";
 import {
   useGetProfileQuery,
   useUpdateProfileMutation,
 } from "../redux/api/authApi";
+import { api } from "../redux/api/api";
 
 export const ProfileSettingsMain = () => {
   const { data: userData, refetch } = useGetProfileQuery();
   console.log(userData);
   const [updateProfile, { isLoading }] = useUpdateProfileMutation();
+  const dispatch = useDispatch();
+  const { access } = useSelector((state) => state.auth);
   const [formData, setFormData] = useState({
     fullName: "",
     emailAddress: "",
@@ -62,9 +67,10 @@ export const ProfileSettingsMain = () => {
     }
 
     try {
-      await updateProfile(submitData).unwrap();
+      const updatedUser = await updateProfile(submitData).unwrap();
+       dispatch(api.util.invalidateTags(["Auth"])); // Invalidate auth tag to refresh user data
       toast.success("Profile info saved successfully!");
-      refetch(); // Refresh the data
+      refetch(); // Ensure data is refreshed
       setFormData((prev) => ({ ...prev, photo: null })); // Reset file input
     } catch (err) {
       console.error(err);

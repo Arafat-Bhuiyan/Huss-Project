@@ -110,7 +110,7 @@ const Register = () => {
   });
 
   return (
-    <div className="bg-[#f9f6ee] px-4 sm:px-6 md:px-12 lg:px-28 py-4">
+    <div className="bg-[#f9f6ee] h-screen px-4 sm:px-6 md:px-12 lg:px-28 py-4">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 py-4 sm:py-8">
         {/* Breadcrumb */}
         <div className="bg-[#f9f6ee] py-3 text-left text-sm text-black font-medium">

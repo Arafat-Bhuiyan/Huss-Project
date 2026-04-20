@@ -8,7 +8,7 @@ import { useSendOtpMutation } from "../redux/api/authApi";
 const ForgetPassword = () => {
   const [form, setForm] = useState({ email: "" });
   const [otpSent, setOtpSent] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(30); // 30 seconds timer
+  const [timeLeft, setTimeLeft] = useState(120); // 30 seconds timer
   const [sendOtp, { isLoading }] = useSendOtpMutation();
 
   // Handle form input changes
@@ -24,7 +24,7 @@ const ForgetPassword = () => {
     } else if (timeLeft === 0) {
       toast.error("OTP Expired! Please try again.");
       setOtpSent(false); // Reset OTP Sent status
-      setTimeLeft(30); // Reset the timer
+      setTimeLeft(120); // Reset the timer
     }
     return () => clearInterval(timer);
   }, [otpSent, timeLeft]);
@@ -50,12 +50,12 @@ const ForgetPassword = () => {
   };
 
   return (
-    <div>
+    <div className="bg-[#f9f6ee] h-screen">
       {/* Conditional Rendering */}
       {!otpSent ? (
         <div>
           {/* Breadcrumb */}
-          <div className="w-full bg-[#f9f6ee] px-4 sm:px-8 md:px-16 lg:px-28 py-3 text-left text-sm text-black font-medium">
+          <div className="w-full  px-4 sm:px-8 md:px-16 lg:px-28 py-3 text-left text-sm text-black font-medium">
             <span className="text-gray-600 font-medium text-lg sm:text-xl">
               Account /{" "}
             </span>

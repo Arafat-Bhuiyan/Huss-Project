@@ -122,11 +122,11 @@ const ProductsSection = () => {
 
             {/* Content */}
             <div className="p-4 flex flex-col flex-grow">
-              <h3 className="text-base font-semibold text-gray-800 mb-1">
+              <h3 className="text-base font-semibold text-gray-800 mb-1 line-clamp-1">
                 {product.product_name}
               </h3>
               <p className="text-sm text-gray-600 flex-grow line-clamp-2">
-                {product.description || "No description available."}
+                {product?.description || "No description available."}
               </p>
               <div className="mt-4 flex items-center justify-between">
                 <span className="text-sm font-semibold text-gray-900">

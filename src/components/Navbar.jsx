@@ -15,15 +15,16 @@ import {
   useGetCategoryListQuery,
   useGetProfileQuery,
 } from "../redux/api/authApi";
+import { api } from "../redux/api/api";
 
 export const Navbar = () => {
   const { data: categoryList } = useGetCategoryListQuery();
-  const { access: token } = useSelector((state) => state.auth);
+  const { access: token, user } = useSelector((state) => state.auth);
   const { data: userData } = useGetProfileQuery(undefined, {
-    skip: !token && !localStorage.getItem("access"),
+    skip: !token,
   });
   const subCategories = categoryList || [];
-  const { user } = useSelector((state) => state.auth);
+  const profileUser = token ? (userData || user) : null;
   const searchTerm = useSelector((state) => state.product.searchTerm);
   const dispatch = useDispatch();
   const [showCategories, setShowCategories] = useState(false);
@@ -34,7 +35,8 @@ export const Navbar = () => {
 
   const handleLogout = () => {
     dispatch(logout());
-    navigate("/login");
+    dispatch(api.util.resetApiState());
+    navigate("/");
   };
 
   useEffect(() => {
@@ -158,16 +160,18 @@ export const Navbar = () => {
           </div>
 
           {/* Account */}
-          {userData ? (
+          {profileUser ? (
             <div className="flex items-center gap-2">
               <img
                 onClick={() => navigate("/profile-settings")}
-                src={userData.picture}
+                src={profileUser.picture || profileUser.photo || accountIcon}
                 alt="Profile"
                 className="w-8 h-8 rounded-full"
               />
               <span onClick={() => navigate("/profile-settings")}>
-                {userData.first_name + " " + userData.last_name}
+                {profileUser.first_name && profileUser.last_name
+                  ? `${profileUser.first_name} ${profileUser.last_name}`
+                  : profileUser.name || "Profile"}
               </span>
               <LogOut
                 size={20}
@@ -178,14 +182,14 @@ export const Navbar = () => {
             </div>
           ) : (
             <div className="flex items-center gap-2">
-              <div>
+              {/* <div>
                 <img src={accountIcon} alt="" />
-              </div>
+              </div> */}
               <NavLink
                 to="/login"
                 className="text-white font-medium text-xl hover:text-[#D5B56E] transition"
               >
-                Account
+                Login
               </NavLink>
             </div>
           )}
@@ -311,7 +315,7 @@ export const Navbar = () => {
             </NavLink>
 
             {/* Account */}
-            {userData ? (
+            {profileUser ? (
               <>
                 <div
                   className="flex items-center gap-3 hover:text-[#D5B56E] cursor-pointer"
@@ -321,12 +325,14 @@ export const Navbar = () => {
                   }}
                 >
                   <img
-                    src={userData.picture}
+                    src={profileUser.picture || profileUser.photo || accountIcon}
                     alt="Profile"
                     className="w-8 h-8 rounded-full shadow-sm"
                   />
                   <span className="font-medium">
-                    {userData.first_name + " " + userData.last_name}
+                    {profileUser.first_name && profileUser.last_name
+                      ? `${profileUser.first_name} ${profileUser.last_name}`
+                      : profileUser.name || "Profile"}
                   </span>
                 </div>
                 <div
@@ -346,8 +352,8 @@ export const Navbar = () => {
                 className="flex items-center gap-3 hover:text-[#D5B56E]"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <img src={accountIcon} alt="Account" className="w-5 h-5" />
-                <span className="font-medium">Account</span>
+           
+                <span className="font-medium">Login</span>
               </NavLink>
             )}
           </div>

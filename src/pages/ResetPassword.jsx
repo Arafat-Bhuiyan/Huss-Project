@@ -48,7 +48,7 @@ const ResetPassword = ({ email }) => {
     } catch (err) {
       console.error(err);
       toast.error(
-        err?.data?.message || "Failed to reset password. Please try again.",
+        err?.data?.message || err?.data?.password?.[0] || "Failed to reset password. Please try again.",
       );
     }
   };

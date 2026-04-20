@@ -9,6 +9,7 @@ export const authApi = api.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ['Profile'], // Invalidate profile to refresh user data after login
     }),
     // === SIGNUP ===
     signup: builder.mutation({
@@ -17,6 +18,7 @@ export const authApi = api.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ['Profile'], // Invalidate profile to refresh user data after signup
     }),
     // === Send OTP ===
     sendOtp: builder.mutation({
@@ -48,6 +50,7 @@ export const authApi = api.injectEndpoints({
         url: "/accounts/profile/",
         method: "GET",
       }),
+      providesTags: ['Profile'],
     }),
     // Update Profile
     updateProfile: builder.mutation({
@@ -56,6 +59,7 @@ export const authApi = api.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
+      invalidatesTags: ['Profile'],
     }),
     // === Terms & Conditions ===
     termsAndConditions: builder.query({
