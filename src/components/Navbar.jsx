@@ -39,6 +39,13 @@ export const Navbar = () => {
     navigate("/");
   };
 
+  const handleSearch = () => {
+    if (searchTerm.trim()) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      navigate("/#products");
+    }
+  };
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       // Check if the click is outside the categories dropdown or the mobile menu button
@@ -73,7 +80,10 @@ export const Navbar = () => {
         <div className="hidden lg:flex flex-1 justify-center px-4">
           <div className="relative w-72 md:w-96 flex items-center">
             <span className="absolute right-0 h-full flex items-center">
-              <span className="bg-[#D5B56E] rounded-r-full px-6 py-[10px] border border-gray-100 flex items-center">
+              <span 
+                onClick={handleSearch}
+                className="bg-[#D5B56E] rounded-r-full px-6 py-[10px] border border-gray-100 flex items-center cursor-pointer hover:bg-[#C9A85E] transition"
+              >
                 <img src={searchIcon} alt="Search" className="w-5 h-5" />
               </span>
             </span>
@@ -82,6 +92,7 @@ export const Navbar = () => {
               placeholder="Search for Products..."
               value={searchTerm}
               onChange={(e) => dispatch(setSearchTerm(e.target.value))}
+              onKeyPress={(e) => e.key === "Enter" && handleSearch()}
               className="w-full px-4 py-2 rounded-full placeholder:text-base placeholder:font-normal placeholder:text-gray-100 border border-gray-100 bg-black focus:outline-none focus:ring-2 focus:ring-gray-300 transition"
             />
           </div>
@@ -224,15 +235,19 @@ export const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Search Bar */}
-      <div className="lg:hidden px-4 sm:px-6 pb-3">
-        <div className="relative w-full flex items-center">
-          <span className="absolute right-0 h-full flex items-center">
-            <span className="bg-[#D5B56E] rounded-r-full px-4 py-[10px] border border-gray-100 flex items-center">
+      {/* Mobile S
+              onClick={handleSearch}
+              className="bg-[#D5B56E] rounded-r-full px-4 py-[10px] border border-gray-100 flex items-center cursor-pointer hover:bg-[#C9A85E] transition"
+            >
               <img src={searchIcon} alt="Search" className="w-5 h-5" />
             </span>
           </span>
           <input
+            type="text"
+            placeholder="Search for Products..."
+            value={searchTerm}
+            onChange={(e) => dispatch(setSearchTerm(e.target.value))}
+            onKeyPress={(e) => e.key === "Enter" && handleSearch(
             type="text"
             placeholder="Search for Products..."
             value={searchTerm}

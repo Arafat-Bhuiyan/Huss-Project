@@ -93,56 +93,68 @@ const ProductsSection = () => {
         </div>
       </div>
 
+      {/* No Products Message */}
+      {products.length === 0 && !isLoading && (
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center text-gray-900 mt-10 py-12">
+            <p className="text-lg font-semibold">No products found.</p>
+            <p className="text-gray-600 mt-2">Try searching with different keywords.</p>
+          </div>
+        </div>
+      )}
+
       {/* Products Grid */}
-      <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-        {displayedProducts.map((product, index) => (
-          <div
-            key={product.id || index}
-            className="bg-white border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col relative"
-          >
-            {/* Save Button */}
-            <button
-              onClick={() => handleToggleWishlist(product.id)}
-              className="absolute top-2 right-2 w-6 h-6 rounded-full shadow text-sm flex items-center justify-center"
+      {products.length > 0 && (
+        <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+          {displayedProducts.map((product, index) => (
+            <div
+              key={product.id || index}
+              className="bg-white border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col relative"
             >
-              <img src={white_save} alt="" />
-            </button>
+              {/* Save Button */}
+              <button
+                onClick={() => handleToggleWishlist(product.id)}
+                className="absolute top-2 right-2 w-6 h-6 rounded-full shadow text-sm flex items-center justify-center"
+              >
+                <img src={white_save} alt="" />
+              </button>
 
-            {/* Image */}
-            <img
-              src={
-                product.image
-                  ? `${import.meta.env.VITE_BASE_URL_MEDIA}${product.image}`
-                  : Headphone
-              }
-              alt={product.product_name}
-              className="w-full h-52 object-contain p-2 cursor-pointer"
-              onClick={() => navigate(`/products/${product.id}/detail`)}
-            />
+              {/* Image */}
+              <img
+                src={
+                  product.image
+                    ? `${import.meta.env.VITE_BASE_URL_MEDIA}${product.image}`
+                    : Headphone
+                }
+                alt={product.product_name}
+                className="w-full h-52 object-contain p-2 cursor-pointer"
+                onClick={() => navigate(`/products/${product.id}/detail`)}
+              />
 
-            {/* Content */}
-            <div className="p-4 flex flex-col flex-grow">
-              <h3 className="text-base font-semibold text-gray-800 mb-1 line-clamp-1">
-                {product.product_name}
-              </h3>
-              <p className="text-sm text-gray-600 flex-grow line-clamp-2">
-                {product?.description || "No description available."}
-              </p>
-              <div className="mt-4 flex items-center justify-between">
-                <span className="text-sm font-semibold text-gray-900">
-                  ${product.price}
-                </span>
-                <button
-                  onClick={() => handleAddToCart(product.id)}
-                  className="bg-[#D5B56E] text-white px-4 py-1 rounded hover:bg-[#D5B56E]/90 transition text-sm font-medium"
-                >
-                  Add to Cart
-                </button>
+              {/* Content */}
+              <div className="p-4 flex flex-col flex-grow">
+                <h3 className="text-base font-semibold text-gray-800 mb-1 line-clamp-1">
+                  {product.product_name}
+                </h3>
+                <p className="text-sm text-gray-600 flex-grow line-clamp-2">
+                  {product?.description || "No description available."}
+                </p>
+                <div className="mt-4 flex items-center justify-between">
+                  <span className="text-sm font-semibold text-gray-900">
+                    ${product.price}
+                  </span>
+                  <button
+                    onClick={() => handleAddToCart(product.id)}
+                    className="bg-[#D5B56E] text-white px-4 py-1 rounded hover:bg-[#D5B56E]/90 transition text-sm font-medium"
+                  >
+                    Add to Cart
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
