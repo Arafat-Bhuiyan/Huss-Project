@@ -30,7 +30,7 @@ export const CheckoutOrder = () => {
   const handleCheckout = () => {
 
     if (!shippingInfo) {
-      toast.error("Please add a shipping address first.");
+      toast.error("Please add shipping information first. Then try checkout.");
       return;
     }
     setPlaceOrderToggle(true);
