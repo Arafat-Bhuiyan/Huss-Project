@@ -47,14 +47,14 @@ export const ContactSec = () => {
     <div
       id="contact"
       className=" flex items-center justify-center px-4 sm:px-6 md:px-8 lg:px-16 py-12"
-      style={{
-        backgroundColor: "#f3f4f6",
-        backgroundImage: `
-          radial-gradient(at 50% 10%, rgba(213, 181, 110, 0.1) 0px, transparent 40%),
-          radial-gradient(at 0% 90%, rgba(213, 181, 110, 0.08) 0px, transparent 40%),
-          linear-gradient(115deg, transparent 40%, rgba(213, 181, 110, 0.03) 44%, rgba(213, 181, 110, 0.08) 48%, rgba(213, 181, 110, 0.12) 50%, rgba(213, 181, 110, 0.08) 52%, rgba(213, 181, 110, 0.03) 56%, transparent 60%)
-        `,
-      }}
+      // style={{
+      //   backgroundColor: "#f3f4f6",
+      //   backgroundImage: `
+      //     radial-gradient(at 50% 10%, rgba(213, 181, 110, 0.1) 0px, transparent 40%),
+      //     radial-gradient(at 0% 90%, rgba(213, 181, 110, 0.08) 0px, transparent 40%),
+      //     linear-gradient(115deg, transparent 40%, rgba(213, 181, 110, 0.03) 44%, rgba(213, 181, 110, 0.08) 48%, rgba(213, 181, 110, 0.12) 50%, rgba(213, 181, 110, 0.08) 52%, rgba(213, 181, 110, 0.03) 56%, transparent 60%)
+      //   `,
+      // }}
     >
       <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Left: Contact Form */}
@@ -166,7 +166,7 @@ export const ContactSec = () => {
               </li>
               <li className="flex items-center gap-4">
                 <img src={phone} alt="" />
-                <span>+1 (555) 123-4567</span>
+                <span>+61450 916 632</span>
               </li>
               <li className="flex items-center gap-4">
                 <img src={mail} alt="" className="mt-1.5" />

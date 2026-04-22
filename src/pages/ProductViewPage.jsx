@@ -14,6 +14,7 @@ export default function ProductViewPage() {
   const [addReview, { isLoading: isSubmitting }] = useAddReviewMutation();
 
   const [showReviewBox, setShowReviewBox] = useState(false);
+  const [activeTab, setActiveTab] = useState("specifications");
   const [formData, setFormData] = useState({
     review: "",
     photo: null, // file object
@@ -100,85 +101,112 @@ export default function ProductViewPage() {
         {/* Tabs */}
         <div className="mt-10 rounded-lg bg-white p-2 sm:p-3">
           <div className="flex flex-wrap gap-2 sm:gap-4">
-            <button className="flex-1 sm:flex-none sm:w-48 h-12 rounded-lg bg-red-500 hover:bg-red-600 text-white font-bold text-sm sm:text-lg">
+            <button
+              onClick={() => setActiveTab("specifications")}
+              className={`flex-1 sm:flex-none sm:w-48 h-12 rounded-lg font-bold text-sm sm:text-lg transition-colors ${
+                activeTab === "specifications"
+                  ? "bg-red-500 hover:bg-red-600 text-white"
+                  : "bg-gray-300 hover:bg-gray-400 text-black"
+              }`}
+            >
               Specifications
             </button>
-            <button className="flex-1 sm:flex-none sm:w-48 h-12 rounded-lg bg-gray-300 hover:bg-gray-400 text-black font-bold text-sm sm:text-lg">
+            <button
+              onClick={() => setActiveTab("description")}
+              className={`flex-1 sm:flex-none sm:w-48 h-12 rounded-lg font-bold text-sm sm:text-lg transition-colors ${
+                activeTab === "description"
+                  ? "bg-red-500 hover:bg-red-600 text-white"
+                  : "bg-gray-300 hover:bg-gray-400 text-black"
+              }`}
+            >
               Description
             </button>
-            <button className="flex-1 sm:flex-none sm:w-48 h-12 rounded-lg bg-gray-300 hover:bg-gray-400 text-black font-bold text-sm sm:text-lg">
+            <button
+              onClick={() => setActiveTab("reviews")}
+              className={`flex-1 sm:flex-none sm:w-48 h-12 rounded-lg font-bold text-sm sm:text-lg transition-colors ${
+                activeTab === "reviews"
+                  ? "bg-red-500 hover:bg-red-600 text-white"
+                  : "bg-gray-300 hover:bg-gray-400 text-black"
+              }`}
+            >
               Reviews
             </button>
           </div>
         </div>
 
         {/* Specifications */}
-        <div className="mt-4 bg-white p-4 sm:p-6 rounded-lg shadow-sm">
-          <h1 className="font-semibold text-lg sm:text-xl">
-            Product Specifications
-          </h1>
-          <div className="flex flex-col md:flex-row gap-4 mt-4 w-full text-sm sm:text-base">
-            <div className="flex flex-col w-full md:w-1/2">
-              <div className="flex justify-between pb-2 border-b border-gray-300 mb-2">
-                <p>Material</p>
-                <p>Plastic</p>
+        {activeTab === "specifications" && (
+          <div className="mt-4 bg-white p-4 sm:p-6 rounded-lg shadow-sm">
+            <h1 className="font-semibold text-lg sm:text-xl">
+              Product Specifications
+            </h1>
+            <div className="flex flex-col md:flex-row gap-4 mt-4 w-full text-sm sm:text-base">
+              <div className="flex flex-col w-full md:w-1/2">
+                <div className="flex justify-between pb-2 border-b border-gray-300 mb-2">
+                  <p>Material</p>
+                  <p>Plastic</p>
+                </div>
+                <div className="flex justify-between pb-2 border-b border-gray-300 mb-2">
+                  <p>Color</p>
+                  <p>Navy</p>
+                </div>
+                <div className="flex justify-between pb-2 border-b border-gray-300 mb-2">
+                  <p>Weight</p>
+                  <p>4 KG</p>
+                </div>
               </div>
-              <div className="flex justify-between pb-2 border-b border-gray-300 mb-2">
-                <p>Color</p>
-                <p>Navy</p>
-              </div>
-              <div className="flex justify-between pb-2 border-b border-gray-300 mb-2">
-                <p>Weight</p>
-                <p>4 KG</p>
-              </div>
-            </div>
-            <div className="flex flex-col w-full md:w-1/2">
-              <div className="flex justify-between pb-2 border-b border-gray-300 mb-2">
-                <p>Warranty</p>
-                <p>2 Years Limited</p>
-              </div>
-              <div className="flex justify-between pb-2 border-b border-gray-300 mb-2">
-                <p>Country of Origin</p>
-                <p>Italy</p>
+              <div className="flex flex-col w-full md:w-1/2">
+                <div className="flex justify-between pb-2 border-b border-gray-300 mb-2">
+                  <p>Warranty</p>
+                  <p>2 Years Limited</p>
+                </div>
+                <div className="flex justify-between pb-2 border-b border-gray-300 mb-2">
+                  <p>Country of Origin</p>
+                  <p>Italy</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Description */}
-        <div className="mt-6 bg-white p-4 sm:p-6 rounded-lg shadow-sm">
-          <h1 className="font-bold text-xl sm:text-2xl">Description</h1>
-          <h3 className="font-semibold text-lg sm:text-xl my-2">
-            {product?.product_name}
-          </h3>
-          <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
-            {product?.description ||
-              "No description available for this product."}
-          </p>
-        </div>
-
-        {/* Reviews */}
-        <div className="mt-6 bg-white p-4 sm:p-6 rounded-lg shadow-sm">
-          <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-3">
-            <h3 className="font-bold text-xl sm:text-2xl">Reviews</h3>
-            <button
-              className="bg-[#D5B56E] hover:bg-[#D5B56E]/90 text-white px-4 py-2 rounded-md text-sm font-medium self-start sm:self-center"
-              onClick={() => setShowReviewBox(!showReviewBox)}
-            >
-              Write a Review
-            </button>
-          </div>
-          <div className="text-gray-700 text-base sm:text-lg mt-2">
-            Get specific details about this product from customers who own it.
-          </div>
-          <div className="flex flex-col justify-center items-center gap-3 mt-7 text-center">
-            <img src={ReviewImg} alt="" />
-            <p className="font-medium text-xl text-gray-700">
-              This product has no reviews yet. Be the first one to write a
-              review.
+        {activeTab === "description" && (
+          <div className="mt-6 bg-white p-4 sm:p-6 rounded-lg shadow-sm">
+            <h1 className="font-bold text-xl sm:text-2xl">Description</h1>
+            <h3 className="font-semibold text-lg sm:text-xl my-2">
+              {product?.product_name}
+            </h3>
+            <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
+              {product?.description ||
+                "No description available for this product."}
             </p>
           </div>
-        </div>
+        )}
+
+        {/* Reviews */}
+        {activeTab === "reviews" && (
+          <div className="mt-6 bg-white p-4 sm:p-6 rounded-lg shadow-sm">
+            <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-3">
+              <h3 className="font-bold text-xl sm:text-2xl">Reviews</h3>
+              <button
+                className="bg-[#D5B56E] hover:bg-[#D5B56E]/90 text-white px-4 py-2 rounded-md text-sm font-medium self-start sm:self-center"
+                onClick={() => setShowReviewBox(!showReviewBox)}
+              >
+                Write a Review
+              </button>
+            </div>
+            <div className="text-gray-700 text-base sm:text-lg mt-2">
+              Get specific details about this product from customers who own it.
+            </div>
+            <div className="flex flex-col justify-center items-center gap-3 mt-7 text-center">
+              <img src={ReviewImg} alt="" />
+              <p className="font-medium text-xl text-gray-700">
+                This product has no reviews yet. Be the first one to write a
+                review.
+              </p>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Review Sidebar */}

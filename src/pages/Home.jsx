@@ -25,7 +25,7 @@ const Home = () => {
   }, [location]);
 
   return (
-    <div>
+    <div className="w-full bg-gray-50">
       <ScrollRestoration />
       <Hero />
       <CategorySection />

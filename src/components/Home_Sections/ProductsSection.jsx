@@ -63,15 +63,15 @@ const ProductsSection = () => {
   return (
     <div
       id="products"
-      className="py-16 px-4 sm:px-6 lg:px-8 xl:px-28"
-      style={{
-        backgroundColor: "#f3f4f6",
-        backgroundImage: `
-          radial-gradient(at 10% 20%, rgba(213, 181, 110, 0.08) 0px, transparent 40%),
-          radial-gradient(at 90% 80%, rgba(213, 181, 110, 0.12) 0px, transparent 40%),
-          linear-gradient(115deg, transparent 40%, rgba(213, 181, 110, 0.03) 44%, rgba(213, 181, 110, 0.08) 48%, rgba(213, 181, 110, 0.12) 50%, rgba(213, 181, 110, 0.08) 52%, rgba(213, 181, 110, 0.03) 56%, transparent 60%)
-        `,
-      }}
+      className="py-16 px-4 sm:px-6 lg:px-8 xl:px-28 bg-white"
+      // style={{
+      //   backgroundColor: "#f3f4f6",
+      //   backgroundImage: `
+      //     radial-gradient(at 10% 20%, rgba(213, 181, 110, 0.08) 0px, transparent 40%),
+      //     radial-gradient(at 90% 80%, rgba(213, 181, 110, 0.12) 0px, transparent 40%),
+      //     linear-gradient(115deg, transparent 40%, rgba(213, 181, 110, 0.03) 44%, rgba(213, 181, 110, 0.08) 48%, rgba(213, 181, 110, 0.12) 50%, rgba(213, 181, 110, 0.08) 52%, rgba(213, 181, 110, 0.03) 56%, transparent 60%)
+      //   `,
+      // }}
     >
       {/* Header */}
       <div className="max-w-7xl mx-auto mb-10 flex flex-col md:flex-row md:justify-between md:items-center">
@@ -105,11 +105,11 @@ const ProductsSection = () => {
 
       {/* Products Grid */}
       {products.length > 0 && (
-        <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 ">
           {displayedProducts.map((product, index) => (
             <div
               key={product.id || index}
-              className="bg-white border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col relative"
+              className="bg-gray-50 border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col relative"
             >
               {/* Save Button */}
               <button

@@ -259,7 +259,7 @@ Unit / Level / Street Address
               disabled={!isEditMode}
               placeholder=""
               className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
-              required
+              
             />
           </div>
           <div className="w-full ">
@@ -279,7 +279,7 @@ Building name, complex, etc.
               disabled={!isEditMode}
               placeholder=""
               className="mt-1 block text-sm  font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
-              required
+              
             />
           </div>
         </div>

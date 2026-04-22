@@ -28,6 +28,7 @@ export const Navbar = () => {
   const searchTerm = useSelector((state) => state.product.searchTerm);
   const dispatch = useDispatch();
   const [showCategories, setShowCategories] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const categoriesRef = useRef(null);
   const navigate = useNavigate();
@@ -80,7 +81,7 @@ export const Navbar = () => {
         <div className="hidden lg:flex flex-1 justify-center px-4">
           <div className="relative w-72 md:w-96 flex items-center">
             <span className="absolute right-0 h-full flex items-center">
-              <span 
+              <span
                 onClick={handleSearch}
                 className="bg-[#D5B56E] rounded-r-full px-6 py-[10px] border border-gray-100 flex items-center cursor-pointer hover:bg-[#C9A85E] transition"
               >
@@ -172,24 +173,58 @@ export const Navbar = () => {
 
           {/* Account */}
           {profileUser ? (
-            <div className="flex items-center gap-2">
-              <img
-                onClick={() => navigate("/profile-settings")}
-                src={profileUser.picture || profileUser.photo || accountIcon}
-                alt="Profile"
-                className="w-8 h-8 rounded-full"
-              />
-              <span onClick={() => navigate("/profile-settings")}>
+            <div>
+              <div className="flex items-center gap-2 cursor-pointer"
+              onClick={() => setShowProfile((prev) => !prev)}
+              >
+                <img
+                  // onClick={() => navigate("/profile-settings")}
+                  src={profileUser.picture || profileUser.photo || accountIcon}
+                  alt="Profile"
+                  className="w-8 h-8 rounded-full"
+                />
+             
+                <LogOut
+                  size={20}
+                  color="#FFBA07"
+                  
+                  className="cursor-pointer"
+                />
+              </div>
+
+              {showProfile && (
+                <div className="absolute right-2 mt-2 w-48 bg-white rounded-2xl overflow-hidden shadow-lg z-50">
+               <div className="flex items-center gap-2 px-4 py-2 border-b">
+                     <img
+                  // onClick={() => navigate("/profile-settings")}
+                  src={profileUser.picture || profileUser.photo || accountIcon}
+                  alt="Profile"
+                  className="w-8 h-8 rounded-full"
+                />
+                   <span className="block px-4 py-2 text-gray-800 font-bold text-xl " onClick={() => navigate("/profile-settings")}>
                 {profileUser.first_name && profileUser.last_name
                   ? `${profileUser.first_name} ${profileUser.last_name}`
                   : profileUser.name || "Profile"}
               </span>
-              <LogOut
-                size={20}
-                color="#FFBA07"
-                onClick={handleLogout}
-                className="cursor-pointer"
-              />
+               </div>
+                  <NavLink
+                    to="/profile-settings"
+                    className="block px-4 py-2 font-semibold text-gray-800 hover:bg-gray-100"
+                    onClick={() => setShowProfile(false)}
+                  >
+                    Account Settings
+                  </NavLink>
+                  <NavLink
+                    to="/"
+                    className="block px-4 py-2 font-semibold text-2xl text-gray-800 hover:bg-red-100"
+                    onClick={() => setShowProfile(false)}
+                    onClick={handleLogout}
+                  >
+                    sign out
+                  </NavLink>
+                </div>
+              )}
+
             </div>
           ) : (
             <div className="flex items-center gap-2">
@@ -286,9 +321,8 @@ export const Navbar = () => {
                   <span>Categories</span>
                 </div>
                 <svg
-                  className={`w-5 h-5 transform transition-transform ${
-                    showCategories ? "rotate-180" : ""
-                  }`}
+                  className={`w-5 h-5 transform transition-transform ${showCategories ? "rotate-180" : ""
+                    }`}
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -367,7 +401,7 @@ export const Navbar = () => {
                 className="flex items-center gap-3 hover:text-[#D5B56E]"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-           
+
                 <span className="font-medium">Login</span>
               </NavLink>
             )}
