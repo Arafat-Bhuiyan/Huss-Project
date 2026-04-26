@@ -73,7 +73,7 @@ export const CategorySection = () => {
                 return (
                   <div
                     key={index}
-                    className="bg-white border rounded-xl shadow hover:shadow-md transition overflow-hidden flex flex-col text-center sm:text-left"
+                    className="  rounded-xl  bg-gray-100 hover:shadow-md transition overflow-hidden flex flex-col text-center sm:text-left"
                   >
                     <img
                       onClick={() =>
@@ -85,7 +85,7 @@ export const CategorySection = () => {
                       }
                       src={imageUrl}
                       alt={category.category_name}
-                      className="w-full h-56 object-contain p-4 bg-white cursor-pointer transition-transform duration-500 hover:scale-110"
+                      className="w-full h-56 object-contain p-4  cursor-pointer transition-transform duration-500 hover:scale-110"
                     />
                     <div className="p-5 flex flex-col justify-between flex-grow">
                       <h3 className="text-xl md:text-2xl font-semibold text-gray-800 mb-2">

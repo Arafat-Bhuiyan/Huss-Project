@@ -50,7 +50,7 @@ export const CartItem = ({ item }) => {
           src={minus}
           alt="Decrease quantity"
           onClick={() => handleUpdateQuantity("decrease")}
-          className={`cursor-pointer w-6 h-6 ${
+          className={`cursor-pointer w-6 h-6  ${
             isUpdating ? "opacity-50 cursor-not-allowed" : ""
           }`}
         />

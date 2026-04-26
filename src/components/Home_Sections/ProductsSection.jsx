@@ -109,7 +109,7 @@ const ProductsSection = () => {
           {displayedProducts.map((product, index) => (
             <div
               key={product.id || index}
-              className="bg-gray-50 border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col relative"
+              className="bg-gray-100  rounded-xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col relative"
             >
               {/* Save Button */}
               <button
@@ -127,7 +127,7 @@ const ProductsSection = () => {
                     : Headphone
                 }
                 alt={product.product_name}
-                className="w-full h-52 object-contain p-2 cursor-pointer"
+                className="w-full h-52 object-contain p-4 cursor-pointer"
                 onClick={() => navigate(`/products/${product.id}/detail`)}
               />
 

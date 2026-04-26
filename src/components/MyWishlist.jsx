@@ -101,7 +101,7 @@ const MyWishlist = () => {
                   : ""
               }
               alt={product.product_name}
-              className="w-full h-52 object-contain p-2 cursor-pointer"
+              className="w-full h-52 object-contain  cursor-pointer  "
               onClick={() => navigate(`/products/${product.id}/detail`)}
             />
 

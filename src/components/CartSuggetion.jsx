@@ -91,7 +91,7 @@ export const CartSuggetion = () => {
                   : Headphone
               }
               alt={product.product_name}
-              className="w-full h-52 object-contain p-2 cursor-pointer"
+              className="w-full h-56 object-contain p-2 cursor-pointer bg-gray-100"
               onClick={() => navigate(`/products/${product.id}/detail`)}
             />
 

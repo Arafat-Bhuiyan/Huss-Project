@@ -12,6 +12,7 @@ import { LogOut } from "lucide-react";
 import { logout } from "../redux/features/authSlice";
 import { setSearchTerm } from "../features/products/productSlice";
 import {
+  useGetCartQuery,
   useGetCategoryListQuery,
   useGetProfileQuery,
 } from "../redux/api/authApi";
@@ -33,6 +34,8 @@ export const Navbar = () => {
   const categoriesRef = useRef(null);
   const navigate = useNavigate();
   console.log(userData);
+
+  const { data, isLoading } = useGetCartQuery();
 
   const handleLogout = () => {
     dispatch(logout());
@@ -159,23 +162,23 @@ export const Navbar = () => {
             </div>
           </div>
           {/* Cart */}
-          <div className="flex items-center gap-2">
+          <NavLink to="/add-to-cart" className="flex items-center gap-2 relative">
             <div>
               <img src={cartIcon} alt="" className="pt-1" />
             </div>
-            <NavLink
-              to="/add-to-cart"
-              className="text-white font-medium text-xl hover:text-[#D5B56E] transition"
+            <div
+              
+              className="text-white font-medium text-xl hover:text-[#D5B56E] transition "
             >
-              Cart
-            </NavLink>
-          </div>
+              <span className=" font-semibold text-gray-300 absolute -top-2 right-0 px-1 bg-red-500 rounded-full text-sm">{`${data?.order_summary?.item_count || 0}`}</span>
+            </div>
+          </NavLink>
 
           {/* Account */}
           {profileUser ? (
             <div>
               <div className="flex items-center gap-2 cursor-pointer"
-              onClick={() => setShowProfile((prev) => !prev)}
+                onClick={() => setShowProfile((prev) => !prev)}
               >
                 <img
                   // onClick={() => navigate("/profile-settings")}
@@ -183,30 +186,31 @@ export const Navbar = () => {
                   alt="Profile"
                   className="w-8 h-8 rounded-full"
                 />
-             
+                <p className="text-white font-medium text-xl">{profileUser.first_name + " " + profileUser.last_name || "Profile"}</p>
+
                 <LogOut
                   size={20}
                   color="#FFBA07"
-                  
+
                   className="cursor-pointer"
                 />
               </div>
 
               {showProfile && (
                 <div className="absolute right-2 mt-2 w-48 bg-white rounded-2xl overflow-hidden shadow-lg z-50">
-               <div className="flex items-center gap-2 px-4 py-2 border-b">
-                     <img
-                  // onClick={() => navigate("/profile-settings")}
-                  src={profileUser.picture || profileUser.photo || accountIcon}
-                  alt="Profile"
-                  className="w-8 h-8 rounded-full"
-                />
-                   <span className="block px-4 py-2 text-gray-800 font-bold text-xl " onClick={() => navigate("/profile-settings")}>
-                {profileUser.first_name && profileUser.last_name
-                  ? `${profileUser.first_name} ${profileUser.last_name}`
-                  : profileUser.name || "Profile"}
-              </span>
-               </div>
+                  <div className="flex items-center gap-2 px-4 py-2 border-b">
+                    <img
+                      // onClick={() => navigate("/profile-settings")}
+                      src={profileUser.picture || profileUser.photo || accountIcon}
+                      alt="Profile"
+                      className="w-8 h-8 rounded-full"
+                    />
+                    <span className="block px-4 py-2 text-gray-800 font-bold text-xl " onClick={() => navigate("/profile-settings")}>
+                      {profileUser.first_name && profileUser.last_name
+                        ? `${profileUser.first_name} ${profileUser.last_name}`
+                        : profileUser.name || "Profile"}
+                    </span>
+                  </div>
                   <NavLink
                     to="/profile-settings"
                     className="block px-4 py-2 font-semibold text-gray-800 hover:bg-gray-100"
@@ -217,10 +221,12 @@ export const Navbar = () => {
                   <NavLink
                     to="/"
                     className="block px-4 py-2 font-semibold text-2xl text-gray-800 hover:bg-red-100"
-                    onClick={() => setShowProfile(false)}
-                    onClick={handleLogout}
+                    onClick={() => {
+                      setShowProfile(false);
+                      handleLogout();
+                    }}
                   >
-                    sign out
+                    Sign Out
                   </NavLink>
                 </div>
               )}
@@ -233,9 +239,15 @@ export const Navbar = () => {
               </div> */}
               <NavLink
                 to="/login"
-                className="text-white font-medium text-xl hover:text-[#D5B56E] transition"
+                className="text-white font-medium border border-gray-400 px-2 py-1 rounded text-xl hover:text-[#D5B56E] transition"
               >
                 Login
+              </NavLink>
+              <NavLink
+                to="/register"
+                className="text-white font-medium border border-gray-400 px-2 py-1 rounded text-xl hover:text-[#D5B56E] transition"
+              >
+                Register
               </NavLink>
             </div>
           )}
@@ -270,27 +282,7 @@ export const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile S
-              onClick={handleSearch}
-              className="bg-[#D5B56E] rounded-r-full px-4 py-[10px] border border-gray-100 flex items-center cursor-pointer hover:bg-[#C9A85E] transition"
-            >
-              <img src={searchIcon} alt="Search" className="w-5 h-5" />
-            </span>
-          </span>
-          <input
-            type="text"
-            placeholder="Search for Products..."
-            value={searchTerm}
-            onChange={(e) => dispatch(setSearchTerm(e.target.value))}
-            onKeyPress={(e) => e.key === "Enter" && handleSearch(
-            type="text"
-            placeholder="Search for Products..."
-            value={searchTerm}
-            onChange={(e) => dispatch(setSearchTerm(e.target.value))}
-            className="w-full px-4 py-2 rounded-full placeholder:text-sm placeholder:font-normal placeholder:text-gray-100 border border-gray-100 bg-black focus:outline-none focus:ring-2 focus:ring-gray-300 transition"
-          />
-        </div>
-      </div>
+   
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
@@ -356,11 +348,11 @@ export const Navbar = () => {
             {/* Cart */}
             <NavLink
               to="/add-to-cart"
-              className="flex items-center gap-3 hover:text-[#D5B56E]"
+              className="flex items-center gap-3 hover:text-[#D5B56E] relative"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <img src={cartIcon} alt="Cart" className="w-5 h-5" />
-              <span>Cart</span>
+                <span className=" font-semibold text-gray-300 absolute -top-3 left-3 px-1 bg-red-500 rounded-full text-sm">{`${data?.order_summary?.item_count || 0}`}</span>
             </NavLink>
 
             {/* Account */}
