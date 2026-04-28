@@ -11,12 +11,17 @@ import logo from "../assets/img/1ezybuy-logo2.png";
 import { LogOut } from "lucide-react";
 import { logout } from "../redux/features/authSlice";
 import { setSearchTerm } from "../features/products/productSlice";
+import { IoMdNotificationsOutline } from "react-icons/io";
 import {
+  useAcceptOrDeclineNotificationMutation,
   useGetCartQuery,
   useGetCategoryListQuery,
+  useGetNotificationQuery,
   useGetProfileQuery,
 } from "../redux/api/authApi";
 import { api } from "../redux/api/api";
+
+import { Toaster, toast } from "react-hot-toast";
 
 export const Navbar = () => {
   const { data: categoryList } = useGetCategoryListQuery();
@@ -30,17 +35,52 @@ export const Navbar = () => {
   const dispatch = useDispatch();
   const [showCategories, setShowCategories] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const categoriesRef = useRef(null);
+  const notificationsRef = useRef(null);
   const navigate = useNavigate();
   console.log(userData);
 
   const { data, isLoading } = useGetCartQuery();
+  const {data:getNotification} = useGetNotificationQuery();
+  const [acceptOrDeclineNotification] = useAcceptOrDeclineNotificationMutation();
 
   const handleLogout = () => {
     dispatch(logout());
     dispatch(api.util.resetApiState());
     navigate("/");
+  };
+
+  const handleAcceptNotification = async (notification) => {
+    if (notification.status === "declined" || notification.status === "decline") {
+      toast.error("This offer has already been declined");
+      return;
+    }
+    try {
+      if (notification.notification_type === "offer") {
+         await acceptOrDeclineNotification({ offer_id: notification.related_id, action: "accept", is_read: true }).unwrap();
+      }
+      setShowNotifications(false);
+      navigate("/add-to-cart/checkout");
+    } catch (e) {
+      console.log(e);
+      navigate("/add-to-cart/checkout");
+      setShowNotifications(false);
+    }
+  };
+
+  const handleDeclineNotification = async (notification) => {
+    try {
+      if (notification.notification_type === "offer") {
+         await acceptOrDeclineNotification({ offer_id: notification.related_id, action: "decline", is_read: true }).unwrap();
+      }
+      setShowNotifications(false);
+      toast.success("Notification declined successfully");
+    } catch (e) {
+      console.log(e);
+      toast.error(e?.data?.error || "Failed to decline notification");
+    }
   };
 
   const handleSearch = () => {
@@ -60,11 +100,17 @@ export const Navbar = () => {
         setShowCategories(false);
         // Do not close mobile menu here to allow interaction inside it
       }
+      if (
+        notificationsRef.current &&
+        !notificationsRef.current.contains(event.target)
+      ) {
+        setShowNotifications(false);
+      }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [categoriesRef]);
+  }, [categoriesRef, notificationsRef]);
 
   return (
     <header className="bg-black text-white shadow relative" ref={categoriesRef}>
@@ -173,6 +219,55 @@ export const Navbar = () => {
               <span className=" font-semibold text-gray-300 absolute -top-2 right-0 px-1 bg-red-500 rounded-full text-sm">{`${data?.order_summary?.item_count || 0}`}</span>
             </div>
           </NavLink>
+          <div className="flex items-center gap-2 relative cursor-pointer" ref={notificationsRef}>
+            <div onClick={() => setShowNotifications(!showNotifications)}>
+              <IoMdNotificationsOutline className="text-2xl text-[#D5B56E] "/>
+            </div>
+            <div
+              onClick={() => setShowNotifications(!showNotifications)}
+              className="text-white font-medium text-xl hover:text-[#D5B56E] transition "
+            >
+              <span className=" font-semibold text-gray-300 absolute -top-2 right-1 px-1 bg-red-500 rounded-full text-sm">
+                {Array.isArray(getNotification) ? getNotification.filter(n => !n.is_read).length : (getNotification?.unread_count || 0)}
+              </span>
+            </div>
+            
+            {showNotifications && (
+              <div className="absolute top-10 right-0 w-80 bg-white rounded-md shadow-lg z-50 text-black max-h-96 overflow-y-auto">
+                <div className="p-3 border-b font-bold text-lg">Notifications</div>
+                {Array.isArray(getNotification) && getNotification.length > 0 ? (
+                  <div className="flex flex-col">
+                    {getNotification.map((notif) => (
+                      <div key={notif.id} className="p-3 border-b hover:bg-gray-50 flex flex-col gap-2">
+                        <div className="font-semibold text-sm">{notif.title}</div>
+                        <div className="text-xs text-gray-600">{notif.message}</div>
+                        <div className="flex gap-2 mt-1 items-center">
+                          <button 
+                            onClick={() => handleAcceptNotification(notif)}
+                            className="bg-black text-[#D5B56E] px-3 py-1 text-xs rounded hover:opacity-80"
+                          >
+                            Accept
+                          </button>
+                          {notif.status === "declined" || notif.status === "decline" ? (
+                            <span className="text-red-500 font-semibold text-xs py-1">Declined</span>
+                          ) : (
+                            <button 
+                              onClick={() => handleDeclineNotification(notif)}
+                              className="bg-red-500 text-white px-3 py-1 text-xs rounded hover:opacity-80"
+                            >
+                              Decline
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="p-4 text-center text-gray-500">No new notifications</div>
+                )}
+              </div>
+            )}
+          </div>
 
           {/* Account */}
           {profileUser ? (
@@ -354,6 +449,54 @@ export const Navbar = () => {
               <img src={cartIcon} alt="Cart" className="w-5 h-5" />
                 <span className=" font-semibold text-gray-300 absolute -top-3 left-3 px-1 bg-red-500 rounded-full text-sm">{`${data?.order_summary?.item_count || 0}`}</span>
             </NavLink>
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-3 relative cursor-pointer hover:text-[#D5B56E]" onClick={() => setShowNotifications(!showNotifications)}>
+              <div>
+                <IoMdNotificationsOutline className="text-2xl text-[#D5B56E] "/>
+              </div>
+              <div className="text-white font-medium text-xl transition ">
+                <span className="font-semibold text-gray-300 absolute -top-2 left-3 px-1 bg-red-500 rounded-full text-sm">
+                  {Array.isArray(getNotification) ? getNotification.filter(n => !n.is_read).length : (getNotification?.unread_count || 0)}
+                </span>
+              </div>
+              <span>Notifications</span>
+            </div>
+            {showNotifications && (
+              <div className="bg-white rounded-md shadow-lg w-full text-black max-h-60 overflow-y-auto mt-2">
+                <div className="p-3 border-b font-bold text-lg">Notifications</div>
+                {Array.isArray(getNotification) && getNotification.length > 0 ? (
+                  <div className="flex flex-col">
+                    {getNotification.map((notif) => (
+                      <div key={notif.id} className="p-3 border-b hover:bg-gray-50 flex flex-col gap-2">
+                        <div className="font-semibold text-sm">{notif.title}</div>
+                        <div className="text-xs text-gray-600">{notif.message}</div>
+                        <div className="flex gap-2 mt-1 items-center">
+                          <button 
+                            onClick={() => handleAcceptNotification(notif)}
+                            className="bg-black text-[#D5B56E] px-3 py-1 text-xs rounded"
+                          >
+                            Accept
+                          </button>
+                          {notif.status === "declined" || notif.status === "decline" ? (
+                            <span className="text-red-500 font-semibold text-xs py-1">Declined</span>
+                          ) : (
+                            <button 
+                              onClick={() => handleDeclineNotification(notif)}
+                              className="bg-red-500 text-white px-3 py-1 text-xs rounded"
+                            >
+                              Decline
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="p-4 text-center text-gray-500">No new notifications</div>
+                )}
+              </div>
+            )}
+          </div>
 
             {/* Account */}
             {profileUser ? (
@@ -400,6 +543,7 @@ export const Navbar = () => {
           </div>
         </div>
       )}
+      <Toaster/>
     </header>
   );
 };

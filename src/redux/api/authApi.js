@@ -201,6 +201,26 @@ export const authApi = api.injectEndpoints({
       }),
       providesTags: ["Wishlist"],
     }),
+
+    // get notification
+    getNotification: builder.query({
+      query: () => ({
+        url: "/accounts/notifications/",
+        method: "GET",
+      }),
+      providesTags: ["Notification"],
+    }),
+
+    // accept or decline notification
+    acceptOrDeclineNotification: builder.mutation({
+      query: ({offer_id, ...data}) => ({
+        url: `/offers/${offer_id}/respond/`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Notification"],
+    }),
+
     // === Add Review ===
     addReview: builder.mutation({
       query: ({ id, data }) => ({
@@ -275,4 +295,6 @@ export const {
   useGetMyOrdersQuery,
   useGoogleLoginMutation,
   useGoogleRegisterMutation,
+  useGetNotificationQuery,
+  useAcceptOrDeclineNotificationMutation,
 } = authApi;
