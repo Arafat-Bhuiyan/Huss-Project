@@ -221,6 +221,15 @@ export const authApi = api.injectEndpoints({
       invalidatesTags: ["Notification"],
     }),
 
+    // get notifications count
+
+    getNotifCount: builder.query({
+      query: () => ({
+        url: "/accounts/unread-notifications/count/",
+        method: "GET",
+      }),
+    }),
+
     // === Add Review ===
     addReview: builder.mutation({
       query: ({ id, data }) => ({
@@ -297,4 +306,5 @@ export const {
   useGoogleRegisterMutation,
   useGetNotificationQuery,
   useAcceptOrDeclineNotificationMutation,
+  useGetNotifCountQuery,
 } = authApi;
