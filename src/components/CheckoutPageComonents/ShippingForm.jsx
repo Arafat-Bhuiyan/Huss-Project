@@ -139,7 +139,7 @@ const ShippingForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="p-4 sm:p-6 md:p-8 lg:p-12 w-full bg-white rounded-lg shadow-lg relative"
+      className="p-4 sm:p-6 md:p-8 lg:p-12 w-full bg-gray-100 rounded-lg shadow-lg relative"
     >
       {/* Edit Button - Top Right Corner */}
       {!isEditMode && (
@@ -174,7 +174,7 @@ const ShippingForm = () => {
               onChange={handleChange}
               disabled={!isEditMode}
               placeholder="Enter full name"
-              className="mt-1 text-sm font-medium w-full px-4 py-2.5 bg-[#f9f6ee] shadow rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
+              className="mt-1 text-sm font-medium w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
               required
             />
           </div>
@@ -195,7 +195,7 @@ const ShippingForm = () => {
               onChange={handleChange}
               disabled={!isEditMode}
               placeholder="Enter phone number"
-              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
+              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
               required
             />
           </div>
@@ -216,7 +216,7 @@ const ShippingForm = () => {
             onChange={handleChange}
             disabled={!isEditMode}
             placeholder="Enter email address"
-            className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
+            className="mt-1 block text-sm font-medium w-full px-4 py-2.5 border border-gray-200  rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
             required
           />
         </div>
@@ -236,7 +236,7 @@ const ShippingForm = () => {
             onChange={handleChange}
             disabled={!isEditMode}
             placeholder="House number and street name"
-            className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
+            className="mt-1 block text-sm font-medium w-full px-4 py-2.5 border border-gray-200  rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
             required
           />
         </div>
@@ -258,7 +258,7 @@ Unit / Level / Street Address
               onChange={handleChange}
               disabled={!isEditMode}
               placeholder=""
-              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
+              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 border border-gray-200  rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
               
             />
           </div>
@@ -278,7 +278,7 @@ Building name, complex, etc.
               onChange={handleChange}
               disabled={!isEditMode}
               placeholder=""
-              className="mt-1 block text-sm  font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
+              className="mt-1 block text-sm  font-medium w-full px-4 py-2.5 border border-gray-200  rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
               
             />
           </div>
@@ -300,7 +300,7 @@ Building name, complex, etc.
               onChange={handleChange}
               disabled={!isEditMode}
               placeholder="00"
-              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
+              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 border border-gray-200  rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
               required
             />
           </div>
@@ -320,7 +320,7 @@ Building name, complex, etc.
               onChange={handleChange}
               disabled={!isEditMode}
               placeholder="Enter city"
-              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
+              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 border border-gray-200  rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
               required
             />
           </div>
@@ -340,7 +340,7 @@ Building name, complex, etc.
               onChange={handleChange}
               disabled={!isEditMode}
               placeholder="Select or type state"
-              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
+              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 border border-gray-200  rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
               required
             />
             <datalist id="state-options">
@@ -372,7 +372,7 @@ Building name, complex, etc.
               onChange={handleChange}
               disabled={!isEditMode}
               placeholder="Australia"
-              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
+              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 border border-gray-200  rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
               required
             />
           </div>
@@ -394,13 +394,13 @@ Building name, complex, etc.
               onChange={handleChange}
               disabled={!isEditMode}
               placeholder="Enter zip code"
-              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 shadow bg-[#f9f6ee] rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
+              className="mt-1 block text-sm font-medium w-full px-4 py-2.5 border border-gray-200  rounded-xl focus:ring-[#D5B56E] focus:border-[#D5B56E] disabled:opacity-60 disabled:cursor-not-allowed"
               required
             />
           </div>
         </div>
 
-        <div className="w-full p-4 shadow bg-[#f9f6ee] rounded-xl">
+        <div className="w-full p-4 border border-gray-200 bg-white  rounded-xl">
           <h1 className="font-medium text-lg sm:text-xl">
             Billing Information:
           </h1>

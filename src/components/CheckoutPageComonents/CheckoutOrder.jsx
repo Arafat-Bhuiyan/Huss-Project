@@ -82,7 +82,7 @@ export const CheckoutOrder = () => {
   return (
     <div>
       {!placeOrderToggle ? (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 ">
           <h1 className="font-semibold text-xl sm:text-2xl">Order Summary</h1>
           <div className="flex flex-col gap-3">
             {cartDetails.map((item) => (

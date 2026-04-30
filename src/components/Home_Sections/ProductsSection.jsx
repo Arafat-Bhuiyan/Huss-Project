@@ -56,7 +56,7 @@ const ProductsSection = () => {
       toast.success(response.message || "Wishlist updated.");
       navigate("/wishlist");
     } catch (error) {
-      toast.error(error?.data?.message || "Something went wrong.");
+      toast.error(error?.data?.message || error?.data?.detail || "Something went wrong.");
     }
   };
 
@@ -109,12 +109,12 @@ const ProductsSection = () => {
           {displayedProducts.map((product, index) => (
             <div
               key={product.id || index}
-              className="bg-gray-100  rounded-xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col relative"
+              className="  overflow-hidden  hover:shadow-md transition flex flex-col relative"
             >
               {/* Save Button */}
               <button
                 onClick={() => handleToggleWishlist(product.id)}
-                className="absolute top-2 right-2 w-6 h-6 rounded-full shadow text-sm flex items-center justify-center"
+                className="absolute  top-2 right-2 w-6 h-6 rounded-full shadow text-sm flex items-center justify-center"
               >
                 <img src={white_save} alt="" />
               </button>
@@ -127,7 +127,7 @@ const ProductsSection = () => {
                     : Headphone
                 }
                 alt={product.product_name}
-                className="w-full h-52 object-contain p-4 cursor-pointer"
+                className="w-full h-52 object-contain p-4 cursor-pointer bg-gray-100 rounded-xl "
                 onClick={() => navigate(`/products/${product.id}/detail`)}
               />
 

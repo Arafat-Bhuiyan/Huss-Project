@@ -110,10 +110,10 @@ const Register = () => {
   });
 
   return (
-    <div className="bg-[#f9f6ee] h-screen px-4 sm:px-6 md:px-12 lg:px-28 py-4">
+    <div className=" h-screen px-4 sm:px-6 md:px-12 lg:px-28 py-4">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 py-4 sm:py-8">
         {/* Breadcrumb */}
-        <div className="bg-[#f9f6ee] py-3 text-left text-sm text-black font-medium">
+        <div className=" py-3 text-left text-sm text-black font-medium">
           <span className="text-gray-600 font-medium text-lg sm:text-xl">
             Account /{" "}
           </span>
@@ -130,16 +130,16 @@ const Register = () => {
         </p>
       </div>
       <div className="flex justify-center items-center">
-        <div className="flex flex-col md:flex-row md:items-stretch max-w-6xl w-full md:p-4 lg:p-8 h-full gap-8">
+        <div className="flex flex-col md:flex-row md:items-stretch max-w-7xl w-full md:p-4 lg:p-8 h-full gap-8">
           {/* Left side: Background image */}
           <img
             src={reg_side_img}
             alt="Register side image"
-            className="hidden xl:block xl:w-1/2 h-auto xl:h-full object-cover rounded-lg"
+            className="hidden xl:block xl:w-1/2 h-auto xl:h-full bg-cover rounded-lg"
           />
 
           {/* Right side: Registration form */}
-          <div className="w-full xl:w-1/2 border border-[#D5B56E] rounded-md p-6 sm:p-8 bg-white shadow-md flex flex-col justify-center">
+          <div className="w-full xl:w-1/2 border border-[#D5B56E] rounded-md p-6 sm:p-8 bg-gray-100 shadow-md flex flex-col justify-center">
             <h2 className="text-2xl font-semibold text-gray-500 mb-6 text-center lg:text-left">
               Register Account
             </h2>
@@ -222,7 +222,7 @@ const Register = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className={`w-full py-3 ${isLoading ? "bg-gray-400 cursor-not-allowed" : "bg-[#2196F3] hover:bg-[#0088ff]"} text-white font-semibold text-lg rounded-md transition duration-300`}
+                className={`w-full py-3 ${isLoading ? "bg-gray-400 cursor-not-allowed" : "bg-[#D5B56E] hover:bg-[#d4b573cc]"} text-white font-semibold text-lg rounded-md transition duration-300`}
               >
                 {isLoading ? "Loading..." : "Continue"}
               </button>

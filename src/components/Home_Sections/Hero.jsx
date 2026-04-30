@@ -5,7 +5,7 @@ import { ShieldCheck, Truck, CheckCircle } from "lucide-react";
 export const Hero = () => {
   const navigate = useNavigate();
   return (
-  <div className="min-h-screen flex flex-col justify-center ">
+  <div className="min-h-screen flex flex-col justify-center  ">
       <div
       className=" w-full flex items-center justify-center px-4 sm:px-6 lg:px-8 xl:px-28 py-16 md:py-0 relative overflow-hidden "
      
@@ -13,7 +13,7 @@ export const Hero = () => {
       <div className=" flex flex-col md:flex-row items-center justify-between gap-12 lg:gap-16 z-10">
         {/* Left Content */}
         <div className="text-center md:text-left max-w-xl">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-4">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#0B3C5D] leading-tight mb-4">
             Discover Your Perfect <br />
             <span className="text-[#D5B56E]">
               1<span className="text-[#0B3C5D]">ezy</span>

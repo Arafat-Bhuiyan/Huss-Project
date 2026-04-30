@@ -41,17 +41,17 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-[#f9f6ee] h-screen w-full">
+    <div className=" h-screen w-full">
       {/* Breadcrumb */}
-      <div className="w-full bg-[#f9f6ee] px-4 sm:px-8 md:px-16 lg:px-28 py-3 text-left text-sm text-black font-medium">
+      <div className="w-full px-4 sm:px-8 md:px-16 lg:px-28 py-3 text-left text-sm text-black font-medium">
         <span className="text-gray-600 font-medium text-lg sm:text-xl">
           Account /{" "}
         </span>
-        <span className="text-black font-bold text-lg sm:text-xl">Log In</span>
+        <span className="text-[#D5B56E] font-bold text-lg sm:text-xl">Log In</span>
       </div>
       <div className="pt-8 pb-14 flex flex-col items-center justify-center px-4">
         {/* Login Box */}
-        <div className="w-full max-w-md border border-[#D5B56E] rounded-md p-6 sm:p-8 bg-white shadow-md">
+        <div className="w-full max-w-md border border-[#D5B56E] rounded-md p-6 sm:p-8 bg-gray-100 shadow-md">
           <h2 className="text-center text-2xl sm:text-3xl font-bold text-[#D5B56E] mb-4">
             Welcome
           </h2>
@@ -72,7 +72,7 @@ const Login = () => {
                 value={form.email}
                 onChange={handleChange}
                 placeholder="Enter email"
-                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#D5B56E]"
+                className="w-full p-3 bg-white border  border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#D5B56E]"
                 required
               />
             </div>
@@ -121,7 +121,7 @@ const Login = () => {
               className={`w-full ${
                 isLoading
                   ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-[#2196F3] hover:bg-[#0088ff]"
+                  : "bg-[#D5B56E] hover:bg-[#d4b573cc]"
               } text-white font-medium text-lg sm:text-xl py-3 rounded-md transition`}
             >
               {isLoading ? "Logging in..." : "Log In"}
@@ -138,7 +138,7 @@ const Login = () => {
             <Link to="/register">
               <button
                 type="button"
-                className="w-full border border-gray-400 text-[#2196F3] font-bold text-lg sm:text-xl py-3 rounded-md hover:bg-gray-100 transition"
+                className="w-full border border-[#D5B56E] text-[#D5B56E] bg-white  font-bold text-lg sm:text-xl py-3 rounded-md hover:bg-gray-100 transition"
               >
                 Create Your Account
               </button>

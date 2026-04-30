@@ -83,7 +83,7 @@ const Footer = () => {
           . All rights reserved.
         </p>
 
-        <p className="text-[#D5B56E]">Discover Your Perfect Buy at 1ezybuy</p>
+        <p className="text-[#D5B56E]"> Buy at 1ezybuy</p>
         <div className="flex gap-4 mt-2 md:mt-0">
           <Link
             to="/terms-of-conditions"

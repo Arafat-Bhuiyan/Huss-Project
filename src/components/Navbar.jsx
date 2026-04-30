@@ -134,9 +134,10 @@ export const Navbar = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [categoriesRef, notificationsRef]);
+  
 
   return (
-    <header className="bg-black text-white shadow relative" ref={categoriesRef}>
+    <header className="bg-[#0B1C3C] text-white shadow relative" ref={categoriesRef}>
       <nav className="flex items-center justify-between px-4 sm:px-6 lg:px-28 py-3">
         {/* Left: Brand */}
         <div className="flex-1 flex items-center">
@@ -166,7 +167,7 @@ export const Navbar = () => {
               value={searchTerm}
               onChange={(e) => dispatch(setSearchTerm(e.target.value))}
               onKeyPress={(e) => e.key === "Enter" && handleSearch()}
-              className="w-full px-4 py-2 rounded-full placeholder:text-base placeholder:font-normal placeholder:text-gray-100 border border-gray-100 bg-black focus:outline-none focus:ring-2 focus:ring-gray-300 transition"
+              className="w-full px-4 py-2 rounded-full placeholder:text-base placeholder:font-normal placeholder:text-gray-100 border border-gray-100 bg-[#0B1C3C] focus:outline-none focus:ring-2 focus:ring-gray-300 transition"
             />
           </div>
         </div>
@@ -367,13 +368,13 @@ export const Navbar = () => {
               </div> */}
               <NavLink
                 to="/login"
-                className="text-white font-medium border border-gray-400 px-2 py-1 rounded text-xl hover:text-[#D5B56E] transition"
+                className="text-white font-medium border border-[#D5B56E] px-2 py-1 rounded text-lg hover:text-[#D5B56E] transition"
               >
                 Login
               </NavLink>
               <NavLink
                 to="/register"
-                className="text-white font-medium border border-gray-400 px-2 py-1 rounded text-xl hover:text-[#D5B56E] transition"
+                className="text-white font-medium bg-[#D5B56E] px-2 py-1 rounded text-lg hover:bg-[#d4b573cc] hover:text-white transition"
               >
                 Register
               </NavLink>

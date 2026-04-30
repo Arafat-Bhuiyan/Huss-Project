@@ -90,7 +90,7 @@ export const ProductImgDet = ({ product, isLoading }) => {
               : Headphone
           }
           alt={product.product_name}
-          className="rounded-xl w-full h-[300px] sm:h-[400px] object-contain bg-white border"
+          className="rounded-xl w-fit h-[300px] sm:h-[400px] object-contain bg-gray-100 p-6 border"
         />
         <div className="flex gap-2 justify-center sm:justify-start">
           <img
@@ -100,7 +100,7 @@ export const ProductImgDet = ({ product, isLoading }) => {
                 : Headphone
             }
             alt="thumbnail"
-            className="w-16 h-16 sm:w-24 sm:h-24 object-contain rounded-md cursor-pointer border-2 border-[#D5B56E] bg-white"
+            className="w-16 h-16 sm:w-24 sm:h-24 object-contain rounded-md overflow-hidden cursor-pointer border-2 border-[#D5B56E] bg-white "
           />
         </div>
       </div>
