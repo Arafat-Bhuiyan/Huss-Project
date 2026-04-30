@@ -134,8 +134,10 @@ export const Navbar = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [categoriesRef, notificationsRef]);
-  
 
+
+
+  
   return (
     <header className="bg-[#0B1C3C] text-white shadow relative" ref={categoriesRef}>
       <nav className="flex items-center justify-between px-4 sm:px-6 lg:px-28 py-3">
